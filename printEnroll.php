@@ -129,13 +129,13 @@ $row = mysqli_fetch_array($res);
         <tr>
             <td width="100%">
                 <br>
-                <img src="uploads/<?php echo $row["id_card_pic"]; ?>" alt="" height="300px">
+                <img src="uploads/<?php echo $row["id_card_pic"]; ?>" alt="" height="320px">
             </td>
         </tr>
         <tr>
             <td width="100%">
                 <br>
-                <img src="uploads/<?php echo $row["account_book_pic"]; ?>" alt="" height="300px">
+                <img src="uploads/<?php echo $row["account_book_pic"]; ?>" alt="" height="320px">
             </td>
         </tr>
         <tr>
