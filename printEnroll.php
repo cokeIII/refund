@@ -165,7 +165,7 @@ $row = mysqli_fetch_array($res);
 $html = ob_get_contents();
 // $mpdf->AddPage('L');
 $mpdf->WriteHTML($html);
-$taget = "pdf/" . "report_1" . ".pdf";
+$taget = "pdf/" . $row["student_id"] . ".pdf";
 $mpdf->Output($taget);
 ob_end_flush();
 echo "<script>window.location.href='$taget';</script>";
