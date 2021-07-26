@@ -1,7 +1,7 @@
 <?php
 require_once "connect.php";
 session_start();
-if (empty($_SESSION["student_id"])) {
+if (empty($_SESSION["user_status"])) {
     header("location: index.php");
 }
 $student_id = $_POST["student_id"];

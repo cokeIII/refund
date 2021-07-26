@@ -40,5 +40,21 @@ if (strlen($username) != 13) {
         echo "fail";
     }
 } else {
-
+    if($password == "ctcrefund"){
+        // $sql = "select * from people where people_id = '$username' and people_birthday = '$password' ";
+        $sql = "select * from people where people_id = '$username'";
+        $res = mysqli_query($conn,$sql);
+        $rowcount = mysqli_num_rows($res);
+        if($rowcount){
+            $row = mysqli_fetch_array($res);
+            $_SESSION["people_id"] = $row["people_id"];
+            $_SESSION["people_name"] = $row["people_name"];
+            $_SESSION["user_status"] = "staff";
+            echo "ok staff";
+        } else {
+            echo "fail";
+        }
+    } else {
+        echo "fail";
+    }  
 }

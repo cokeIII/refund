@@ -2,7 +2,7 @@
 <html lang="en">
 <?php require_once "setHead.php"; ?>
 <?php
-if (empty($_SESSION["student_id"])) {
+if (empty($_SESSION["user_status"])) {
     header("location: index.php");
 }
 ?>

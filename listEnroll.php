@@ -2,7 +2,7 @@
 <html lang="en">
 <?php
 require_once "setHead.php";
-if (empty($_SESSION["student_id"])) {
+if (empty($_SESSION["user_status"])) {
     header("location: index.php");
 }
 require_once "connect.php";
@@ -48,7 +48,7 @@ $res = mysqli_query($conn, $sql);
                                                     } ?>"><?php echo $row["status"]; ?></div>
                                     </td>
                                     <?php if ($_SESSION["user_status"] == "staff") { ?>
-                                        <td><a href="#" target="_blank"><button class="btn btn-info"><i class="fas fa-print"></i> พิมพ์</button></a></td>
+                                        <td><a href="printEnroll.php" target="_blank"><button class="btn btn-info"><i class="fas fa-print"></i> พิมพ์</button></a></td>
                                     <?php } else { ?>
                                         <?php if ($row["status"] == "ลงทะเบียนสำเร็จ") { ?>
                                             <td><button enrollId="<?php echo $row["id"]; ?>" class="btn btn-danger btnCancel"><i class="fas fa-window-close"></i> ยกเลิก</button></td>
@@ -106,7 +106,6 @@ $res = mysqli_query($conn, $sql);
             fixedColumns: true
         });
         $(".btnCancel").click(function() {
-
             if (confirm("you want to cancel the item ?")) {
                 $.redirect("cancelEnroll.php", {
                     id: $(this).attr("enrollId"),

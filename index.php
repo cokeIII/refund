@@ -60,8 +60,10 @@
                     success: function(result) {
                         if (result.trim() == "ok") {
                             window.location.replace("enroll.php");
-                        } else {
-                            $("#alertLogin").fadeIn(3000, function() {
+                        } else if(result.trim() == "ok staff"){
+                            window.location.replace("listEnroll.php");
+                        }else {
+                            $("#alertLogin").fadeIn(1000, function() {
                                 $("#alertLogin").fadeOut(5000)
                             })
                         }
