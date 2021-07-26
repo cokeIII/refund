@@ -14,13 +14,14 @@ if (strlen($username) != 13) {
         s.stu_fname,
         s.stu_lname,
         s.group_id,
+        p.prefix_name,
         g.grade_name,
         g.major_name,
         g.minor_name,
         g.student_group_no,
         g.student_group_short_name
-        from student s ,  student_group g
-        where student_id='$username' and s.group_id = g.student_group_id";
+        from student s ,  student_group g ,prefix p
+        where student_id='$username' and s.group_id = g.student_group_id and p.prefix_id = s.perfix_id";
         $resStd = mysqli_query($conn,$sqlStd);
         while($rowStd = mysqli_fetch_array($resStd)){
             $_SESSION["student_id"] = $rowStd["student_id"];
@@ -32,6 +33,7 @@ if (strlen($username) != 13) {
             $_SESSION["grade_name"] = $rowStd["grade_name"];
             $_SESSION["major_name"] = $rowStd["major_name"];
             $_SESSION["minor_name"] = $rowStd["minor_name"];
+            $_SESSION["prefix_name"] = $rowStd["prefix_name"];
             $_SESSION["student_group_short_name"] = $rowStd["student_group_short_name"];
             $_SESSION["user_status"] = "student";
         }

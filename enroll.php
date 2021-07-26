@@ -73,6 +73,7 @@ if (empty($_SESSION["user_status"])) {
                                 </div>
                                 <input type="hidden" name="student_group_short_name" value="<?php echo $_SESSION["student_group_short_name"]; ?>">
                                 <input type="hidden" name="student_group_no" value="<?php echo $_SESSION["student_group_no"]; ?>">
+                                <input type="hidden" name="prefix_name" value="<?php echo $_SESSION["prefix_name"]; ?>">
                             </div>
                         </div>
                         <div class="row mt-3">
@@ -111,7 +112,6 @@ if (empty($_SESSION["user_status"])) {
 </html>
 <script>
     $(document).ready(function() {
-
         var sig = $('#sig').signature({
             syncField: '#signature64',
             syncFormat: 'PNG'

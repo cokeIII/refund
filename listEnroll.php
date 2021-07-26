@@ -7,7 +7,7 @@ if (empty($_SESSION["user_status"])) {
 }
 require_once "connect.php";
 $student_id = $_SESSION["student_id"];
-if($_SESSION["user_status"] == "staff"){
+if ($_SESSION["user_status"] == "staff") {
     $sql = "select * from enroll";
 } else {
     $sql = "select * from enroll where student_id = '$student_id'";
@@ -26,10 +26,12 @@ $res = mysqli_query($conn, $sql);
                         <thead>
                             <tr>
                                 <th>รหัสนักศึกษา</th>
-                                <th>ชื่อ - สกุล</th>
+                                <th width="20%">ชื่อ - สกุล</th>
                                 <th>สาขาวิชา</th>
-                                <th>ระดับชั้น</th>
+                                <th>ชั้น</th>
                                 <th>สถานะ</th>
+                                <th></th>
+                                <th></th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -40,19 +42,32 @@ $res = mysqli_query($conn, $sql);
                                     <td><?php echo $row["stu_fname"] . " " . $row["stu_lname"]; ?></td>
                                     <td><?php echo $row["major_name"]; ?></td>
                                     <td><?php echo $row["student_group_short_name"]; ?></td>
-                                    <td>
-                                        <div class="<?php if ($row["status"] == "ยกเลิก") {
-                                                        echo "text-danger";
-                                                    } else {
-                                                        echo "text-success";
-                                                    } ?>"><?php echo $row["status"]; ?></div>
+                                    <td class="<?php if ($row["status"] == "ยกเลิก") {
+                                                    echo "text-danger";
+                                                } else {
+                                                    echo "text-success";
+                                                } ?>">
+                                        <?php echo $row["status"]; ?>
                                     </td>
                                     <?php if ($_SESSION["user_status"] == "staff") { ?>
-                                        <td><a href="printEnroll.php" target="_blank"><button class="btn btn-info"><i class="fas fa-print"></i> พิมพ์</button></a></td>
+                                        <td><a href="printEnroll.php?id=<?php echo $row["id"]; ?>" target="_blank"><button class="btn btn-info"><i class="fas fa-print"></i> พิมพ์</button></a></td>
+                                        <?php if ($row["status"] == "ลงทะเบียนสำเร็จ") { ?>
+                                            <td><button enrollId="<?php echo $row["id"]; ?>" class="btn btn-success btnUpdate"><i class="fas fa-check"></i> โอนแล้ว</button></td>
+                                        <?php } else if ($row["status"] == "โอนแล้ว") { ?>
+                                            <td><button enrollId="<?php echo $row["id"]; ?>" class="btn btn-danger btnCancelPay"><i class="fas fa-times"></i> ยกเลิกโอน</button></td>
+                                        <?php } else {?>
+                                            <td></td>
+                                        <?php }?>
+                                        <td><button enrollId="<?php echo $row["id"]; ?>" class="btn btn-danger btnDel"><i class="fas fa-trash-alt"></i> ลบ</button></td>
+
                                     <?php } else { ?>
                                         <?php if ($row["status"] == "ลงทะเบียนสำเร็จ") { ?>
                                             <td><button enrollId="<?php echo $row["id"]; ?>" class="btn btn-danger btnCancel"><i class="fas fa-window-close"></i> ยกเลิก</button></td>
-                                        <?php } else {?>
+                                            <td></td>
+                                            <td></td>
+                                        <?php } else { ?>
+                                            <td></td>
+                                            <td></td>
                                             <td></td>
                                         <?php } ?>
                                     <?php } ?>
@@ -109,6 +124,29 @@ $res = mysqli_query($conn, $sql);
             if (confirm("you want to cancel the item ?")) {
                 $.redirect("cancelEnroll.php", {
                     id: $(this).attr("enrollId"),
+                }, "POST");
+            }
+        })
+        $(".btnDel").click(function() {
+            if (confirm("you want to delete the item ?")) {
+                $.redirect("delEnroll.php", {
+                    id: $(this).attr("enrollId"),
+                }, "POST");
+            }
+        })
+        $(".btnUpdate").click(function() {
+            if (confirm("you want to update the item ?")) {
+                $.redirect("updateEnroll.php", {
+                    id: $(this).attr("enrollId"),
+                    update: "update",
+                }, "POST");
+            }
+        })
+        $(".btnCancelPay").click(function() {
+            if (confirm("you want to update the item ?")) {
+                $.redirect("updateEnroll.php", {
+                    id: $(this).attr("enrollId"),
+                    updateCancel: "updateCancel",
                 }, "POST");
             }
         })

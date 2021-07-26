@@ -5,6 +5,7 @@ if (empty($_SESSION["user_status"])) {
     header("location: index.php");
 }
 $student_id = $_POST["student_id"];
+$prefix_name = $_POST["prefix_name"];
 $people_id = $_POST["people_id"];
 $stu_fname = $_POST["stu_fname"];
 $stu_lname = $_POST["stu_lname"];
@@ -73,6 +74,7 @@ if ($rowcount == 0) {
     (
         people_id,
         student_id,
+        prefix_name,
         stu_fname,
         stu_lname,
         group_id,
@@ -89,6 +91,7 @@ if ($rowcount == 0) {
     ) values(
         '$people_id',
         '$student_id',
+        '$prefix_name',
         '$stu_fname',
         '$stu_lname',
         '$group_id',
@@ -164,6 +167,7 @@ if ($rowcount == 0) {
         (
             people_id,
             student_id,
+            prefix_name,
             stu_fname,
             stu_lname,
             group_id,
@@ -180,6 +184,7 @@ if ($rowcount == 0) {
         ) values(
             '$people_id',
             '$student_id',
+            '$prefix_name',
             '$stu_fname',
             '$stu_lname',
             '$group_id',
