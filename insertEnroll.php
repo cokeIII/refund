@@ -1,6 +1,6 @@
 <?php
 require_once "connect.php";
- session_start();
+session_start();
 if (empty($_SESSION["user_status"])) {
     header("location: index.php");
 }
@@ -17,6 +17,7 @@ $student_group_no = $_POST["student_group_no"];
 $student_group_short_name = $_POST["student_group_short_name"];
 $sqlCheck = "SELECT status
 FROM   enroll 
+WHERE student_id = '$student_id'
 ORDER  BY time_stamp DESC
 LIMIT  1;";
 $resCheck = mysqli_query($conn, $sqlCheck);
