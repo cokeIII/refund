@@ -131,7 +131,7 @@ if ($rowcount == 0) {
     ";
         $res = mysqli_query($conn, $sql);
         if ($res) {
-            header("location: listEnroll.php");
+            header("location: listEnroll_std.php");
         } else {
             echo $sql;
         }
