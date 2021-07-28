@@ -27,53 +27,95 @@ if (empty($_SESSION["user_status"])) {
             <div class="card">
                 <div class="card-body">
                     <form id="enrollData" action="insertEnroll.php" method="POST" enctype="multipart/form-data">
+                        <input type="hidden" name="student_id" value="<?php echo $_SESSION["student_id"]; ?>">
+                        <input type="hidden" name="prefix_name" value="<?php echo $_SESSION["prefix_name"]; ?>">
+                        <input type="hidden" name="people_id" value="<?php echo $_SESSION["people_id"]; ?>">
+                        <input type="hidden" name="stu_fname" value="<?php echo $_SESSION["stu_fname"]; ?>">
+                        <input type="hidden" name="stu_lname" value="<?php echo $_SESSION["stu_lname"]; ?>">
+                        <input type="hidden" name="group_id" value="<?php echo $_SESSION["group_id"]; ?>">
+                        <input type="hidden" name="minor_name" value="<?php echo $_SESSION["minor_name"]; ?>">
+                        <input type="hidden" name="grade_name" value="<?php echo $_SESSION["grade_name"]; ?>">
+                        <input type="hidden" name="student_group_short_name" value="<?php echo $_SESSION["student_group_short_name"]; ?>">
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="form-group p-1">
-                                    <label>รหัสนักศึกษา</label>
-                                    <input value="<?php echo $_SESSION["student_id"]; ?>" type="number" name="student_id" id="student_id" class="form-control" maxlength="11" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" required>
-                                </div>
-                                <div class="form-group p-1">
-                                    <label>รหัสบัตรประชาชน</label>
-                                    <input value="<?php echo $_SESSION["people_id"]; ?>" type="number" name="people_id" id="people_id" class="form-control" maxlength="13" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" required>
-                                </div>
-                                <div class="form-group p-1">
-                                    <label>ชื่อ</label>
-                                    <input value="<?php echo $_SESSION["stu_fname"]; ?>" type="text" name="stu_fname" id="f_name_th" class="form-control" required>
-                                </div>
-                                <div class="form-group p-1">
-                                    <label>สกุล</label>
-                                    <input value="<?php echo $_SESSION["stu_lname"]; ?>" type="text" name="stu_lname" id="l_name_th" class="form-control" required>
+                                    <label>ชื่อ-สกุล</label>
+                                    <input value="<?php echo $_SESSION["prefix_name"] . $_SESSION["stu_fname"] . " " . $_SESSION["stu_lname"]; ?>" type="text" name="stu_name" id="stu_name" class="form-control" required readonly>
                                 </div>
                             </div>
-                            <div class="col-md-6 border-left">
+                            <div class="col-md-2">
                                 <div class="form-group p-1">
-                                    <label>รหัสกลุ่ม</label>
-                                    <input value="<?php echo $_SESSION["group_id"]; ?>" type="text" name="group_id" id="group_id" class="form-control" required>
+                                    <label>กลุ่ม</label>
+                                    <input value="<?php echo $_SESSION["student_group_no"] ?>" type="text" name="student_group_no" id="student_group_no" class="form-control" required readonly>
                                 </div>
+                            </div>
+                            <div class="col-md-6">
                                 <div class="form-group p-1">
-                                    <label>สาขาวิชา</label>
-                                    <input value="<?php echo $_SESSION["major_name"]; ?>" type="text" name="major_name" id="major_name" class="form-control" required>
+                                    <label>แผนก</label>
+                                    <input value="<?php echo $_SESSION["major_name"] ?>" type="text" name="major_name" id="major_name" class="form-control" required readonly>
                                 </div>
+                            </div>
+                        </div>
+                        <strong>ข้อมูลผู้รับเงิน</strong>
+                        <div class="row">
+                            <div class="col-md-12">
                                 <div class="form-group p-1">
-                                    <label>สาขางาน</label>
-                                    <input value="<?php echo $_SESSION["minor_name"]; ?>" type="text" name="minor_name" id="minor_name" class="form-control" required>
+                                    <label>เกี่ยวข้องเป็น</label>
+                                    <select name="recipient" id="recipient" class="form-control">
+                                        <option value="ผู้ปกครอง">ผู้ปกครอง</option>
+                                        <option value="บิดา">บิดา</option>
+                                        <option value="มารดา">มารดา</option>
+                                    </select>
                                 </div>
+                            </div>
+                        </div>
+                        <input type="hidden" name="recipient_fname" id="recipient_fname" required>
+                        <input type="hidden" name="recipient_lname" id="recipient_lname" required>
+                        <div class="row">
+                            <div class="col-md-12">
                                 <div class="form-group p-1">
-                                    <label>ระดับชั้น</label>
-                                    <input value="<?php echo $_SESSION["grade_name"]; ?>" type="text" name="grade_name" id="grade_name" class="form-control" required>
+                                    <label>ชื่อ-สกุล ผู้รับเงิน</label>
+                                    <input type="text" name="recipient_name" id="recipient_name" class="form-control readonly" required>
                                 </div>
+                            </div>
+                        </div>
+                        <strong>ข้อมูลการโอนเงิน</strong>
+                        <?php
+                        require_once "connect.php";
+                        $sqlBank = "select * from bank";
+                        $resBank = mysqli_query($conn, $sqlBank);
+                        ?>
+                        <div class="row">
+                            <div class="col-md-12">
                                 <div class="form-group p-1">
-                                    <label>รูปบัตรประชาชนนักเรียน  <a href="#" data-toggle="modal" data-target="#exampleModalCard">ตัวอย่าง</a></label>
+                                    <label>ธนาคาร</label>
+                                    <select name="recipient_bank" id="recipient_bank" class="form-control" required>
+                                        <option value="">---เลือกธนาคาร---</option>
+                                        <?php while ($rowBank = mysqli_fetch_array($resBank)) { ?>
+                                            <option value="<?php echo $rowBank["bank_name"]; ?>"><?php echo $rowBank["bank_name"]; ?></option>
+                                        <?php } ?>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group p-1">
+                                    <label>เลขบัญชี</label>
+                                    <input type="number" name="recipient_bank_number" id="recipient_bank_number" class="form-control" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group p-1">
+                                    <label>รูปบัตรประชาชนผู้รับเงิน <a href="#" data-toggle="modal" data-target="#exampleModalCard">ตัวอย่าง</a></label>
                                     <input type="file" name="id_card_pic" id="id_card_pic" class="form-control" accept="image/*" required>
                                 </div>
                                 <div class="form-group p-1">
-                                    <label>รูปหน้าสมุดบัญชี <a href="#" data-toggle="modal" data-target="#exampleModalAcc">ตัวอย่าง</a></label>
+                                    <label>รูปหน้าสมุดบัญชีผู้รับเงิน <a href="#" data-toggle="modal" data-target="#exampleModalAcc">ตัวอย่าง</a></label>
                                     <input type="file" name="account_book_pic" id="account_book_pic" class="form-control" accept="image/*" required>
                                 </div>
-                                <input type="hidden" name="student_group_short_name" value="<?php echo $_SESSION["student_group_short_name"]; ?>">
-                                <input type="hidden" name="student_group_no" value="<?php echo $_SESSION["student_group_no"]; ?>">
-                                <input type="hidden" name="prefix_name" value="<?php echo $_SESSION["prefix_name"]; ?>">
                             </div>
                         </div>
                         <div class="row mt-3">
@@ -110,45 +152,51 @@ if (empty($_SESSION["user_status"])) {
 <?php require_once "setFoot.php"; ?>
 <!-- Modal -->
 <div class="modal fade" id="exampleModalAcc" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">ตัวอย่าง</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <img src="img/acc.jpg" alt="" calss="img-ex" width="100%">
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">ตัวอย่าง</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <img src="img/acc.jpg" alt="" calss="img-ex" width="100%">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 <!-- Modal -->
 <div class="modal fade" id="exampleModalCard" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">ตัวอย่าง</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <img src="img/card.jpg" alt="" calss="img-ex" width="100%">
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">ตัวอย่าง</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <img src="img/card.jpg" alt="" calss="img-ex" width="100%">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
+
 </html>
 <script>
     $(document).ready(function() {
+        $(".readonly").on('keydown paste focus mousedown', function(e) {
+            if (e.keyCode != 9) // ignore tab
+                e.preventDefault();
+        });
+        get_recipient("ผู้ปกครอง")
         var sig = $('#sig').signature({
             syncField: '#signature64',
             syncFormat: 'PNG'
@@ -158,5 +206,33 @@ if (empty($_SESSION["user_status"])) {
             sig.signature('clear');
             $("#signature64").val('');
         });
+        $("#recipient").change(function() {
+            let status = $("#recipient").val()
+            get_recipient(status)
+        })
+
     })
+
+    function get_recipient(status) {
+        $.ajax({
+            type: "POST",
+            url: "get_recipient.php",
+            data: {
+                student_id: "<?php echo $_SESSION["student_id"]; ?>",
+                get_status: status,
+            },
+            success: function(result) {
+                if (result) {
+                    let obj = JSON.parse(result)
+                    $("#recipient_fname").val(obj.recipient_fname)
+                    $("#recipient_lname").val(obj.recipient_lname)
+                    if (obj.recipient_fname != "") {
+                        $("#recipient_name").val(obj.recipient_fname + " " + obj.recipient_lname)
+                    } else {
+                        $("#recipient_name").val("")
+                    }
+                }
+            }
+        });
+    }
 </script>

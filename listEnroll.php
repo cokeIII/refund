@@ -22,7 +22,16 @@ $res = mysqli_query($conn, $sql);
         <div class="container px-5">
             <div class="card">
                 <div class="card-body">
-                    <table class="table" id="enrollTable">
+                    <div class="row">
+                        <div class="col-md-12 mb-3">
+                            <div class="d-flex justify-content-end">
+                                <div class="d-flex justify-content-end">
+                                    <a href="report_1.php"><button class="btn btn-primary"><i class="fas fa-list-alt"></i> พิมพ์รายงาน</button></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <table class="table table-responsive" id="enrollTable">
                         <thead>
                             <tr>
                                 <th>รหัสนักศึกษา</th>
@@ -55,9 +64,9 @@ $res = mysqli_query($conn, $sql);
                                             <td><button enrollId="<?php echo $row["id"]; ?>" class="btn btn-success btnUpdate"><i class="fas fa-check"></i> โอนแล้ว</button></td>
                                         <?php } else if ($row["status"] == "โอนแล้ว") { ?>
                                             <td><button enrollId="<?php echo $row["id"]; ?>" class="btn btn-danger btnCancelPay"><i class="fas fa-times"></i> ยกเลิกโอน</button></td>
-                                        <?php } else {?>
+                                        <?php } else { ?>
                                             <td></td>
-                                        <?php }?>
+                                        <?php } ?>
                                         <td><button enrollId="<?php echo $row["id"]; ?>" class="btn btn-danger btnDel"><i class="fas fa-trash-alt"></i> ลบ</button></td>
 
                                     <?php } else { ?>

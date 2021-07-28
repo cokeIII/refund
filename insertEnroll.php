@@ -14,7 +14,17 @@ $major_name = $_POST["major_name"];
 $minor_name = $_POST["minor_name"];
 $grade_name = $_POST["grade_name"];
 $student_group_no = $_POST["student_group_no"];
+$recipient = $_POST["recipient"];
+$recipient_fname = $_POST["recipient_fname"];
+$recipient_lname = $_POST["recipient_lname"];
+$recipient_bank = $_POST["recipient_bank"];
+$recipient_bank_number = $_POST["recipient_bank_number"];
 $student_group_short_name = $_POST["student_group_short_name"];
+
+$sqlPay = "select * from pay where grade_name = '$grade_name'";
+$resPay = mysqli_query($conn, $sqlPay);
+$rowPay = mysqli_fetch_array($resPay);
+$pay = $rowPay["id"];
 $sqlCheck = "SELECT status
 FROM   enroll 
 WHERE student_id = '$student_id'
@@ -87,7 +97,13 @@ if ($rowcount == 0) {
         stu_signature,
         id_card_pic,
         account_book_pic,
-        status
+        status,
+        recipient,
+        recipient_fname,
+        recipient_lname,
+        recipient_bank,
+        recipient_bank_number,
+        pay_id
 
     ) values(
         '$people_id',
@@ -104,7 +120,14 @@ if ($rowcount == 0) {
         '$stu_signature',
         '$id_card_pic',
         '$account_book_pic',
-        'ลงทะเบียนสำเร็จ');
+        'ลงทะเบียนสำเร็จ',
+        '$recipient',
+        '$recipient_fname',
+        '$recipient_lname',
+        '$recipient_bank',
+        '$recipient_bank_number',
+        '$pay'
+    );
     ";
         $res = mysqli_query($conn, $sql);
         if ($res) {
@@ -180,7 +203,13 @@ if ($rowcount == 0) {
             stu_signature,
             id_card_pic,
             account_book_pic,
-            status
+            status,
+            recipient,
+            recipient_fname,
+            recipient_lname,
+            recipient_bank,
+            recipient_bank_number,
+            pay_id
     
         ) values(
             '$people_id',
@@ -197,11 +226,18 @@ if ($rowcount == 0) {
             '$stu_signature',
             '$id_card_pic',
             '$account_book_pic',
-            'ลงทะเบียนสำเร็จ');
+            'ลงทะเบียนสำเร็จ',
+            '$recipient',
+            '$recipient_fname',
+            '$recipient_lname',
+            '$recipient_bank',
+            '$recipient_bank_number',
+            '$pay'
+        );
         ";
             $res = mysqli_query($conn, $sql);
             if ($res) {
-                header("location: listEnroll.php");
+                header("location: listEnroll_std.php");
             } else {
                 echo $sql;
             }

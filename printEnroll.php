@@ -103,7 +103,8 @@ $row = mysqli_fetch_array($res);
         .center {
             text-align: center;
         }
-        .red{
+
+        .red {
             background-color: red;
         }
     </style>
@@ -139,7 +140,9 @@ $row = mysqli_fetch_array($res);
             </td>
         </tr>
         <tr>
-            <td class="center"><div>ลงชื่อนักศึกษา</div></td>
+            <td class="center">
+                <div>ลงชื่อนักศึกษา</div>
+            </td>
         </tr>
         <tr>
             <td width="100%" align="center">
@@ -148,7 +151,7 @@ $row = mysqli_fetch_array($res);
         </tr>
         <tr>
             <td width="100%" class="center">
-                <P class="txt-h"><?php echo "(".$row["prefix_name"].$row["stu_fname"] . " " . $row["stu_lname"].")"; ?></P>
+                <P class="txt-h"><?php echo "(" . $row["prefix_name"] . $row["stu_fname"] . " " . $row["stu_lname"] . ")"; ?></P>
             </td>
         </tr>
         <tr>
