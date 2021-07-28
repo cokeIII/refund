@@ -11,7 +11,10 @@
                     <?php if ($_SESSION["user_status"] == "student") { ?>
                         <li class="nav-item"><a class="nav-link me-lg-3" href="enroll.php">รับเงินคืน</a></li>
                         <li class="nav-item"><a class="nav-link me-lg-3" href="listEnroll_std.php">รายการที่ลงเบียน</a></li>
-                    <?php } ?>
+                    <?php } else if($_SESSION["user_status"] == "staff") {?>
+                        <li class="nav-item"><a class="nav-link me-lg-3" href="listEnroll.php"><i class="fas fa-home"></i> หน้าแรก</a></li>
+                        <li class="nav-item"><a class="nav-link me-lg-3" href="form_report.php"><i class="fas fa-list-alt"></i> พิมพ์รายงาน</a></li>
+                    <?php }?>
                     <a href="logout.php"><button class="btn btn-primary rounded-pill">
                             <i class="fas fa-sign-out-alt"></i>
                             <span class="">ออกจากระบบ</span>

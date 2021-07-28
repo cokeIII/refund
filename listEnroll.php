@@ -22,15 +22,7 @@ $res = mysqli_query($conn, $sql);
         <div class="container px-5">
             <div class="card">
                 <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-12 mb-3">
-                            <div class="d-flex justify-content-end">
-                                <div class="d-flex justify-content-end">
-                                    <a href="report_1.php"><button class="btn btn-primary"><i class="fas fa-list-alt"></i> พิมพ์รายงาน</button></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+
                     <table class="table table-responsive" id="enrollTable">
                         <thead>
                             <tr>
@@ -51,7 +43,7 @@ $res = mysqli_query($conn, $sql);
                                     <td><?php echo $row["stu_fname"] . " " . $row["stu_lname"]; ?></td>
                                     <td><?php echo $row["major_name"]; ?></td>
                                     <td><?php echo $row["student_group_short_name"]; ?></td>
-                                    <td class="<?php if ($row["status"] == "ยกเลิก") {
+                                    <td class="col-status-<?php echo $row["id"];?> <?php if ($row["status"] == "ยกเลิก") {
                                                     echo "text-danger";
                                                 } else {
                                                     echo "text-success";
@@ -59,16 +51,16 @@ $res = mysqli_query($conn, $sql);
                                         <?php echo $row["status"]; ?>
                                     </td>
                                     <?php if ($_SESSION["user_status"] == "staff") { ?>
+                                        <td width="20%">
+                                            <select enrollId="<?php echo $row["id"]; ?>" name="status" id="status" class="form-control status">
+                                                <option value="ตรวจแล้ว" <?php echo ($row["status"] == "ตรวจแล้ว" ? "selected" : ""); ?>>ตรวจแล้ว</option>
+                                                <option value="โอนแล้ว" <?php echo ($row["status"] == "โอนแล้ว" ? "selected" : ""); ?>>โอนแล้ว</option>
+                                                <option value="ลงทะเบียนสำเร็จ" <?php echo ($row["status"] == "ลงทะเบียนสำเร็จ" ? "selected" : ""); ?>>ลงทะเบียนสำเร็จ</option>
+                                                <option value="ยกเลิก" <?php echo ($row["status"] == "ยกเลิก" ? "selected" : ""); ?>>ยกเลิก</option>
+                                            </select>
+                                        </td>
                                         <td><a href="printEnroll.php?id=<?php echo $row["id"]; ?>" target="_blank"><button class="btn btn-info"><i class="fas fa-print"></i> พิมพ์</button></a></td>
-                                        <?php if ($row["status"] == "ลงทะเบียนสำเร็จ") { ?>
-                                            <td><button enrollId="<?php echo $row["id"]; ?>" class="btn btn-success btnUpdate"><i class="fas fa-check"></i> โอนแล้ว</button></td>
-                                        <?php } else if ($row["status"] == "โอนแล้ว") { ?>
-                                            <td><button enrollId="<?php echo $row["id"]; ?>" class="btn btn-danger btnCancelPay"><i class="fas fa-times"></i> ยกเลิกโอน</button></td>
-                                        <?php } else { ?>
-                                            <td></td>
-                                        <?php } ?>
                                         <td><button enrollId="<?php echo $row["id"]; ?>" class="btn btn-danger btnDel"><i class="fas fa-trash-alt"></i> ลบ</button></td>
-
                                     <?php } else { ?>
                                         <?php if ($row["status"] == "ลงทะเบียนสำเร็จ") { ?>
                                             <td><button enrollId="<?php echo $row["id"]; ?>" class="btn btn-danger btnCancel"><i class="fas fa-window-close"></i> ยกเลิก</button></td>
@@ -143,21 +135,32 @@ $res = mysqli_query($conn, $sql);
                 }, "POST");
             }
         })
-        $(".btnUpdate").click(function() {
-            if (confirm("you want to update the item ?")) {
-                $.redirect("updateEnroll.php", {
-                    id: $(this).attr("enrollId"),
-                    update: "update",
-                }, "POST");
-            }
+        $(".status").change(function() {
+            let id = $(this).attr("enrollId")
+            let val = $(this).val()
+            $.ajax({
+                type: "POST",
+                url: "updateEnroll.php",
+                data: {
+                    id: id,
+                    update: val,
+                },
+                success: function(result) {
+                    if (result == "ok") {
+                        if(val != "ยกเลิก") {
+                            $(".col-status-"+id).removeClass("text-danger");
+                            $(".col-status-"+id).addClass("text-success");
+                        } else {
+                            $(".col-status-"+id).removeClass("text-success");
+                            $(".col-status-"+id).addClass("text-danger");
+                        }
+                        $(".col-status-"+id).html(val)
+                    } else if(result == "fail"){
+                        alert("แก้ไขไม่สำเร็จ")
+                    }
+                }
+            });
         })
-        $(".btnCancelPay").click(function() {
-            if (confirm("you want to update the item ?")) {
-                $.redirect("updateEnroll.php", {
-                    id: $(this).attr("enrollId"),
-                    updateCancel: "updateCancel",
-                }, "POST");
-            }
-        })
+
     })
 </script>
