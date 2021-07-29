@@ -50,14 +50,14 @@ $major_name = $_POST["major_name"];
 $grade_name = $_POST["grade_name"];
 $student_group_no = $_POST["student_group_no"];
 $status = $_POST["status"];
-$sql = "select * from enroll,pay 
-where major_name='$major_name' 
-and grade_name='$grade_name' 
-and student_group_no='$student_group_no' 
-and status='$status' 
-and enroll.pay_id = pay.id";
+$sql = "select * from enroll,pay p 
+where enroll.major_name='$major_name' 
+and enroll.grade_name='$grade_name' 
+and enroll.student_group_no='$student_group_no' 
+and enroll.status='$status' 
+and enroll.pay_id = p.id";
 $res = mysqli_query($conn, $sql);
-
+echo $sql;
 ?>
 
 
