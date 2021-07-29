@@ -44,9 +44,10 @@ function DateThai($strDate)
     // return "$strDay $strMonthThai $strYear, $strHour:$strMinute";
     return "$strDay $strMonthThai $strYear";
 }
+
 ob_start(); // Start get HTML code
 $id = $_GET["id"];
-$sql = "select * from enroll where id='$id'";
+$sql = "select * from enroll, pay where enroll.id='$id' and pay_id = pay.id";
 $res = mysqli_query($conn, $sql);
 $row = mysqli_fetch_array($res);
 ?>
@@ -94,8 +95,8 @@ $row = mysqli_fetch_array($res);
         tr,
         th,
         td {
-            border: 0px solid black;
-            border-collapse: collapse;
+            /* border: 0px solid black;
+            border-collapse: collapse; */
             margin-left: auto;
             margin-right: auto;
         }
@@ -107,24 +108,31 @@ $row = mysqli_fetch_array($res);
         .red {
             background-color: red;
         }
+
+        tr.border_bottom td {
+            border-bottom: 1px solid black;
+        }
     </style>
 </head>
 
 <body>
     <table width="100%">
-        <tr>
-            <td width="35%"><strong>รหัสนักศึกษา</strong> <?php echo $row["student_id"]; ?></td>
-            <td width="65%"><strong>รหัสกลุ่ม</strong> <?php echo $row["group_id"]; ?></td>
+        <tr class="border_bottom">
+            <td><strong>รหัสนักเรียน </strong> <?php echo $row["student_id"]; ?></td>
+            <td><strong>ชื่อ-สกุล </strong> <?php echo $row["stu_fname"] . " " . $row["stu_lname"]; ?></td>
+            <td colspan="2"><strong>ชั้น </strong> <?php echo $row["student_group_short_name"]; ?></td>
         </tr>
-        <tr>
-            <td><strong>รหัสบัตรประชาชน</strong> <?php echo $row["people_id"]; ?></td>
-            <td><strong>สาขาวิชา</strong> <?php echo $row["major_name"]; ?></td>
+        <tr class="border_bottom">
+            <td><strong>ข้อมูลผู้รับเงิน </strong></td>
+            <td><strong>ชื่อ - สกุล </strong> <?php echo $row["recipient_fname"] . " " . $row["recipient_lname"]; ?></td>
+            <td colspan="2"><strong>เกี่ยวข้องเป็น </strong> <?php echo $row["recipient"]; ?></td>
         </tr>
-        <tr>
-            <td><strong>ชื่อ - สกุล</strong> <?php echo $row["stu_fname"] . " " . $row["stu_lname"]; ?></td>
-            <td><strong>สาขางาน</strong> <?php echo $row["minor_name"] . " (" . $row["grade_name"] . " (" . $row["student_group_short_name"] . ")" . ")"; ?></td>
+        <tr class="border_bottom">
+            <td><strong>ข้อมูลการโอนเงิน </strong></td>
+            <td><strong>ธนาคาร </strong> <?php echo $row["recipient_bank"] . " " . $row["recipient_lname"]; ?></td>
+            <td><strong>เลขบัญชี </strong> <?php echo $row["recipient_bank_number"]; ?></td>
+            <td><strong>จำนวนเงิน </strong> <?php echo $row["pay"]; ?></td>
         </tr>
-
     </table>
     <table>
         <tr>
