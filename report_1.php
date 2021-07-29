@@ -144,7 +144,7 @@ $res = mysqli_query($conn, $sql);
         </tr>
         <?php $i = 0;
         $pay = 0;
-        while ($row = mysqli_fetch_array($res)) { $pay+=$row["pay"]?>
+        while ($row = mysqli_fetch_array($res)) { $pay+=$row["pay"];?>
             <tr>
                 <td><?php echo ++$i; ?></td>
                 <td><?php echo $row["student_id"]; ?></td>
