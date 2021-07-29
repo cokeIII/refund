@@ -50,7 +50,12 @@ $major_name = $_POST["major_name"];
 $grade_name = $_POST["grade_name"];
 $student_group_no = $_POST["student_group_no"];
 $status = $_POST["status"];
-$sql = "select * from enroll where major_name='$major_name' and grade_name='$grade_name' and student_group_no='$student_group_no' and status='$status'";
+$sql = "select * from enroll,pay 
+where major_name='$major_name' 
+and grade_name='$grade_name' 
+and student_group_no='$student_group_no' 
+and status='$status' 
+and enroll.pay_id = pay.id";
 $res = mysqli_query($conn, $sql);
 
 ?>
@@ -138,7 +143,8 @@ $res = mysqli_query($conn, $sql);
             <th>ความสัมพันธ์</th>
         </tr>
         <?php $i = 0;
-        while ($row = mysqli_fetch_array($res)) { ?>
+        $pay = 0;
+        while ($row = mysqli_fetch_array($res)) { $pay+=$row["pay"]?>
             <tr>
                 <td><?php echo ++$i; ?></td>
                 <td><?php echo $row["student_id"]; ?></td>
@@ -147,11 +153,12 @@ $res = mysqli_query($conn, $sql);
                 <td><?php echo $row["recipient_bank_number"]; ?></td>
                 <td><?php echo $row["recipient_bank"]; ?></td>
                 <td><?php echo $row["recipient"]; ?></td>
+            
             </tr>
         <?php } ?>
         <tr>
             <td colspan="6">รวมเงิน</td>
-            <td>.........</td>
+            <td><?php echo $pay;?></td>
         </tr>
     </table>
     <br>
