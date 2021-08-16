@@ -130,20 +130,20 @@ if (empty($_SESSION["user_status"])) {
                                     <input type="file" name="id_card_pic_std" id="id_card_pic_std" class="form-control" accept="image/*" required>
                                 </div>
                                 <label for="id_card_pic_std" class="image-previewer" data-cropzee="id_card_pic_std"></label>
-                                <button type="button" class="btn btn-secondary" onclick="set_id_card_pic_std(cropzeeGetImage('id_card_pic_std'))">ยืนยันการตัดรูปภาพ</button>
+                                <button id="btn_id_card_pic_std" type="button" class="btn btn-secondary" onclick="set_id_card_pic_std(cropzeeGetImage('id_card_pic_std'))">ยืนยันรูปภาพ</button>
 
                                 <div class="form-group p-1">
                                     <label>รูปบัตรประชาชนผู้ปกครอง<a href="#" data-toggle="modal" data-target="#exampleModalCard">ตัวอย่าง</a></label>
                                     <input type="file" name="id_card_pic" id="id_card_pic" class="form-control" accept="image/*" required>
                                 </div>
                                 <label for="id_card_pic" class="image-previewer" data-cropzee="id_card_pic"></label>
-                                <button type="button" class="btn btn-secondary" onclick="set_id_card_pic(cropzeeGetImage('id_card_pic'))">ยืนยันการตัดรูปภาพ</button>
+                                <button id="btn_id_card_pic" type="button" class="btn btn-secondary" onclick="set_id_card_pic(cropzeeGetImage('id_card_pic'))">ยืนยันรูปภาพ</button>
                                 <div class="form-group p-1">
                                     <label>รูปหน้าสมุดบัญชีผู้ปกครอง <a href="#" data-toggle="modal" data-target="#exampleModalAcc">ตัวอย่าง</a></label>
                                     <input type="file" name="account_book_pic" id="account_book_pic" class="form-control" accept="image/*" required>
                                 </div>
                                 <label for="account_book_pic" class="image-previewer" data-cropzee="account_book_pic"></label>
-                                <button type="button" class="btn btn-secondary" onclick="set_account_book_pic(cropzeeGetImage('account_book_pic'))">ยืนยันการตัดรูปภาพ</button>
+                                <button id="btn_account_book_pic" type="button" class="btn btn-secondary" onclick="set_account_book_pic(cropzeeGetImage('account_book_pic'))">ยืนยันรูปภาพ</button>
                             </div>
                         </div>
                         <!-- <div class="row mt-3">
@@ -217,8 +217,19 @@ if (empty($_SESSION["user_status"])) {
 
 </html>
 <script>
+    let btn_id_card_pic_std = true;
+    let btn_id_card_pic = true;
+    let btn_account_book_pic = true;
     function set_id_card_pic_std(val) {
-        console.log(val)
+        btn_id_card_pic_std = !btn_id_card_pic_std;
+        if(btn_id_card_pic_std){
+            $("#btn_id_card_pic_std").removeClass("btn-success");
+            $("#btn_id_card_pic_std").addClass("btn-secondary");
+        } else {
+            $("#btn_id_card_pic_std").removeClass("btn-secondary");
+            $("#btn_id_card_pic_std").addClass("btn-success");
+        }
+        
         if (val == "") {
             alert("เกิดข้อผิดพลาดในการตัดรูป กรุณาเลือกรูปใหม่")
         } else {
@@ -227,7 +238,15 @@ if (empty($_SESSION["user_status"])) {
     }
 
     function set_id_card_pic(val) {
-        console.log(val)
+        btn_id_card_pic = !btn_id_card_pic;
+        if(btn_id_card_pic){
+            $("#btn_id_card_pic").removeClass("btn-success");
+            $("#btn_id_card_pic").addClass("btn-secondary");
+        } else {
+            $("#btn_id_card_pic").removeClass("btn-secondary");
+            $("#btn_id_card_pic").addClass("btn-success");
+        }
+
         if (val == "") {
             alert("เกิดข้อผิดพลาดในการตัดรูป กรุณาเลือกรูปใหม่")
         } else {
@@ -236,7 +255,14 @@ if (empty($_SESSION["user_status"])) {
     }
 
     function set_account_book_pic(val) {
-        console.log(val)
+        btn_account_book_pic = !btn_account_book_pic;
+        if(btn_account_book_pic){
+            $("#btn_account_book_pic").removeClass("btn-success");
+            $("#btn_account_book_pic").addClass("btn-secondary");
+        } else {
+            $("#btn_account_book_pic").removeClass("btn-secondary");
+            $("#btn_account_book_pic").addClass("btn-success");
+        }
         if (val == "") {
             alert("เกิดข้อผิดพลาดในการตัดรูป กรุณาเลือกรูปใหม่")
         } else {
