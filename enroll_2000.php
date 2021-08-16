@@ -165,7 +165,7 @@ if (empty($_SESSION["user_status"])) {
                         </div> -->
                         <div class="row mt-3">
                             <div class="d-flex justify-content-center text-center">
-                                <button class="btn btn-primary"><i class="fas fa-clipboard-list"></i> ลงทะเบียนรับเงินคืน</button>
+                                <button class="btn btn-primary"><i class="fas fa-clipboard-list"></i> ลงทะเบียนรับเงิน</button>
                             </div>
                         </div>
                     </form>
