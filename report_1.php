@@ -169,9 +169,7 @@ echo $sql;
         <div class="mr">หัวหน้างานการเงิน</div>
     </div>
 </body>
-
 </html>
-
 <?php
 $html = ob_get_contents();
 // $mpdf->AddPage('L');

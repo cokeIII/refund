@@ -36,6 +36,8 @@ if ($rowcount == 0) {
     date_default_timezone_set("Asia/Bangkok");
     $nameDate = date("YmdHis");
     $target_dir = "uploads/";
+    $id_card_pic_std =  "id_card_pic_std" . $student_id . "_" . $nameDate . ".jpg";
+    $target_file_id_card_pic_std = $target_dir . $id_card_pic_std;
     $id_card_pic = "id_card_pic_" . $student_id . "_" . $nameDate . ".jpg";
     $target_file_id_card_pic = $target_dir . $id_card_pic;
     $account_book_pic =  "account_book_pic_" . $student_id . "_" . $nameDate . ".jpg";
@@ -56,6 +58,12 @@ if ($rowcount == 0) {
     $stu_signature = $student_id . "_" . $nameDate . '.' . $image_type;
     file_put_contents($file, $image_base64);
 
+    $check = getimagesize($_FILES["id_card_pic_std"]["tmp_name"]);
+    if ($check !== false) {
+        $uploadOk = 1;
+    } else {
+        $uploadOk = 0;
+    }
     $check = getimagesize($_FILES["id_card_pic"]["tmp_name"]);
     if ($check !== false) {
         $uploadOk = 1;
@@ -73,6 +81,10 @@ if ($rowcount == 0) {
         echo "Sorry, your file was not uploaded.";
         // if everything is ok, try to upload file
     } else {
+        if (move_uploaded_file($_FILES["id_card_pic_std"]["tmp_name"], $target_file_id_card_pic_std)) {
+        } else {
+            echo "Sorry, there was an error uploading your file.";
+        }
         if (move_uploaded_file($_FILES["id_card_pic"]["tmp_name"], $target_file_id_card_pic)) {
         } else {
             echo "Sorry, there was an error uploading your file.";
@@ -81,6 +93,39 @@ if ($rowcount == 0) {
         } else {
             echo "Sorry, there was an error uploading your file.";
         }
+        //base64
+        // $id_card_pic_std = $_POST["id_card_pic_std_h"];
+        // $id_card_pic = $_POST["id_card_pic_h"];
+        // $account_book_pic = $_POST["account_book_pic_h"];
+
+     
+            $folderPath = "uploads/";
+            $image_parts = explode(";base64,", $_POST["id_card_pic_std_h"]);
+            $image_type_aux = explode("image/", $image_parts[0]);
+            $image_type = $image_type_aux[1];
+            $image_base64 = base64_decode($image_parts[1]);
+            $file = $folderPath . $student_id . "std_" . $nameDate . '.' . $image_type;
+            $id_card_pic_std = $student_id . "std_" . $nameDate . '.' . $image_type;
+            file_put_contents($file, $image_base64);
+        
+            $folderPath = "uploads/";
+            $image_parts = explode(";base64,", $_POST["id_card_pic_h"]);
+            $image_type_aux = explode("image/", $image_parts[0]);
+            $image_type = $image_type_aux[1];
+            $image_base64 = base64_decode($image_parts[1]);
+            $file = $folderPath . $student_id . "p_" . $nameDate . '.' . $image_type;
+            $id_card_pic = $student_id . "p_" . $nameDate . '.' . $image_type;
+            file_put_contents($file, $image_base64);
+
+            $folderPath = "uploads/";
+            $image_parts = explode(";base64,", $_POST["account_book_pic_h"]);
+            $image_type_aux = explode("image/", $image_parts[0]);
+            $image_type = $image_type_aux[1];
+            $image_base64 = base64_decode($image_parts[1]);
+            $file = $folderPath . $student_id . "ab_" . $nameDate . '.' . $image_type;
+            $account_book_pic = $student_id . "ab_" . $nameDate . '.' . $image_type;
+            file_put_contents($file, $image_base64);
+        
         $sql = "insert into enroll 
     (
         people_id,
@@ -95,6 +140,7 @@ if ($rowcount == 0) {
         grade_name,
         student_group_short_name,
         stu_signature,
+        id_card_pic_std,
         id_card_pic,
         account_book_pic,
         status,
@@ -118,6 +164,7 @@ if ($rowcount == 0) {
         '$grade_name',
         '$student_group_short_name',
         '$stu_signature',
+        '$id_card_pic_std',
         '$id_card_pic',
         '$account_book_pic',
         'ลงทะเบียนสำเร็จ',
@@ -142,6 +189,8 @@ if ($rowcount == 0) {
         date_default_timezone_set("Asia/Bangkok");
         $nameDate = date("YmdHis");
         $target_dir = "uploads/";
+        $id_card_pic_std =  "id_card_pic_std" . $student_id . "_" . $nameDate . ".jpg";
+        $target_file_id_card_pic_std = $target_dir . $id_card_pic_std;
         $id_card_pic = "id_card_pic_" . $student_id . "_" . $nameDate . ".jpg";
         $target_file_id_card_pic = $target_dir . $id_card_pic;
         $account_book_pic =  "account_book_pic_" . $student_id . "_" . $nameDate . ".jpg";
@@ -161,7 +210,12 @@ if ($rowcount == 0) {
         $file = $folderPath . $student_id . "_" . $nameDate . '.' . $image_type;
         $stu_signature = $student_id . "_" . $nameDate . '.' . $image_type;
         file_put_contents($file, $image_base64);
-
+        $check = getimagesize($_FILES["id_card_pic_std"]["tmp_name"]);
+        if ($check !== false) {
+            $uploadOk = 1;
+        } else {
+            $uploadOk = 0;
+        }
         $check = getimagesize($_FILES["id_card_pic"]["tmp_name"]);
         if ($check !== false) {
             $uploadOk = 1;
@@ -179,6 +233,10 @@ if ($rowcount == 0) {
             echo "Sorry, your file was not uploaded.";
             // if everything is ok, try to upload file
         } else {
+            if (move_uploaded_file($_FILES["id_card_pic_std"]["tmp_name"], $target_file_id_card_pic_std)) {
+            } else {
+                echo "Sorry, there was an error uploading your file.";
+            }
             if (move_uploaded_file($_FILES["id_card_pic"]["tmp_name"], $target_file_id_card_pic)) {
             } else {
                 echo "Sorry, there was an error uploading your file.";
@@ -187,6 +245,37 @@ if ($rowcount == 0) {
             } else {
                 echo "Sorry, there was an error uploading your file.";
             }
+            //base64
+            // $id_card_pic_std = $_POST["id_card_pic_std_h"];
+            // $id_card_pic = $_POST["id_card_pic_h"];
+            // $account_book_pic = $_POST["account_book_pic_h"];
+
+            $folderPath = "uploads/";
+            $image_parts = explode(";base64,", $_POST["id_card_pic_std_h"]);
+            $image_type_aux = explode("image/", $image_parts[0]);
+            $image_type = $image_type_aux[1];
+            $image_base64 = base64_decode($image_parts[1]);
+            $file = $folderPath . $student_id . "std_" . $nameDate . '.' . $image_type;
+            $id_card_pic_std = $student_id . "std_" . $nameDate . '.' . $image_type;
+            file_put_contents($file, $image_base64);
+        
+            $folderPath = "uploads/";
+            $image_parts = explode(";base64,", $_POST["id_card_pic_h"]);
+            $image_type_aux = explode("image/", $image_parts[0]);
+            $image_type = $image_type_aux[1];
+            $image_base64 = base64_decode($image_parts[1]);
+            $file = $folderPath . $student_id . "p_" . $nameDate . '.' . $image_type;
+            $id_card_pic = $student_id . "p_" . $nameDate . '.' . $image_type;
+            file_put_contents($file, $image_base64);
+
+            $folderPath = "uploads/";
+            $image_parts = explode(";base64,", $_POST["account_book_pic_h"]);
+            $image_type_aux = explode("image/", $image_parts[0]);
+            $image_type = $image_type_aux[1];
+            $image_base64 = base64_decode($image_parts[1]);
+            $file = $folderPath . $student_id . "ap_" . $nameDate . '.' . $image_type;
+            $account_book_pic = $student_id . "ap_" . $nameDate . '.' . $image_type;
+            file_put_contents($file, $image_base64);
             $sql = "insert into enroll 
         (
             people_id,
@@ -201,6 +290,7 @@ if ($rowcount == 0) {
             grade_name,
             student_group_short_name,
             stu_signature,
+            id_card_pic_std,
             id_card_pic,
             account_book_pic,
             status,
@@ -224,6 +314,7 @@ if ($rowcount == 0) {
             '$grade_name',
             '$student_group_short_name',
             '$stu_signature',
+            '$id_card_pic_std',
             '$id_card_pic',
             '$account_book_pic',
             'ลงทะเบียนสำเร็จ',

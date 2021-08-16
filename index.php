@@ -17,7 +17,7 @@
                             <div class="col-md-7">
                                 <div class="border-left p-5  mb-3">
                                     <div class="text-center">
-                                        <h1 class="h4 mb-4">ระบบคืนเงิน</h1>
+                                        <h1 class="h4 mb-4">ระบบลงทะเบียนรับเงิน</h1>
                                     </div>
                                     <form class="user">
                                         <div class="form-group">
@@ -59,7 +59,7 @@
                     },
                     success: function(result) {
                         if (result.trim() == "ok") {
-                            window.location.replace("enroll.php");
+                            window.location.replace("enroll_2000.php");
                         } else if(result.trim() == "ok staff"){
                             window.location.replace("listEnroll.php");
                         }else {

@@ -30,6 +30,7 @@ $res = mysqli_query($conn, $sql);
                                 <th>เลขบัญชี</th>
                                 <th>สถานะ</th>
                                 <th></th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -46,6 +47,7 @@ $res = mysqli_query($conn, $sql);
                                         <?php echo $row["status"]; ?>
                                     </td>
                                     <?php if ($row["status"] == "ลงทะเบียนสำเร็จ") { ?>
+                                        <td><button enrollId="<?php echo $row["id"]; ?>" class="btn btn-info btnPrint"><i class="fas fa-print"></i>พิมพ์</button></td>
                                         <td><button enrollId="<?php echo $row["id"]; ?>" class="btn btn-danger btnCancel"><i class="fas fa-window-close"></i> ยกเลิก</button></td>
                                     <?php } else { ?>
                                         <td></td>
@@ -62,6 +64,7 @@ $res = mysqli_query($conn, $sql);
     </div>
 </body>
 <?php require_once "setFoot.php"; ?>
+
 </html>
 <script>
     $(document).ready(function() {
@@ -71,6 +74,11 @@ $res = mysqli_query($conn, $sql);
                     id: $(this).attr("enrollId"),
                 }, "POST");
             }
+        })
+        $(".btnPrint").click(function() {
+            $.redirect("report_2.php", {
+                id: $(this).attr("enrollId"),
+            }, "POST");
         })
     })
 </script>

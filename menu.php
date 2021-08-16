@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light fixed-top shadow-sm" id="mainNav">
     <div class="container px-5">
-        <a class="navbar-brand fw-bold" href="#">ระบบคืนเงิน</a>
+        <a class="navbar-brand fw-bold" href="#">รับเงินเยียวยา</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             เมนู
             <i class="bi-list"></i>
@@ -9,7 +9,7 @@
             <ul class="navbar-nav ms-auto me-4 my-3 my-lg-0">
                 <?php if (!empty($_SESSION["user_status"])) { ?>
                     <?php if ($_SESSION["user_status"] == "student") { ?>
-                        <li class="nav-item"><a class="nav-link me-lg-3" href="enroll.php">รับเงินคืน</a></li>
+                        <li class="nav-item"><a class="nav-link me-lg-3" href="enroll_2000.php">ลงทะเบียนรับเงิน</a></li>
                         <li class="nav-item"><a class="nav-link me-lg-3" href="listEnroll_std.php">รายการที่ลงเบียน</a></li>
                     <?php } else if($_SESSION["user_status"] == "staff") {?>
                         <li class="nav-item"><a class="nav-link me-lg-3" href="listEnroll.php"><i class="fas fa-home"></i> หน้าแรก</a></li>
