@@ -133,13 +133,13 @@ if (empty($_SESSION["user_status"])) {
                                 <button id="btn_id_card_pic_std" type="button" class="btn btn-secondary" onclick="set_id_card_pic_std(cropzeeGetImage('id_card_pic_std'))">ยืนยันรูปภาพ</button>
 
                                 <div class="form-group p-1">
-                                    <label>รูปบัตรประชาชนผู้ปกครอง<a href="#" data-toggle="modal" data-target="#exampleModalCard">ตัวอย่าง</a></label>
+                                    <label>รูปบัตรประชาชน<span class="re_status"></span><a href="#" data-toggle="modal" data-target="#exampleModalCard">ตัวอย่าง</a></label>
                                     <input type="file" name="id_card_pic" id="id_card_pic" class="form-control" accept="image/*" required>
                                 </div>
                                 <label for="id_card_pic" class="image-previewer" data-cropzee="id_card_pic"></label>
                                 <button id="btn_id_card_pic" type="button" class="btn btn-secondary" onclick="set_id_card_pic(cropzeeGetImage('id_card_pic'))">ยืนยันรูปภาพ</button>
                                 <div class="form-group p-1">
-                                    <label>รูปหน้าสมุดบัญชีผู้ปกครอง <a href="#" data-toggle="modal" data-target="#exampleModalAcc">ตัวอย่าง</a></label>
+                                    <label>รูปหน้าสมุดบัญชี<span class="re_status"></span> <a href="#" data-toggle="modal" data-target="#exampleModalAcc">ตัวอย่าง</a></label>
                                     <input type="file" name="account_book_pic" id="account_book_pic" class="form-control" accept="image/*" required>
                                 </div>
                                 <label for="account_book_pic" class="image-previewer" data-cropzee="account_book_pic"></label>
@@ -169,7 +169,7 @@ if (empty($_SESSION["user_status"])) {
                                 <div class="row">
                                     <div class="col-md-12">
 
-                                        <label>ลายเซ็นผู้ปกครอง</label>
+                                        <label>ลายเซ็น<span class="re_status"></span></label>
                                         <div class="wrapper">
                                             <div id="sig2"></div>
                                             <textarea id="signature65" name="signed2" style="display: none" required></textarea>
@@ -236,6 +236,7 @@ if (empty($_SESSION["user_status"])) {
 
 </html>
 <script>
+    $(".re_status").html($("#recipient").val())
     let btn_id_card_pic_std = true;
     let btn_id_card_pic = true;
     let btn_account_book_pic = true;
@@ -328,6 +329,7 @@ if (empty($_SESSION["user_status"])) {
         $("#recipient").change(function() {
             let status = $("#recipient").val()
             get_recipient(status)
+            $(".re_status").html(status)
         })
     })
 
