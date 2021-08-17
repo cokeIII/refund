@@ -146,7 +146,8 @@ if (empty($_SESSION["user_status"])) {
                                 <button id="btn_account_book_pic" type="button" class="btn btn-secondary" onclick="set_account_book_pic(cropzeeGetImage('account_book_pic'))">ยืนยันรูปภาพ</button>
                             </div>
                         </div>
-                        <!-- <div class="row mt-3">
+                       
+                         <div class="row mt-3">
                             <div class="d-flex justify-content-center text-center">
                                 <div class="row">
                                     <div class="col-md-12">
@@ -162,7 +163,25 @@ if (empty($_SESSION["user_status"])) {
                                     </div>
                                 </div>
                             </div>
-                        </div> -->
+                        </div>
+                        <div class="row mt-3">
+                            <div class="d-flex justify-content-center text-center">
+                                <div class="row">
+                                    <div class="col-md-12">
+
+                                        <label>ลายเซ็นผู้ปกครอง</label>
+                                        <div class="wrapper">
+                                            <div id="sig2"></div>
+                                            <textarea id="signature65" name="signed2" style="display: none" required></textarea>
+                                        </div>
+                                        <div class="mt-2">
+                                            <button id="clear2" type="button">Clear</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="row mt-3">
                             <div class="d-flex justify-content-center text-center">
                                 <button class="btn btn-primary"><i class="fas fa-clipboard-list"></i> ลงทะเบียนรับเงิน</button>
@@ -296,6 +315,15 @@ if (empty($_SESSION["user_status"])) {
             e.preventDefault();
             sig.signature('clear');
             $("#signature64").val('');
+        });
+        var sig2 = $('#sig2').signature({
+            syncField: '#signature65',
+            syncFormat: 'PNG'
+        });
+        $('#clear2').click(function(e) {
+            e.preventDefault();
+            sig2.signature('clear');
+            $("#signature65").val('');
         });
         $("#recipient").change(function() {
             let status = $("#recipient").val()

@@ -78,7 +78,8 @@ $res = mysqli_query($conn, $sql);
         $(".btnPrint").click(function() {
             $.redirect("report_2.php", {
                 id: $(this).attr("enrollId"),
-            }, "POST");
+                
+            }, "POST",'_blank',);
         })
     })
 </script>

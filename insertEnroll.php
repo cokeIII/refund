@@ -58,6 +58,19 @@ if ($rowcount == 0) {
     $stu_signature = $student_id . "_" . $nameDate . '.' . $image_type;
     file_put_contents($file, $image_base64);
 
+
+    $image_parts_parent = explode(";base64,", $_POST['signed2']);
+
+    $image_type_aux_parent = explode("image/", $image_parts_parent[0]);
+
+    $image_type_parent = $image_type_aux_parent[1];
+
+    $image_base64_parent = base64_decode($image_parts_parent[1]);
+
+    $file_parent = $folderPath . $student_id . "P_" . $nameDate . '.' . $image_type_parent;
+    $stu_signature_parent = $student_id . "P_" . $nameDate . '.' . $image_type_parent;
+    file_put_contents($file_parent, $image_base64_parent);
+
     $check = getimagesize($_FILES["id_card_pic_std"]["tmp_name"]);
     if ($check !== false) {
         $uploadOk = 1;
@@ -140,6 +153,7 @@ if ($rowcount == 0) {
         grade_name,
         student_group_short_name,
         stu_signature,
+        parent_signature,
         id_card_pic_std,
         id_card_pic,
         account_book_pic,
@@ -164,6 +178,7 @@ if ($rowcount == 0) {
         '$grade_name',
         '$student_group_short_name',
         '$stu_signature',
+        '$stu_signature_parent',
         '$id_card_pic_std',
         '$id_card_pic',
         '$account_book_pic',
@@ -210,6 +225,19 @@ if ($rowcount == 0) {
         $file = $folderPath . $student_id . "_" . $nameDate . '.' . $image_type;
         $stu_signature = $student_id . "_" . $nameDate . '.' . $image_type;
         file_put_contents($file, $image_base64);
+
+        $image_parts_parent = explode(";base64,", $_POST['signed2']);
+
+        $image_type_aux_parent = explode("image/", $image_parts_parent[0]);
+    
+        $image_type_parent = $image_type_aux_parent[1];
+    
+        $image_base64_parent = base64_decode($image_parts_parent[1]);
+    
+        $file_parent = $folderPath . $student_id . "P_" . $nameDate . '.' . $image_type_parent;
+        $stu_signature_parent = $student_id . "P_" . $nameDate . '.' . $image_type_parent;
+        file_put_contents($file_parent, $image_base64_parent);
+        
         $check = getimagesize($_FILES["id_card_pic_std"]["tmp_name"]);
         if ($check !== false) {
             $uploadOk = 1;
@@ -290,6 +318,7 @@ if ($rowcount == 0) {
             grade_name,
             student_group_short_name,
             stu_signature,
+            parent_signature,
             id_card_pic_std,
             id_card_pic,
             account_book_pic,
@@ -314,6 +343,7 @@ if ($rowcount == 0) {
             '$grade_name',
             '$student_group_short_name',
             '$stu_signature',
+            '$stu_signature_parent',
             '$id_card_pic_std',
             '$id_card_pic',
             '$account_book_pic',

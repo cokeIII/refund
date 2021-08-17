@@ -106,7 +106,7 @@ $row = mysqli_fetch_assoc($res);
         tr,
         th,
         td {
-            border: 1px solid black;
+            /* border: 1px solid black; */
             border-collapse: collapse;
             margin-left: auto;
             margin-right: auto;
@@ -125,45 +125,66 @@ $row = mysqli_fetch_assoc($res);
         }
 
         .width-sig {
-            margin-left: 35%;
+            margin-left: 40%;
         }
 
         .tab {
             margin-left: 10%;
         }
-        .m-r{
+
+        .m-r {
             margin-right: 15%;
         }
-        .m-r-n{
+
+        .m-r-n {
             margin-right: 12%;
+        }
+
+        .sig-size {
+            width: 75px;
+            height: 30px;
         }
     </style>
 </head>
 
 <body>
     <h2 class="center">วิทยาลัยเทคนิคชลบุรี</h2>
-    <div class="center text-size">หลักฐานรับเงินเยียวยา ช่วยเหลือ 2,000 บาท บรรเทาความเดือดร้อนในภาคเรียนที่ 1/2564</div>
+    <div class="center text-size">หลักฐานการรับเงินเยียวยาที่ได้รับผลกระทบจากสถานการณ์การระบาดของโรคติดเชื้อไวรัสโคโรน่า 2019</div>
     <div class="text-size">1.สำเนาบัตรประชาชนของนักเรียน/นักศึกษา</div>
     <div class="text-size txt-right">ชั้น/ช่าง <?php echo $row["student_group_short_name"]; ?> รหัส <?php echo $row["student_id"]; ?></div>
-    <div class="center"><img src="uploads/<?php echo $row["id_card_pic_std"]; ?>" alt="" height="150" width="290"></div>
+    <div class="center"><img src="uploads/<?php echo $row["id_card_pic_std"]; ?>" alt="" height="135" width="275"></div>
     <div class="text-size center">สำเนาถูกต้อง</div>
-    <div class="text-size width-sig">ลงชื่อ</div>
+    <div class="text-size width-sig">ลงชื่อ<img class="sig-size" src="uploads/signature/<?php echo $row["stu_signature"]; ?>" width="75px" height="30px"></div>
     <div class="text-size center">(<?php echo $row["prefix_name"] . $row["stu_fname"] . " " . $row["stu_lname"]; ?>)</div>
     <div class="text-size">2.สำเนาบัตรประชาชนผู้ปกครอง</div>
-    <div class="center"><img src="uploads/<?php echo $row["id_card_pic"]; ?>" alt="" height="150" width="290"></div>
+    <div class="center"><img src="uploads/<?php echo $row["id_card_pic"]; ?>" alt="" height="135" width="275"></div>
     <div class="text-size center">สำเนาถูกต้อง</div>
-    <div class="text-size width-sig">ลงชื่อ</div>
+    <div class="text-size width-sig">ลงชื่อ <img class="sig-size" src="uploads/signature/<?php echo $row["parent_signature"]; ?>" width="75px" height="30px"></div>
     <div class="text-size center">(<?php echo $row["recipient_fname"] . " " . $row["recipient_lname"]; ?>)</div>
-    <div class="text-size">3.เลขบัญชีธนาคารของผู้ปกครองของผู้ปกครองโดยถ่ายหน้าบัญชี</div>
-    <div class="center"><img src="uploads/<?php echo $row["account_book_pic"]; ?>" alt="" height="150" width="290"></div>
+    <div class="text-size">3.เลขบัญชีธนาคารของผู้ปกครองโดยถ่ายหน้าบัญชีธนาคาร</div>
+    <div class="center"><img src="uploads/<?php echo $row["account_book_pic"]; ?>" alt="" height="135" width="275"></div>
     <div class="text-size tab">ขอรับรองว่าเป็นผู้ปกครองของ <?php echo $row["prefix_name"] . $row["stu_fname"] . " " . $row["stu_lname"]; ?></div>
     <div class="text-size">ได้รับเงินช่วยเหลือจากรัฐบาล จำนวน 2,000 บาท เรียบร้อยแล้ว</div>
-    <div class="txt-right text-size ">
-            ลงชื่อ..............................................................ผู้รับเงิน
-            <div class="txt-right text-size m-r-n">(<?php echo $row["recipient_fname"] . " " . $row["recipient_lname"]; ?>)</div>
+    <!-- <div class="txt-right text-size ">
+            ลงชื่อ<img src="uploads/signature/<?php //echo $row["parent_signature"];
+                                                ?>" width="50px" height="50px">ผู้รับเงิน
+            <div class="txt-right text-size m-r-n">(<?php //echo $row["recipient_fname"] . " " . $row["recipient_lname"]; 
+                                                    ?>)</div>
             <div class="txt-right text-size m-r">ผู้ปกครอง</div>
             <div class="txt-right text-size m-r">วันที่................................................</div>
-    </div>
+    </div> -->
+    <table>
+        <tr class="txt-right text-size ">
+            <td>ลงชื่อ<img class="sig-size" src="uploads/signature/<?php echo $row["parent_signature"]; ?>">ผู้รับเงิน</td>
+        </tr>
+        <tr>
+            <td class="text-size center">(<?php echo $row["recipient_fname"] . " " . $row["recipient_lname"]; ?>)</td>
+        </tr>
+        <tr>
+            <td class="text-size center">วันที่................................................</td>
+        </tr>
+    </table>
+    <div class="text-size">หมายเหตุ : โดยให้ผู้ปกครองนักเรียน/นักศึกษาเป็นผู้รับผิดชอบค่าธรรมเนียมในการโอนเงินฝากธนาคาร</div>
 
 
 
@@ -175,7 +196,7 @@ $row = mysqli_fetch_assoc($res);
 $html = ob_get_contents();
 // $mpdf->AddPage('L');
 $mpdf->WriteHTML($html);
-$taget = "pdf/".$id."_report2.pdf";
+$taget = "pdf/" . $id . "_report2.pdf";
 $mpdf->Output($taget);
 ob_end_flush();
 echo "<script>window.location.href='$taget';</script>";
