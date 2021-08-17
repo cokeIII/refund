@@ -7,8 +7,15 @@ if (empty($_SESSION["user_status"])) {
 }
 require_once "connect.php";
 $student_id = $_SESSION["student_id"];
+$bank_name = "";
 if ($_SESSION["user_status"] == "staff") {
-    $sql = "select * from enroll";
+
+    if (!empty($_POST["bank_name"])) {
+        $bank_name = $_POST["bank_name"];
+        $sql = "select * from enroll where recipient_bank = '$bank_name'";
+    } else {
+        $sql = "select * from enroll";
+    }
 } else {
     $sql = "select * from enroll where student_id = '$student_id'";
 }
@@ -22,6 +29,30 @@ $res = mysqli_query($conn, $sql);
         <div class="container px-5">
             <div class="card">
                 <div class="card-body">
+                    <div class="row mb-3">
+                        <div class="col-md-4">
+                            <h4>เลือกธนาคาร</h4>
+                            <select class="form-control" id="bank">
+                                <option value="">-- เลือกธนาคาร --</option>
+                                <?php
+                                $sqlBank = "select * from bank";
+                                $resBank  = mysqli_query($conn, $sqlBank);
+                                while ($rowBank = mysqli_fetch_array($resBank)) {
+                                ?>
+                                    <option value="<?php echo $rowBank["bank_name"]; ?>" <?php echo ($rowBank["bank_name"] == $bank_name ? "selected" : "") ?>><?php echo $rowBank["bank_name"]; ?></option>
+                                <?php
+                                }
+                                ?>
+                            </select>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="row justify-content-end">
+                                <div class="col-md-4">
+                                    <!-- <button class="btn btn-info" id="printAll"><i class="fas fa-print"></i> พิมพ์รายงาน ทั้งหมด</button> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                     <table class="table table-responsive" id="enrollTable">
                         <thead>
@@ -43,11 +74,11 @@ $res = mysqli_query($conn, $sql);
                                     <td><?php echo $row["stu_fname"] . " " . $row["stu_lname"]; ?></td>
                                     <td><?php echo $row["major_name"]; ?></td>
                                     <td><?php echo $row["student_group_short_name"]; ?></td>
-                                    <td class="col-status-<?php echo $row["id"];?> <?php if ($row["status"] == "ยกเลิก") {
-                                                    echo "text-danger";
-                                                } else {
-                                                    echo "text-success";
-                                                } ?>">
+                                    <td class="col-status-<?php echo $row["id"]; ?> <?php if ($row["status"] == "ยกเลิก") {
+                                                                                        echo "text-danger";
+                                                                                    } else {
+                                                                                        echo "text-success";
+                                                                                    } ?>">
                                         <?php echo $row["status"]; ?>
                                     </td>
                                     <?php if ($_SESSION["user_status"] == "staff") { ?>
@@ -59,8 +90,8 @@ $res = mysqli_query($conn, $sql);
                                                 <option value="ยกเลิก" <?php echo ($row["status"] == "ยกเลิก" ? "selected" : ""); ?>>ยกเลิก</option>
                                             </select>
                                         </td>
-                                        <td><a href="printEnroll.php?id=<?php echo $row["id"]; ?>" target="_blank"><button class="btn btn-info"><i class="fas fa-print"></i> พิมพ์</button></a></td>
-                                        <td><button enrollId="<?php echo $row["id"]; ?>" class="btn btn-danger btnDel"><i class="fas fa-trash-alt"></i> ลบ</button></td>
+                                        <td width="10%"><a href="printEnroll.php?id=<?php echo $row["id"]; ?>" target="_blank"><button class="btn btn-info"><i class="fas fa-print"></i> พิมพ์</button></a></td>
+                                        <td width="10%"><button enrollId="<?php echo $row["id"]; ?>" class="btn btn-danger btnDel"><i class="fas fa-trash-alt"></i> ลบ</button></td>
                                     <?php } else { ?>
                                         <?php if ($row["status"] == "ลงทะเบียนสำเร็จ") { ?>
                                             <td><button enrollId="<?php echo $row["id"]; ?>" class="btn btn-danger btnCancel"><i class="fas fa-window-close"></i> ยกเลิก</button></td>
@@ -128,12 +159,22 @@ $res = mysqli_query($conn, $sql);
                 }, "POST");
             }
         })
+        $("#bank").change(function() {
+            $.redirect("listEnroll.php", {
+                bank_name: $(this).val(),
+            }, "POST");
+        })
         $(".btnDel").click(function() {
             if (confirm("you want to delete the item ?")) {
                 $.redirect("delEnroll.php", {
                     id: $(this).attr("enrollId"),
                 }, "POST");
             }
+        })
+        $("#printAll").click(function() {
+            $.redirect("printEnrollAll.php", {
+                bank_name: $("#bank").val(),
+            }, "POST","_ _blank");
         })
         $(".status").change(function() {
             let id = $(this).attr("enrollId")
@@ -147,15 +188,15 @@ $res = mysqli_query($conn, $sql);
                 },
                 success: function(result) {
                     if (result == "ok") {
-                        if(val != "ยกเลิก") {
-                            $(".col-status-"+id).removeClass("text-danger");
-                            $(".col-status-"+id).addClass("text-success");
+                        if (val != "ยกเลิก") {
+                            $(".col-status-" + id).removeClass("text-danger");
+                            $(".col-status-" + id).addClass("text-success");
                         } else {
-                            $(".col-status-"+id).removeClass("text-success");
-                            $(".col-status-"+id).addClass("text-danger");
+                            $(".col-status-" + id).removeClass("text-success");
+                            $(".col-status-" + id).addClass("text-danger");
                         }
-                        $(".col-status-"+id).html(val)
-                    } else if(result == "fail"){
+                        $(".col-status-" + id).html(val)
+                    } else if (result == "fail") {
                         alert("แก้ไขไม่สำเร็จ")
                     }
                 }

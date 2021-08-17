@@ -16,56 +16,67 @@ require_once "connect.php";
         <div class="container px-5">
             <div class="card">
                 <div class="card-body">
-                    <form action="report_1.php" method="POST" target="_blank">
-                        <?php
-                        $sqlMajor = "select major_name from enroll group by major_name";
-                        $resMajor = mysqli_query($conn, $sqlMajor);
-                        ?>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label>เลือกแผนก</label>
-                                    <select name="major_name" id="major_name" class="form-control" required>
-                                        <option value="">--เลือกแผนก--</option>
-                                        <?php while ($rowMajor = mysqli_fetch_array($resMajor)) { ?>
-                                            <option value="<?php echo $rowMajor["major_name"]; ?>"><?php echo $rowMajor["major_name"]; ?></option>
-                                        <?php } ?>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-2">
-                                <div class="form-group">
-                                    <label>เลือกระดับชั้น</label>
-                                    <select name="grade_name" id="grade_name" class="form-control" required>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h4>ข้อมูลการโอนเงินคืนค่าลงทะเบียน</h4>
+                            <form action="report_1.php" method="POST" target="_blank">
+                                <?php
+                                $sqlMajor = "select major_name from enroll group by major_name";
+                                $resMajor = mysqli_query($conn, $sqlMajor);
+                                ?>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>เลือกแผนก</label>
+                                            <select name="major_name" id="major_name" class="form-control" required>
+                                                <option value="">--เลือกแผนก--</option>
+                                                <?php while ($rowMajor = mysqli_fetch_array($resMajor)) { ?>
+                                                    <option value="<?php echo $rowMajor["major_name"]; ?>"><?php echo $rowMajor["major_name"]; ?></option>
+                                                <?php } ?>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label>เลือกระดับชั้น</label>
+                                            <select name="grade_name" id="grade_name" class="form-control" required>
 
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-2">
-                                <div class="form-group">
-                                    <label>เลือกห้อง</label>
-                                    <select name="student_group_no" id="student_group_no" class="form-control" required>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label>เลือกห้อง</label>
+                                            <select name="student_group_no" id="student_group_no" class="form-control" required>
 
-                                    </select>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label>สถานะ</label>
+                                            <select name="status" id="status" class="form-control" required>
+                                                <option value="ตรวจแล้ว">ตรวจแล้ว</option>
+                                                <option value="โอนแล้ว">โอนแล้ว</option>
+                                                <option value="ลงทะเบียนสำเร็จ">ลงทะเบียนสำเร็จ</option>
+                                                <option value="ยกเลิก">ยกเลิก</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label></label>
+                                        <button class="btn btn-info mt-2">พิมพ์รายงาน</button>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-2">
-                                <div class="form-group">
-                                    <label>สถานะ</label>
-                                    <select name="status" id="status" class="form-control" required>
-                                        <option value="ตรวจแล้ว">ตรวจแล้ว</option>
-                                        <option value="โอนแล้ว">โอนแล้ว</option>
-                                        <option value="ลงทะเบียนสำเร็จ">ลงทะเบียนสำเร็จ</option>
-                                        <option value="ยกเลิก">ยกเลิก</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-2">
-                                <label></label>
-                                <button class="btn btn-info mt-2">พิมพ์รายงาน</button>
-                            </div>
+                            </form>
                         </div>
-                    </form>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-12">
+                            ข้อมูล
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
