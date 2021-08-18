@@ -274,6 +274,7 @@ if (empty($_SESSION["user_status"])) {
         if (signed && signed2) {
             $("#btnEnroll").attr('disabled', false)
         }
+        alert("click")
         $("#signed").val("image/svg+xml;base64," + $("#signatureparent").jSignature('getData', "image/svg+xml;base64")[1])
         $("#signed2").val("image/svg+xml;base64," + $("#signatureparent2").jSignature('getData', "image/svg+xml;base64")[1])
 
@@ -284,10 +285,17 @@ if (empty($_SESSION["user_status"])) {
         if (signed && signed2) {
             $("#btnEnroll").attr('disabled', false)
         }
+        alert("click")
         $("#signed").val("image/svg+xml;base64," + $("#signatureparent").jSignature('getData', "image/svg+xml;base64")[1])
         $("#signed2").val("image/svg+xml;base64," + $("#signatureparent2").jSignature('getData', "image/svg+xml;base64")[1])
     })
-
+    $("#clear").click(function() {
+        $("#signatureparent").jSignature('reset')
+        signed2 = false
+        if (!signed || !signed2) {
+            $("#btnEnroll").attr('disabled', true)
+        }
+    })
     $("#clear2").click(function() {
         $("#signatureparent2").jSignature('reset')
         signed2 = false
