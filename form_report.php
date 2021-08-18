@@ -74,7 +74,7 @@ require_once "connect.php";
                     <hr>
                     <div class="row">
                         <div class="col-md-12">
-                            ข้อมูล
+                            
                         </div>
                     </div>
                 </div>
