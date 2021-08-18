@@ -16,3 +16,10 @@
  <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
  <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
  <!-- <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script> -->
+ <script src="vendor/jSignature-master/src/jSignature.js"></script>
+
+<!-- optional plugins -->
+<script src="vendor/jSignature-master/src/plugins/jSignature.CompressorBase30.js"></script>
+<script src="vendor/jSignature-master/src/plugins/jSignature.CompressorSVG.js"></script>
+<script src="vendor/jSignature-master/src/plugins/jSignature.UndoButton.js"></script> 
+<script src="vendor/jSignature-master/src/plugins/signhere/jSignature.SignHere.js"></script> 

@@ -146,20 +146,23 @@ if (empty($_SESSION["user_status"])) {
                                 <button id="btn_account_book_pic" type="button" class="btn btn-secondary" onclick="set_account_book_pic(cropzeeGetImage('account_book_pic'))">ยืนยันรูปภาพ</button>
                             </div>
                         </div>
-                       
-                         <div class="row mt-3">
+
+                        <div class="row mt-3">
                             <div class="d-flex justify-content-center text-center">
                                 <div class="row">
                                     <div class="col-md-12">
 
                                         <label>ลายเซ็นนักเรียนนักศึกษา</label>
-                                        <div class="wrapper">
+                                        <div id="signatureparent">
+                                            <div id="signature"></div>
+                                        </div>
+                                        <!-- <div class="wrapper">
                                             <div id="sig"></div>
                                             <textarea id="signature64" name="signed" style="display: none" required></textarea>
                                         </div>
                                         <div class="mt-2">
                                             <button id="clear" type="button">Clear</button>
-                                        </div>
+                                        </div> -->
                                     </div>
                                 </div>
                             </div>
@@ -170,13 +173,16 @@ if (empty($_SESSION["user_status"])) {
                                     <div class="col-md-12">
 
                                         <label>ลายเซ็น<span class="re_status"></span></label>
-                                        <div class="wrapper">
+                                        <div id="signatureparent2">
+                                            <div id="signature2"></div>
+                                        </div>
+                                        <!-- <div class="wrapper">
                                             <div id="sig2"></div>
                                             <textarea id="signature65" name="signed2" style="display: none" required></textarea>
                                         </div>
                                         <div class="mt-2">
                                             <button id="clear2" type="button">Clear</button>
-                                        </div>
+                                        </div> -->
                                     </div>
                                 </div>
                             </div>
@@ -236,20 +242,52 @@ if (empty($_SESSION["user_status"])) {
 
 </html>
 <script>
+    $("#signatureparent").jSignature({
+
+        // line color
+        color: "black",
+
+        // line width
+        lineWidth: 5,
+
+        // width/height of signature pad
+        width: 300,
+        height: 200,
+
+        // background color
+        "background-color": "##AEB4B2"
+
+    });
+    $("#signatureparent2").jSignature({
+        // line color
+        color: "black",
+
+        // line width
+        lineWidth: 5,
+
+        // width/height of signature pad
+        width: 300,
+        height: 200,
+
+        // background color
+        "background-color": "##AEB4B2"
+    });
+
     $(".re_status").html($("#recipient").val())
     let btn_id_card_pic_std = true;
     let btn_id_card_pic = true;
     let btn_account_book_pic = true;
+
     function set_id_card_pic_std(val) {
         btn_id_card_pic_std = !btn_id_card_pic_std;
-        if(btn_id_card_pic_std){
+        if (btn_id_card_pic_std) {
             $("#btn_id_card_pic_std").removeClass("btn-success");
             $("#btn_id_card_pic_std").addClass("btn-secondary");
         } else {
             $("#btn_id_card_pic_std").removeClass("btn-secondary");
             $("#btn_id_card_pic_std").addClass("btn-success");
         }
-        
+
         if (val == "") {
             alert("เกิดข้อผิดพลาดในการตัดรูป กรุณาเลือกรูปใหม่")
         } else {
@@ -259,7 +297,7 @@ if (empty($_SESSION["user_status"])) {
 
     function set_id_card_pic(val) {
         btn_id_card_pic = !btn_id_card_pic;
-        if(btn_id_card_pic){
+        if (btn_id_card_pic) {
             $("#btn_id_card_pic").removeClass("btn-success");
             $("#btn_id_card_pic").addClass("btn-secondary");
         } else {
@@ -276,7 +314,7 @@ if (empty($_SESSION["user_status"])) {
 
     function set_account_book_pic(val) {
         btn_account_book_pic = !btn_account_book_pic;
-        if(btn_account_book_pic){
+        if (btn_account_book_pic) {
             $("#btn_account_book_pic").removeClass("btn-success");
             $("#btn_account_book_pic").addClass("btn-secondary");
         } else {
@@ -308,24 +346,24 @@ if (empty($_SESSION["user_status"])) {
                 e.preventDefault();
         });
         get_recipient("ผู้ปกครอง")
-        var sig = $('#sig').signature({
-            syncField: '#signature64',
-            syncFormat: 'PNG'
-        });
-        $('#clear').click(function(e) {
-            e.preventDefault();
-            sig.signature('clear');
-            $("#signature64").val('');
-        });
-        var sig2 = $('#sig2').signature({
-            syncField: '#signature65',
-            syncFormat: 'PNG'
-        });
-        $('#clear2').click(function(e) {
-            e.preventDefault();
-            sig2.signature('clear');
-            $("#signature65").val('');
-        });
+        // var sig = $('#sig').signature({
+        //     syncField: '#signature64',
+        //     syncFormat: 'PNG'
+        // });
+        // $('#clear').click(function(e) {
+        //     e.preventDefault();
+        //     sig.signature('clear');
+        //     $("#signature64").val('');
+        // });
+        // var sig2 = $('#sig2').signature({
+        //     syncField: '#signature65',
+        //     syncFormat: 'PNG'
+        // });
+        // $('#clear2').click(function(e) {
+        //     e.preventDefault();
+        //     sig2.signature('clear');
+        //     $("#signature65").val('');
+        // });
         $("#recipient").change(function() {
             let status = $("#recipient").val()
             get_recipient(status)
