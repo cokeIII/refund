@@ -269,7 +269,7 @@ if (empty($_SESSION["user_status"])) {
     $("#btnEnroll").attr('disabled', true)
     let signed = false
     let signed2 = false
-    $("#signatureparent").mouseup(function() {
+    $("#signatureparent").click(function() {
         signed = true
         if (signed && signed2) {
             $("#btnEnroll").attr('disabled', false)
@@ -278,43 +278,16 @@ if (empty($_SESSION["user_status"])) {
         $("#signed2").val("image/svg+xml;base64," + $("#signatureparent2").jSignature('getData', "image/svg+xml;base64")[1])
 
     }) 
-    $( "#signatureparent" ).bind( "taphold", tapholdHandler );
- 
-    function tapholdHandler( event ){
-        signed = true
-        if (signed && signed2) {
-            $("#btnEnroll").attr('disabled', false)
-        }
-        $("#signed").val("image/svg+xml;base64," + $("#signatureparent").jSignature('getData', "image/svg+xml;base64")[1])
-        $("#signed2").val("image/svg+xml;base64," + $("#signatureparent2").jSignature('getData', "image/svg+xml;base64")[1])
-    }
 
-    $("#signatureparent2").mouseup(function() {
+    $("#signatureparent2").click(function() {
         signed2 = true
         if (signed && signed2) {
             $("#btnEnroll").attr('disabled', false)
         }
         $("#signed").val("image/svg+xml;base64," + $("#signatureparent").jSignature('getData', "image/svg+xml;base64")[1])
         $("#signed2").val("image/svg+xml;base64," + $("#signatureparent2").jSignature('getData', "image/svg+xml;base64")[1])
+    })
 
-    })
-    $( "#signatureparent2" ).bind( "taphold", tapholdHandler2 );
- 
-    function tapholdHandler2( event ){
-        signed = true
-        if (signed && signed2) {
-            $("#btnEnroll").attr('disabled', false)
-        }
-        $("#signed").val("image/svg+xml;base64," + $("#signatureparent").jSignature('getData', "image/svg+xml;base64")[1])
-        $("#signed2").val("image/svg+xml;base64," + $("#signatureparent2").jSignature('getData', "image/svg+xml;base64")[1])
-    }
-    $("#clear").click(function() {
-        signed = false
-        $("#signatureparent").jSignature('reset')
-        if (!signed || !signed2) {
-            $("#btnEnroll").attr('disabled', true)
-        }
-    })
     $("#clear2").click(function() {
         $("#signatureparent2").jSignature('reset')
         signed2 = false
