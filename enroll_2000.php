@@ -278,15 +278,17 @@ if (empty($_SESSION["user_status"])) {
         $("#signed2").val("image/svg+xml;base64," + $("#signatureparent2").jSignature('getData', "image/svg+xml;base64")[1])
 
     }) 
-    $("#signatureparent").taphold(function() {
+    $( "#signatureparent" ).bind( "taphold", tapholdHandler );
+ 
+    function tapholdHandler( event ){
         signed = true
         if (signed && signed2) {
             $("#btnEnroll").attr('disabled', false)
         }
         $("#signed").val("image/svg+xml;base64," + $("#signatureparent").jSignature('getData', "image/svg+xml;base64")[1])
         $("#signed2").val("image/svg+xml;base64," + $("#signatureparent2").jSignature('getData', "image/svg+xml;base64")[1])
+    }
 
-    })
     $("#signatureparent2").mouseup(function() {
         signed2 = true
         if (signed && signed2) {
@@ -296,20 +298,29 @@ if (empty($_SESSION["user_status"])) {
         $("#signed2").val("image/svg+xml;base64," + $("#signatureparent2").jSignature('getData', "image/svg+xml;base64")[1])
 
     })
-    $("#signatureparent2").taphold(function() {
-        signed2 = true
+    $( "#signatureparent2" ).bind( "taphold", tapholdHandler2 );
+ 
+    function tapholdHandler2( event ){
+        signed = true
         if (signed && signed2) {
             $("#btnEnroll").attr('disabled', false)
         }
         $("#signed").val("image/svg+xml;base64," + $("#signatureparent").jSignature('getData', "image/svg+xml;base64")[1])
         $("#signed2").val("image/svg+xml;base64," + $("#signatureparent2").jSignature('getData', "image/svg+xml;base64")[1])
-
-    })
+    }
     $("#clear").click(function() {
+        signed = false
         $("#signatureparent").jSignature('reset')
+        if (!signed || !signed2) {
+            $("#btnEnroll").attr('disabled', true)
+        }
     })
     $("#clear2").click(function() {
         $("#signatureparent2").jSignature('reset')
+        signed2 = false
+        if (!signed || !signed2) {
+            $("#btnEnroll").attr('disabled', true)
+        }
     })
     $("#signatureparent2").jSignature({
         // line color
