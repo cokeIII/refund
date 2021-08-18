@@ -158,6 +158,10 @@ if (empty($_SESSION["user_status"])) {
                                         <div id="signatureparent">
                                             <div id="signature"></div>
                                         </div>
+                                        <div class="mt-2">
+                                            <button class="btn btn-secondary" id="clear" type="button">Clear</button>
+                                        </div>
+
                                         <!-- <div class="wrapper">
                                             <div id="sig"></div>
                                             <textarea id="signature64" name="signed" style="display: none" required></textarea>
@@ -177,6 +181,9 @@ if (empty($_SESSION["user_status"])) {
                                         <label>ลายเซ็น<span class="re_status"></span></label>
                                         <div id="signatureparent2">
                                             <div id="signature2"></div>
+                                        </div>
+                                        <div class="mt-2">
+                                            <button class="btn btn-secondary" id="clear2" type="button">Clear</button>
                                         </div>
                                         <!-- <div class="wrapper">
                                             <div id="sig2"></div>
@@ -280,7 +287,11 @@ if (empty($_SESSION["user_status"])) {
         $("#signed2").val("image/svg+xml;base64,"+$("#signatureparent2").jSignature('getData', "image/svg+xml;base64")[1])
 
     })
-    $("#btnEnroll").submit(function(){
+    $("#clear").click(function(){
+        $("#signatureparent").jSignature('reset')
+    })
+    $("#clear2").click(function(){
+        $("#signatureparent2").jSignature('reset')
     })
     $("#signatureparent2").jSignature({
         // line color
