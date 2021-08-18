@@ -53,6 +53,8 @@ if (empty($_SESSION["user_status"])) {
                         <input type="hidden" id="id_card_pic_std_h" name="id_card_pic_std_h" value="">
                         <input type="hidden" id="id_card_pic_h" name="id_card_pic_h" value="">
                         <input type="hidden" id="account_book_pic_h" name="account_book_pic_h" value="">
+                        <input type="hidden" id="signed" name="signed" value="">
+                        <input type="hidden" id="signed2" name="signed2" value="">
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group p-1">
@@ -190,7 +192,7 @@ if (empty($_SESSION["user_status"])) {
 
                         <div class="row mt-3">
                             <div class="d-flex justify-content-center text-center">
-                                <button class="btn btn-primary"><i class="fas fa-clipboard-list"></i> ลงทะเบียนรับเงิน</button>
+                                <button id="btnEnroll" class="btn btn-primary"><i class="fas fa-clipboard-list"></i> ลงทะเบียนรับเงิน</button>
                             </div>
                         </div>
                     </form>
@@ -256,8 +258,30 @@ if (empty($_SESSION["user_status"])) {
 
         // background color
         "background-color": "##AEB4B2"
-
     });
+    $("#btnEnroll").attr('disabled', true)
+    let signed = false
+    let signed2 = false
+    $("#signatureparent").mouseup(function(){
+        signed = true
+        if(signed && signed2){
+            $("#btnEnroll").attr('disabled', false)
+        }
+        $("#signed").val("image/svg+xml;base64,"+$("#signatureparent").jSignature('getData', "image/svg+xml;base64")[1])
+        $("#signed2").val("image/svg+xml;base64,"+$("#signatureparent2").jSignature('getData', "image/svg+xml;base64")[1])
+
+    })
+    $("#signatureparent2").mouseup(function(){
+        signed2 = true
+        if(signed && signed2){
+            $("#btnEnroll").attr('disabled', false)
+        }
+        $("#signed").val("image/svg+xml;base64,"+$("#signatureparent").jSignature('getData', "image/svg+xml;base64")[1])
+        $("#signed2").val("image/svg+xml;base64,"+$("#signatureparent2").jSignature('getData', "image/svg+xml;base64")[1])
+
+    })
+    $("#btnEnroll").submit(function(){
+    })
     $("#signatureparent2").jSignature({
         // line color
         color: "black",
@@ -272,7 +296,7 @@ if (empty($_SESSION["user_status"])) {
         // background color
         "background-color": "##AEB4B2"
     });
-
+    
     $(".re_status").html($("#recipient").val())
     let btn_id_card_pic_std = true;
     let btn_id_card_pic = true;
