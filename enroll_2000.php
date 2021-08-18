@@ -269,25 +269,29 @@ if (empty($_SESSION["user_status"])) {
     $("#btnEnroll").attr('disabled', true)
     let signed = false
     let signed2 = false
-    $(document).on('click',"#signatureparent",function(){
+    let signed2Load = false
+    $(document).on('change', "#signatureparent", function() {
         signed = true
         if (signed && signed2) {
             $("#btnEnroll").attr('disabled', false)
         }
-        alert("click")
         $("#signed").val("image/svg+xml;base64," + $("#signatureparent").jSignature('getData', "image/svg+xml;base64")[1])
         $("#signed2").val("image/svg+xml;base64," + $("#signatureparent2").jSignature('getData', "image/svg+xml;base64")[1])
 
-    }) 
+    })
 
-    $(document).on('click',"#signatureparent2",function(){
-        signed2 = true
-        if (signed && signed2) {
-            $("#btnEnroll").attr('disabled', false)
+    $(document).on('change', "#signatureparent2", function() {
+        
+        if (signed2Load) {
+            signed2 = true
+            if (signed && signed2) {
+                $("#btnEnroll").attr('disabled', false)
+            }
+            $("#signed").val("image/svg+xml;base64," + $("#signatureparent").jSignature('getData', "image/svg+xml;base64")[1])
+            $("#signed2").val("image/svg+xml;base64," + $("#signatureparent2").jSignature('getData', "image/svg+xml;base64")[1])
+
         }
-        alert("click")
-        $("#signed").val("image/svg+xml;base64," + $("#signatureparent").jSignature('getData', "image/svg+xml;base64")[1])
-        $("#signed2").val("image/svg+xml;base64," + $("#signatureparent2").jSignature('getData', "image/svg+xml;base64")[1])
+        signed2Load = true
     })
     $("#clear").click(function() {
         $("#signatureparent").jSignature('reset')
