@@ -269,7 +269,7 @@ if (empty($_SESSION["user_status"])) {
     $("#btnEnroll").attr('disabled', true)
     let signed = false
     let signed2 = false
-    $("#signatureparent").click(function() {
+    $(document).on('click',"#signatureparent",function(){
         signed = true
         if (signed && signed2) {
             $("#btnEnroll").attr('disabled', false)
@@ -279,7 +279,7 @@ if (empty($_SESSION["user_status"])) {
 
     }) 
 
-    $("#signatureparent2").click(function() {
+    $(document).on('click',"#signatureparent2",function(){
         signed2 = true
         if (signed && signed2) {
             $("#btnEnroll").attr('disabled', false)
