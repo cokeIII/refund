@@ -269,28 +269,46 @@ if (empty($_SESSION["user_status"])) {
     $("#btnEnroll").attr('disabled', true)
     let signed = false
     let signed2 = false
-    $("#signatureparent").mouseup(function(){
+    $("#signatureparent").mouseup(function() {
         signed = true
-        if(signed && signed2){
+        if (signed && signed2) {
             $("#btnEnroll").attr('disabled', false)
         }
-        $("#signed").val("image/svg+xml;base64,"+$("#signatureparent").jSignature('getData', "image/svg+xml;base64")[1])
-        $("#signed2").val("image/svg+xml;base64,"+$("#signatureparent2").jSignature('getData', "image/svg+xml;base64")[1])
+        $("#signed").val("image/svg+xml;base64," + $("#signatureparent").jSignature('getData', "image/svg+xml;base64")[1])
+        $("#signed2").val("image/svg+xml;base64," + $("#signatureparent2").jSignature('getData', "image/svg+xml;base64")[1])
+
+    }) 
+    $("#signatureparent").taphold(function() {
+        signed = true
+        if (signed && signed2) {
+            $("#btnEnroll").attr('disabled', false)
+        }
+        $("#signed").val("image/svg+xml;base64," + $("#signatureparent").jSignature('getData', "image/svg+xml;base64")[1])
+        $("#signed2").val("image/svg+xml;base64," + $("#signatureparent2").jSignature('getData', "image/svg+xml;base64")[1])
 
     })
-    $("#signatureparent2").mouseup(function(){
+    $("#signatureparent2").mouseup(function() {
         signed2 = true
-        if(signed && signed2){
+        if (signed && signed2) {
             $("#btnEnroll").attr('disabled', false)
         }
-        $("#signed").val("image/svg+xml;base64,"+$("#signatureparent").jSignature('getData', "image/svg+xml;base64")[1])
-        $("#signed2").val("image/svg+xml;base64,"+$("#signatureparent2").jSignature('getData', "image/svg+xml;base64")[1])
+        $("#signed").val("image/svg+xml;base64," + $("#signatureparent").jSignature('getData', "image/svg+xml;base64")[1])
+        $("#signed2").val("image/svg+xml;base64," + $("#signatureparent2").jSignature('getData', "image/svg+xml;base64")[1])
 
     })
-    $("#clear").click(function(){
+    $("#signatureparent2").taphold(function() {
+        signed2 = true
+        if (signed && signed2) {
+            $("#btnEnroll").attr('disabled', false)
+        }
+        $("#signed").val("image/svg+xml;base64," + $("#signatureparent").jSignature('getData', "image/svg+xml;base64")[1])
+        $("#signed2").val("image/svg+xml;base64," + $("#signatureparent2").jSignature('getData', "image/svg+xml;base64")[1])
+
+    })
+    $("#clear").click(function() {
         $("#signatureparent").jSignature('reset')
     })
-    $("#clear2").click(function(){
+    $("#clear2").click(function() {
         $("#signatureparent2").jSignature('reset')
     })
     $("#signatureparent2").jSignature({
@@ -307,7 +325,7 @@ if (empty($_SESSION["user_status"])) {
         // background color
         "background-color": "##AEB4B2"
     });
-    
+
     $(".re_status").html($("#recipient").val())
     let btn_id_card_pic_std = true;
     let btn_id_card_pic = true;
