@@ -127,30 +127,30 @@ $res = mysqli_query($conn, $sql);
 <script>
     $(document).ready(function() {
         $('#enrollTable').DataTable({
-            initComplete: function() {
-                this.api().columns().every(function() {
-                    var column = this;
-                    console.log(column)
-                    if (column.selector.cols != 0 && column.selector.cols != 1) {
-                        var select = $('<select class="form-control"><option value=""></option></select>')
-                            .appendTo($(column.footer()).empty())
-                            .on('change', function() {
-                                var val = $.fn.dataTable.util.escapeRegex(
-                                    $(this).val()
-                                );
+            // initComplete: function() {
+            //     this.api().columns().every(function() {
+            //         var column = this;
+            //         // console.log(column)
+            //         if (column.selector.cols != 0 && column.selector.cols != 1) {
+            //             var select = $('<select class="form-control"><option value=""></option></select>')
+            //                 .appendTo($(column.footer()).empty())
+            //                 .on('change', function() {
+            //                     var val = $.fn.dataTable.util.escapeRegex(
+            //                         $(this).val()
+            //                     );
 
-                                column
-                                    .search(val ? '^' + val + '$' : '', true, false)
-                                    .draw();
-                            });
+            //                     column
+            //                         .search(val ? '^' + val + '$' : '', true, false)
+            //                         .draw();
+            //                 });
 
-                        column.data().unique().sort().each(function(d, j) {
-                            select.append('<option value="' + d + '">' + d + '</option>')
-                        });
-                    }
-                });
-            },
-            fixedColumns: true
+            //             column.data().unique().sort().each(function(d, j) {
+            //                 select.append('<option value="' + d + '">' + d + '</option>')
+            //             });
+            //         }
+            //     });
+            // },
+            // fixedColumns: true
         });
         $(".btnCancel").click(function() {
             if (confirm("you want to cancel the item ?")) {
