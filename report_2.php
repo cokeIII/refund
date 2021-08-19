@@ -45,7 +45,7 @@ function DateThai($strDate)
     return "$strDay $strMonthThai $strYear";
 }
 ob_start(); // Start get HTML code
-$id = $_POST["id"];
+$id = $_REQUEST["id"];
 $sql = "select * from enroll where id ='$id'";
 $res = mysqli_query($conn, $sql);
 $row = mysqli_fetch_assoc($res);
