@@ -164,17 +164,24 @@ $res = mysqli_query($conn, $sql);
                 bank_name: $(this).val(),
             }, "POST");
         })
-        $(".btnDel").click(function() {
+        $(document).on('.click', function() {
             if (confirm("you want to delete the item ?")) {
                 $.redirect("delEnroll.php", {
                     id: $(this).attr("enrollId"),
                 }, "POST");
             }
         })
+        // $(".btnDel").click(function() {
+        //     if (confirm("you want to delete the item ?")) {
+        //         $.redirect("delEnroll.php", {
+        //             id: $(this).attr("enrollId"),
+        //         }, "POST");
+        //     }
+        // })
         $("#printAll").click(function() {
             $.redirect("printEnrollAll.php", {
                 bank_name: $("#bank").val(),
-            }, "POST","_ _blank");
+            }, "POST", "_ _blank");
         })
         $(".status").change(function() {
             let id = $(this).attr("enrollId")
