@@ -320,6 +320,8 @@ if (empty($_SESSION["user_status"])) {
 
         // background color
         "background-color": "##AEB4B2"
+
+        
     });
 
     $(".re_status").html($("#recipient").val())

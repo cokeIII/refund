@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php require_once "setHead.php"; ?>
-
+<style>
+    .note{
+        color: #3b127c;
+    }
+</style>
 <body id="page-top">
     <!-- Navigation-->
     <?php require_once "menu.php"; ?>
@@ -17,7 +21,8 @@
                             <div class="col-md-7">
                                 <div class="border-left p-5  mb-3">
                                     <div class="text-center">
-                                        <h1 class="h4 mb-4">ระบบลงทะเบียนรับเงิน</h1>
+                                        <h4 class="้h4 mb-4">ลงทะเบียนขอรับเงินเยียวยา 2,000 บาท</h4>
+                                        <h6 class="h6 mb-4">กรุณาใส่ชื่อผู้ใช้และรหัสผ่านเพื่อเข้าสู่ระบบ</h6>
                                     </div>
                                     <form class="user">
                                         <div class="form-group">
@@ -31,6 +36,13 @@
                                         </a>
                                         <div class="mt-5 h-alert">
                                             <p class="text-danger text-center" id="alertLogin">รหัสนักศึกษาหรือรหัสผ่านไม่ถูกต้อง</p>
+                                        </div>
+                                        <div class="note">
+                                            <p>หมายเหตุ:</p>
+                                            <p> - เข้าสู่ระบบโดยใช้ ชื่อผู้ใช้งานคือ รหัสประจำตัวนักเรียน
+รหัสผ่านคือ วัน/เดือน/ปีเกิด เช่น 30/12/2540</p><p>
+- ค่าธรรมเนียมการโอนเงิน หักจากยอดเงินที่โอนไปยังผู้รับโอน
+</p>
                                         </div>
                                     </form>
                                 </div>
