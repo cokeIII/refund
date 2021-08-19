@@ -164,7 +164,7 @@ $res = mysqli_query($conn, $sql);
                 bank_name: $(this).val(),
             }, "POST");
         })
-        $(document).on('.click','.btnDel' ,function() {
+        $(document).on('click','.btnDel' ,function() {
             if (confirm("you want to delete the item ?")) {
                 $.redirect("delEnroll.php", {
                     id: $(this).attr("enrollId"),
