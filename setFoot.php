@@ -8,7 +8,7 @@
  <script type="text/javascript" src="js/jquery.ui.touch-punch.min.js"></script>
  <script src="js/mainScripts.js"></script>
  <script src="js/jquery.signature.js"></script>
- <script src="js/jquery.dataTables.min.js"></script>
+ <script src="http://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
  <script src="js/jquery.redirect-spec.js"></script>
  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
  <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
