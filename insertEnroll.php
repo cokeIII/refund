@@ -20,6 +20,7 @@ $recipient_lname = $_POST["recipient_lname"];
 $recipient_bank = $_POST["recipient_bank"];
 $recipient_bank_number = $_POST["recipient_bank_number"];
 $student_group_short_name = $_POST["student_group_short_name"];
+$phone = $_POST["phone"];
 
 $sqlPay = "select * from pay where grade_name = '$grade_name'";
 $resPay = mysqli_query($conn, $sqlPay);
@@ -163,7 +164,8 @@ if ($rowcount == 0) {
         recipient_lname,
         recipient_bank,
         recipient_bank_number,
-        pay_id
+        pay_id,
+        phone
 
     ) values(
         '$people_id',
@@ -188,7 +190,8 @@ if ($rowcount == 0) {
         '$recipient_lname',
         '$recipient_bank',
         '$recipient_bank_number',
-        '$pay'
+        '$pay',
+        '$phone'
     );
     ";
         $res = mysqli_query($conn, $sql);
@@ -328,7 +331,8 @@ if ($rowcount == 0) {
             recipient_lname,
             recipient_bank,
             recipient_bank_number,
-            pay_id
+            pay_id,
+            phone
     
         ) values(
             '$people_id',
@@ -353,7 +357,8 @@ if ($rowcount == 0) {
             '$recipient_lname',
             '$recipient_bank',
             '$recipient_bank_number',
-            '$pay'
+            '$pay',
+            '$phone'
         );
         ";
             $res = mysqli_query($conn, $sql);

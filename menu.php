@@ -15,13 +15,14 @@
                         <li class="nav-item"><a class="nav-link me-lg-3" href="listEnroll.php"><i class="fas fa-home"></i> หน้าแรก</a></li>
                         <li class="nav-item"><a class="nav-link me-lg-3" href="form_report.php"><i class="fas fa-list-alt"></i> พิมพ์รายงาน</a></li>
                     <?php } ?>
-                    <a href="logout.php"><button class="btn btn-primary rounded-pill">
+                    <li class="nav-item"><a href="logout.php"><button class="btn btn-primary rounded-pill">
                             <i class="fas fa-sign-out-alt"></i>
                             <span class="">ออกจากระบบ</span>
-                        </button></a>
-                <?php } ?>
-                <li class="nav-item" data-toggle="modal" data-target="#manual"><i class="fas fa-clipboard-list"></i> คู่มือ</li>
+                        </button></a></li>
+                <?php } else {?>
+                    <li class="nav-item" data-toggle="modal" data-target="#manual"><i class="fas fa-clipboard-list"></i> คู่มือ</li>
                 <!-- <li class="nav-item"><a class="nav-link me-lg-3" href="https://youtu.be/7UqigLgab18"><i class="fas fa-video"></i> วิดิโอคู่มือ</a></li> -->
+                <?php }?>
             </ul>
         </div>
     </div>

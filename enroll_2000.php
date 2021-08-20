@@ -80,11 +80,14 @@ if (empty($_SESSION["user_status"])) {
                             <div class="col-md-12">
                                 <div class="form-group p-1">
                                     <label>เกี่ยวข้องเป็น</label>
-                                    <select name="recipient" id="recipient" class="form-control">
+                                    <!-- <select name="recipient" id="recipient" class="form-control">
                                         <option value="ผู้ปกครอง">ผู้ปกครอง</option>
                                         <option value="บิดา">บิดา</option>
                                         <option value="มารดา">มารดา</option>
-                                    </select>
+                                    </select> -->
+                                    <div><input type="radio" id="recipient" name="recipient" value="ผู้ปกครอง" checked> ผู้ปกครอง</div>
+                                    <div><input type="radio" name="recipient" value="บิดา"> บิดา</div>
+                                    <div><input type="radio" name="recipient" value="มารดา"> มารดา</div>
                                 </div>
                             </div>
                         </div>
@@ -95,6 +98,14 @@ if (empty($_SESSION["user_status"])) {
                                 <div class="form-group p-1">
                                     <label>ชื่อ-สกุล ผู้รับเงิน</label>
                                     <input type="text" name="recipient_name" id="recipient_name" class="form-control readonly" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group p-1">
+                                    <label>เบอร์โทรศัพท์มือถือ<span class="re_status"></span></label>
+                                    <input type="tel" class="form-control" id="phone" name="phone" maxlength="10" required>
                                 </div>
                             </div>
                         </div>
@@ -281,7 +292,7 @@ if (empty($_SESSION["user_status"])) {
     })
 
     $(document).on('change', "#signatureparent2", function() {
-        
+
         if (signed2Load) {
             signed2 = true
             if (signed && signed2) {
@@ -321,7 +332,7 @@ if (empty($_SESSION["user_status"])) {
         // background color
         "background-color": "##AEB4B2"
 
-        
+
     });
 
     $(".re_status").html($("#recipient").val())
@@ -380,6 +391,11 @@ if (empty($_SESSION["user_status"])) {
 
     }
     $(document).ready(function() {
+        $('input[type=radio][name=recipient]').change(function() {
+            let status = $(this).val()
+            get_recipient(status)
+            $(".re_status").html(status)
+        });
         $("#id_card_pic_std").cropzee({
             returnImageMode: 'data-url',
             startSize: [60, 60, '%']
