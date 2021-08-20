@@ -2,10 +2,11 @@
 <html lang="en">
 <?php require_once "setHead.php"; ?>
 <style>
-    .note{
+    .note {
         color: #3b127c;
     }
 </style>
+
 <body id="page-top">
     <!-- Navigation-->
     <?php require_once "menu.php"; ?>
@@ -40,9 +41,10 @@
                                         <div class="note">
                                             <p>หมายเหตุ:</p>
                                             <p> - เข้าสู่ระบบโดยใช้ ชื่อผู้ใช้งานคือ รหัสประจำตัวนักเรียน
-รหัสผ่านคือ วัน/เดือน/ปีเกิด เช่น 30/12/2540</p><p>
+                                                รหัสผ่านคือ วัน/เดือน/ปีเกิด เช่น 30/12/2540</p>
+                                            <!-- <p>
 - ค่าธรรมเนียมการโอนเงิน หักจากยอดเงินที่โอนไปยังผู้รับโอน
-</p>
+</p> -->
                                         </div>
                                     </form>
                                 </div>
@@ -72,9 +74,9 @@
                     success: function(result) {
                         if (result.trim() == "ok") {
                             window.location.replace("enroll_2000.php");
-                        } else if(result.trim() == "ok staff"){
+                        } else if (result.trim() == "ok staff") {
                             window.location.replace("listEnroll.php");
-                        }else {
+                        } else {
                             $("#alertLogin").fadeIn(1000, function() {
                                 $("#alertLogin").fadeOut(5000)
                             })

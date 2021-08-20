@@ -41,5 +41,6 @@
 	<script src="https://cdn.jsdelivr.net/gh/cowboy/jquery-throttle-debounce/jquery.ba-throttle-debounce.js" defer></script>
 	<!-- sanitize.css -->
 	<link href="https://unpkg.com/sanitize.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/image-zoom.css" />
 </head>
 <?php session_start(); ?>
