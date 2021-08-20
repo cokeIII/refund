@@ -31,6 +31,11 @@ if (empty($_SESSION["user_status"])) {
         border-radius: 10px;
         border: 1px solid lightgrey;
     }
+
+    .alert_pic {
+        font-size: 16px;
+        color: red;
+    }
 </style>
 
 <body>
@@ -131,7 +136,7 @@ if (empty($_SESSION["user_status"])) {
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group p-1">
-                                    <label>เลขบัญชี</label>
+                                    <label>เลขบัญชี<span class="re_status"></span></label>
                                     <input type="number" name="recipient_bank_number" id="recipient_bank_number" class="form-control" required>
                                 </div>
                             </div>
@@ -144,19 +149,21 @@ if (empty($_SESSION["user_status"])) {
                                 </div>
                                 <label for="id_card_pic_std" class="image-previewer" data-cropzee="id_card_pic_std"></label>
                                 <button id="btn_id_card_pic_std" type="button" class="btn btn-secondary" onclick="set_id_card_pic_std(cropzeeGetImage('id_card_pic_std'))">ยืนยันรูปภาพ</button>
-
+                                <div class="alert_pic" id="btn_id_card_pic_std_alert">กรุณากดปุ่มยืนยันรูปภาพ</div>
                                 <div class="form-group p-1">
                                     <label>รูปบัตรประชาชน<span class="re_status"></span><a href="#" data-toggle="modal" data-target="#exampleModalCard">ตัวอย่าง</a></label>
                                     <input type="file" name="id_card_pic" id="id_card_pic" class="form-control" accept="image/*" required>
                                 </div>
                                 <label for="id_card_pic" class="image-previewer" data-cropzee="id_card_pic"></label>
                                 <button id="btn_id_card_pic" type="button" class="btn btn-secondary" onclick="set_id_card_pic(cropzeeGetImage('id_card_pic'))">ยืนยันรูปภาพ</button>
+                                <div class="alert_pic" id="btn_id_card_pic_alert">กรุณากดปุ่มยืนยันรูปภาพ</div>
                                 <div class="form-group p-1">
                                     <label>รูปหน้าสมุดบัญชี<span class="re_status"></span> <a href="#" data-toggle="modal" data-target="#exampleModalAcc">ตัวอย่าง</a></label>
                                     <input type="file" name="account_book_pic" id="account_book_pic" class="form-control" accept="image/*" required>
                                 </div>
                                 <label for="account_book_pic" class="image-previewer" data-cropzee="account_book_pic"></label>
                                 <button id="btn_account_book_pic" type="button" class="btn btn-secondary" onclick="set_account_book_pic(cropzeeGetImage('account_book_pic'))">ยืนยันรูปภาพ</button>
+                                <div class="alert_pic" id="btn_account_book_pic_alert">กรุณากดปุ่มยืนยันรูปภาพ</div>
                             </div>
                         </div>
 
@@ -281,9 +288,14 @@ if (empty($_SESSION["user_status"])) {
     let signed = false
     let signed2 = false
     let signed2Load = false
+
+    let btn_id_card_pic_std = true;
+    let btn_id_card_pic = true;
+    let btn_account_book_pic = true;
+
     $(document).on('change', "#signatureparent", function() {
         signed = true
-        if (signed && signed2) {
+        if (signed && signed2 && !btn_id_card_pic_std && !btn_id_card_pic && !btn_account_book_pic) {
             $("#btnEnroll").attr('disabled', false)
         }
         $("#signed").val("image/svg+xml;base64," + $("#signatureparent").jSignature('getData', "image/svg+xml;base64")[1])
@@ -295,7 +307,7 @@ if (empty($_SESSION["user_status"])) {
 
         if (signed2Load) {
             signed2 = true
-            if (signed && signed2) {
+            if (signed && signed2 && !btn_id_card_pic_std && !btn_id_card_pic && !btn_account_book_pic) {
                 $("#btnEnroll").attr('disabled', false)
             }
             $("#signed").val("image/svg+xml;base64," + $("#signatureparent").jSignature('getData', "image/svg+xml;base64")[1])
@@ -336,20 +348,26 @@ if (empty($_SESSION["user_status"])) {
     });
 
     $(".re_status").html($("#recipient").val())
-    let btn_id_card_pic_std = true;
-    let btn_id_card_pic = true;
-    let btn_account_book_pic = true;
+
+    $("#btn_id_card_pic_std_alert").show()
+    $("#btn_id_card_pic_alert").show()
+    $("#btn_account_book_pic_alert").show()
 
     function set_id_card_pic_std(val) {
         btn_id_card_pic_std = !btn_id_card_pic_std;
         if (btn_id_card_pic_std) {
             $("#btn_id_card_pic_std").removeClass("btn-success");
             $("#btn_id_card_pic_std").addClass("btn-secondary");
+            $("#btn_id_card_pic_std_alert").show()
+
         } else {
             $("#btn_id_card_pic_std").removeClass("btn-secondary");
             $("#btn_id_card_pic_std").addClass("btn-success");
+            $("#btn_id_card_pic_std_alert").hide()
         }
-
+        if (signed && signed2 && !btn_id_card_pic_std && !btn_id_card_pic && !btn_account_book_pic) {
+            $("#btnEnroll").attr('disabled', false)
+        }
         if (val == "") {
             alert("เกิดข้อผิดพลาดในการตัดรูป กรุณาเลือกรูปใหม่")
         } else {
@@ -362,11 +380,15 @@ if (empty($_SESSION["user_status"])) {
         if (btn_id_card_pic) {
             $("#btn_id_card_pic").removeClass("btn-success");
             $("#btn_id_card_pic").addClass("btn-secondary");
+            $("#btn_id_card_pic_alert").show()
         } else {
             $("#btn_id_card_pic").removeClass("btn-secondary");
             $("#btn_id_card_pic").addClass("btn-success");
+            $("#btn_id_card_pic_alert").hide()
         }
-
+        if (signed && signed2 && !btn_id_card_pic_std && !btn_id_card_pic && !btn_account_book_pic) {
+            $("#btnEnroll").attr('disabled', false)
+        }
         if (val == "") {
             alert("เกิดข้อผิดพลาดในการตัดรูป กรุณาเลือกรูปใหม่")
         } else {
@@ -379,9 +401,14 @@ if (empty($_SESSION["user_status"])) {
         if (btn_account_book_pic) {
             $("#btn_account_book_pic").removeClass("btn-success");
             $("#btn_account_book_pic").addClass("btn-secondary");
+            $("#btn_account_book_pic_alert").show()
         } else {
             $("#btn_account_book_pic").removeClass("btn-secondary");
             $("#btn_account_book_pic").addClass("btn-success");
+            $("#btn_account_book_pic_alert").hide()
+        }
+        if (signed && signed2 && !btn_id_card_pic_std && !btn_id_card_pic && !btn_account_book_pic) {
+            $("#btnEnroll").attr('disabled', false)
         }
         if (val == "") {
             alert("เกิดข้อผิดพลาดในการตัดรูป กรุณาเลือกรูปใหม่")
