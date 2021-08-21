@@ -27,6 +27,15 @@
  <script src="vendor/jSignature-master/src/plugins/signhere/jSignature.SignHere.js"></script>
  <script src="js/image-zoom.js"></script>
  <script src="vendor/datatables/jquery.dataTables.js"></script>
+ 
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.2.0/js/uikit.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.2.0/js/uikit-icons.min.js"></script>
+	<!-- cropzee.js -->
+	<!-- <script src="https://cdn.jsdelivr.net/gh/BossBele/cropzee@v2.0/dist/cropzee.js" defer></script> -->
+	<script src="vendor/cropzee-image-cropper/dist/cropzee.js" defer></script>
+	<!-- google code-prettify -->
+	<script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+
  <script>
      $(function() {
          $('#imageZoom').imageZoom();

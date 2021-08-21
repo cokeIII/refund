@@ -520,24 +520,7 @@ if (empty($_SESSION["user_status"])) {
                 e.preventDefault();
         });
         get_recipient("ผู้ปกครอง")
-        // var sig = $('#sig').signature({
-        //     syncField: '#signature64',
-        //     syncFormat: 'PNG'
-        // });
-        // $('#clear').click(function(e) {
-        //     e.preventDefault();
-        //     sig.signature('clear');
-        //     $("#signature64").val('');
-        // });
-        // var sig2 = $('#sig2').signature({
-        //     syncField: '#signature65',
-        //     syncFormat: 'PNG'
-        // });
-        // $('#clear2').click(function(e) {
-        //     e.preventDefault();
-        //     sig2.signature('clear');
-        //     $("#signature65").val('');
-        // });
+
         $("#recipient").change(function() {
             let status = $("#recipient").val()
             get_recipient(status)
