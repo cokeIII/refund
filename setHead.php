@@ -43,5 +43,6 @@
 	<link href="https://unpkg.com/sanitize.css" rel="stylesheet">
     <link rel="stylesheet" href="css/image-zoom.css" />
     <link rel="stylesheet" href="vendor/datatables/dataTables.bootstrap4.css">
+    <link rel="stylesheet" href="node_modules/cropperjs/src/css/cropper.css">
 </head>
 <?php session_start(); ?>

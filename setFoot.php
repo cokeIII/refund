@@ -2,7 +2,7 @@
  <!-- <script src="https://cdn.jsdelivr.net/npm/signature_pad@2.3.2/dist/signature_pad.min.js"></script> -->
 
  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
- 
+
  <!-- Core theme JS-->
  <script src="js/jquery-3.6.0.js"></script>
 
@@ -27,17 +27,19 @@
  <script src="vendor/jSignature-master/src/plugins/signhere/jSignature.SignHere.js"></script>
  <script src="js/image-zoom.js"></script>
  <script src="vendor/datatables/jquery.dataTables.js"></script>
- 
- <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.2.0/js/uikit.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.2.0/js/uikit-icons.min.js"></script>
-	<!-- cropzee.js -->
-	<!-- <script src="https://cdn.jsdelivr.net/gh/BossBele/cropzee@v2.0/dist/cropzee.js" defer></script> -->
-	<script src="vendor/cropzee-image-cropper/dist/cropzee.js" defer></script>
-	<!-- google code-prettify -->
-	<script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
 
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.2.0/js/uikit.min.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.2.0/js/uikit-icons.min.js"></script>
+ <!-- cropzee.js -->
+ <!-- <script src="https://cdn.jsdelivr.net/gh/BossBele/cropzee@v2.0/dist/cropzee.js" defer></script> -->
+ <script src="vendor/cropzee-image-cropper/dist/cropzee.js" defer></script>
+ <!-- google code-prettify -->
+ <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+ <script src="node_modules/cropperjs/dist/cropper.js"></script>
+ <script src="node_modules/jquery-cropper/dist/jquery-cropper.js"></script>
+ 
  <script>
-     $(function() {
-         $('#imageZoom').imageZoom();
-     });
+ 	$(function() {
+ 		$('#imageZoom').imageZoom();
+ 	});
  </script>

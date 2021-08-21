@@ -462,7 +462,6 @@ if (empty($_SESSION["user_status"])) {
     }
     $(document).ready(function() {
 
-
         let statusRecipient = "ผู้ปกครอง"
 
         $("#submitChangeName").click(function() {
