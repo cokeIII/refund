@@ -10,6 +10,10 @@
  * Copyright 2011-2021 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
+ @media only screen and (max-width: 900px) {
+  /* Style adjustments for non responsive websites */
+  body{width:940px;}
+}
  .note{
    color: #3b127c;
  }

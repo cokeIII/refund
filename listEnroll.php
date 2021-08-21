@@ -84,13 +84,14 @@ $res = mysqli_query($conn, $sql);
                                     <?php if ($_SESSION["user_status"] == "staff") { ?>
                                         <td width="20%">
                                             <select enrollId="<?php echo $row["id"]; ?>" name="status" id="status" class="form-control status">
+                                                <option value="พิมพ์แล้ว" <?php echo ($row["status"] == "พิมพ์แล้ว" ? "selected" : ""); ?>>พิมพ์แล้ว</option>
                                                 <option value="ตรวจแล้ว" <?php echo ($row["status"] == "ตรวจแล้ว" ? "selected" : ""); ?>>ตรวจแล้ว</option>
                                                 <option value="โอนแล้ว" <?php echo ($row["status"] == "โอนแล้ว" ? "selected" : ""); ?>>โอนแล้ว</option>
                                                 <option value="ลงทะเบียนสำเร็จ" <?php echo ($row["status"] == "ลงทะเบียนสำเร็จ" ? "selected" : ""); ?>>ลงทะเบียนสำเร็จ</option>
                                                 <option value="ยกเลิก" <?php echo ($row["status"] == "ยกเลิก" ? "selected" : ""); ?>>ยกเลิก</option>
                                             </select>
                                         </td>
-                                        <td width="10%"><a href="report_2.php?id=<?php echo $row["id"]; ?>" target="_blank"><button class="btn btn-info"><i class="fas fa-print"></i> พิมพ์</button></a></td>
+                                        <td width="10%"><a id="btnPrint" href="report_2.php?id=<?php echo $row["id"]; ?>" target="_blank"><button class="btn btn-info"><i class="fas fa-print"></i> พิมพ์</button></a></td>
                                         <td width="10%"><button enrollId="<?php echo $row["id"]; ?>" class="btn btn-danger btnDel"><i class="fas fa-trash-alt"></i> ลบ</button></td>
                                     <?php } else { ?>
                                         <?php if ($row["status"] == "ลงทะเบียนสำเร็จ") { ?>
@@ -126,6 +127,9 @@ $res = mysqli_query($conn, $sql);
 </html>
 <script>
     $(document).ready(function() {
+        $("#btnPrint").click(function(){
+            alert("print")
+        })
         $('#enrollTable').DataTable({
             initComplete: function() {
                 this.api().columns().every(function() {
@@ -138,7 +142,6 @@ $res = mysqli_query($conn, $sql);
                                 var val = $.fn.dataTable.util.escapeRegex(
                                     $(this).val()
                                 );
-
                                 column
                                     .search(val ? '^' + val + '$' : '', true, false)
                                     .draw();
@@ -181,7 +184,7 @@ $res = mysqli_query($conn, $sql);
         $("#printAll").click(function() {
             $.redirect("printEnrollAll.php", {
                 bank_name: $("#bank").val(),
-            }, "POST", "_ _blank");
+            }, "POST", "_blank");
         })
         $(".status").change(function() {
             let id = $(this).attr("enrollId")
