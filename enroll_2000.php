@@ -80,6 +80,7 @@ if (empty($_SESSION["user_status"])) {
                                 </div>
                             </div>
                         </div>
+                        <hr>
                         <strong>ข้อมูลผู้รับเงิน</strong>
                         <div class="row">
                             <div class="col-md-12">
