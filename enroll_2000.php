@@ -113,6 +113,7 @@ if (empty($_SESSION["user_status"])) {
                                 </div>
                             </div>
                         </div>
+                        <hr>
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group p-1">
