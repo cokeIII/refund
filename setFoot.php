@@ -2,9 +2,10 @@
  <!-- <script src="https://cdn.jsdelivr.net/npm/signature_pad@2.3.2/dist/signature_pad.min.js"></script> -->
 
  <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script> -->
- <script src="vendor/datatables/jquery.dataTables.js"></script>
+ 
  <!-- Core theme JS-->
  <script src="js/jquery-3.6.0.js"></script>
+ <script src="vendor/datatables/jquery.dataTables.js"></script>
  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
  <script type="text/javascript" src="js/jquery.ui.touch-punch.min.js"></script>
  <script src="js/mainScripts.js"></script>
