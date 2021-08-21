@@ -57,6 +57,7 @@ $res = mysqli_query($conn, $sql);
                                     <td><?php echo $row["th_name_old"]; ?></td>
                                     <td><?php echo $row["status"]; ?></td>
                                     <td><?php echo $row["th_name_new"]; ?></td>
+                                    <td><?php echo $row["tel"]; ?></td>
                                 </tr>
                             <?php } ?>
                         </tbody>
