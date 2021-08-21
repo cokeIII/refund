@@ -54,7 +54,7 @@ $res = mysqli_query($conn, $sql);
                         </div>
                     </div>
 
-                    <table class="table table-responsive" id="enrollTable">
+                    <table class="table " id="enrollTable">
                         <thead>
                             <tr>
                                 <th>รหัสนักศึกษา</th>

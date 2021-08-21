@@ -291,6 +291,10 @@ if (empty($_SESSION["user_status"])) {
                         <label>ชื่อ<span class="re_status"></span>ใหม่</label>
                         <div><input type="text" class="form-control" id="NewName" name="NewName" required></div>
                     </div>
+                    <div class="col-md-12">
+                        <label>เบอร์โทรสำหรับติดต่อกลับ</label>
+                        <div><input type="tel" class="form-control" id="tel" name="tel" required></div>
+                    </div>
                     <div class="col-md-12 mt-3">
                         <button type="button" id="submitChangeName" class="btn btn-primary">ส่งข้อมูลเพื่อแก้ไข</button>
                     </div>
@@ -467,10 +471,12 @@ if (empty($_SESSION["user_status"])) {
                     student_id: $("#student_id").val(),
                     th_name_old: $("#OldName").val(),
                     th_name_new: $("#NewName").val(),
-                    status: statusRecipient
+                    status: statusRecipient,
+                    tel: $("#tel").val(),
                 },
                 success: function(result) {
-                    if(result){
+                    console.log(result)
+                    if(result == "true"){
                         alert("ส่งข้อมูลเรียบร้อย กรุณารอเพื่อตรวจสอบ");
                     } else {
                         alert("ส่งข้อมูลไม่สำเร็จ");

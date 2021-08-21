@@ -35,7 +35,7 @@ $res = mysqli_query($conn, $sql);
                         </div>
                     </div>
 
-                    <table class="table table-responsive" id="changeNameTable">
+                    <table class="table " id="changeNameTable">
                         <thead>
                             <tr>
                                 <th>ที่</th>
@@ -44,6 +44,7 @@ $res = mysqli_query($conn, $sql);
                                 <th>ชื่อเดิม</th>
                                 <th>เกี่ยวข้องเป็น</th>
                                 <th>ชื่อที่ต้องการเปลี่ยน</th>
+                                <th>เบอร์ติดต่อกลับ</th>
                             </tr>
                         </thead>
                         <tbody>

@@ -22,7 +22,7 @@ $res = mysqli_query($conn, $sql);
         <div class="container px-5">
             <div class="card">
                 <div class="card-body">
-                    <table class="table table-responsive" id="enrollTable">
+                    <table class="table " id="enrollTable">
                         <thead>
                             <tr>
                                 <th>รหัสลงทะเบียน</th>
