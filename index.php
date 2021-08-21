@@ -22,7 +22,7 @@
                             <div class="col-md-7">
                                 <div class="border-left p-5  mb-3">
                                     <div class="text-center">
-                                        <h4 class="้h4 mb-4">ลงทะเบียนขอรับเงินเยียวยา 2,000 บาท</h4>
+                                        <h4 class="้h4 mb-4">ลงทะเบียนขอรับเงินเยียวยา</h4>
                                         <h6 class="h6 mb-4">กรุณาใส่ชื่อผู้ใช้และรหัสผ่านเพื่อเข้าสู่ระบบ</h6>
                                     </div>
                                     <form class="user">
