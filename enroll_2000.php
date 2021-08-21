@@ -46,7 +46,7 @@ if (empty($_SESSION["user_status"])) {
             <div class="card">
                 <div class="card-body">
                     <form id="enrollData" action="insertEnroll.php" method="POST" enctype="multipart/form-data">
-                        <input type="hidden" name="student_id" value="<?php echo $_SESSION["student_id"]; ?>">
+                        <input type="hidden" id="student_id" name="student_id" value="<?php echo $_SESSION["student_id"]; ?>">
                         <input type="hidden" name="prefix_name" value="<?php echo $_SESSION["prefix_name"]; ?>">
                         <input type="hidden" name="people_id" value="<?php echo $_SESSION["people_id"]; ?>">
                         <input type="hidden" name="stu_fname" value="<?php echo $_SESSION["stu_fname"]; ?>">
@@ -90,7 +90,7 @@ if (empty($_SESSION["user_status"])) {
                                         <option value="บิดา">บิดา</option>
                                         <option value="มารดา">มารดา</option>
                                     </select> -->
-                                    <div><input type="radio" id="recipient" name="recipient" value="ผู้ปกครอง" checked> ผู้ปกครอง</div>
+                                    <div><input type="radio" id="recipient" name="recipient" value="ผู้ปกครอง" checked> ผู้ปกครอง </div>
                                     <div><input type="radio" name="recipient" value="บิดา"> บิดา</div>
                                     <div><input type="radio" name="recipient" value="มารดา"> มารดา</div>
                                 </div>
@@ -99,10 +99,16 @@ if (empty($_SESSION["user_status"])) {
                         <input type="hidden" name="recipient_fname" id="recipient_fname" required>
                         <input type="hidden" name="recipient_lname" id="recipient_lname" required>
                         <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-md-8">
                                 <div class="form-group p-1">
                                     <label>ชื่อ-สกุล ผู้รับเงิน</label>
                                     <input type="text" name="recipient_name" id="recipient_name" class="form-control readonly" required>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group p-1">
+                                    <label>แก้ไขชื่อ</label>
+                                    <div><button type="button" id="btnChangeName" data-toggle="modal" data-target="#exampleModalName" class="btn btn-primary">แก้ไข</button></div>
                                 </div>
                             </div>
                         </div>
@@ -265,6 +271,37 @@ if (empty($_SESSION["user_status"])) {
         </div>
     </div>
 </div>
+<!-- Modal -->
+<div class="modal fade" id="exampleModalName" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">แก้ไขชื่อ<span class="re_status"></span></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <label>ชื่อ<span class="re_status"></span>เดิม</label>
+                        <div><input type="text" class="form-control" id="OldName" name="OldName" required disabled></div>
+                    </div>
+                    <div class="col-md-12">
+                        <label>ชื่อ<span class="re_status"></span>ใหม่</label>
+                        <div><input type="text" class="form-control" id="NewName" name="NewName" required></div>
+                    </div>
+                    <div class="col-md-12 mt-3">
+                        <button type="button" id="submitChangeName" class="btn btn-primary">ส่งข้อมูลเพื่อแก้ไข</button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 </html>
@@ -418,8 +455,36 @@ if (empty($_SESSION["user_status"])) {
 
     }
     $(document).ready(function() {
+
+
+        let statusRecipient = "ผู้ปกครอง"
+
+        $("#submitChangeName").click(function() {
+            $.ajax({
+                type: "POST",
+                url: "change_name.php",
+                data: {
+                    student_id: $("#student_id").val(),
+                    th_name_old: $("#OldName").val(),
+                    th_name_new: $("#NewName").val(),
+                    status: statusRecipient
+                },
+                success: function(result) {
+                    if(result){
+                        alert("ส่งข้อมูลเรียบร้อย กรุณารอเพื่อตรวจสอบ");
+                    } else {
+                        alert("ส่งข้อมูลไม่สำเร็จ");
+                    }
+                }
+            });
+        })
+
+        $("#btnChangeName").click(function() {
+            $("#OldName").val($("#recipient_name").val())
+        })
         $('input[type=radio][name=recipient]').change(function() {
             let status = $(this).val()
+            statusRecipient = $(this).val()
             get_recipient(status)
             $(".re_status").html(status)
         });

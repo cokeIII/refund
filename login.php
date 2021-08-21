@@ -58,5 +58,5 @@ if (strlen($username) != 13) {
         }
     } else {
         echo "fail";
-    }  
+    }
 }
