@@ -293,7 +293,7 @@ if (empty($_SESSION["user_status"])) {
                     </div>
                     <div class="col-md-12">
                         <label>เบอร์โทรสำหรับติดต่อกลับ</label>
-                        <div><input type="tel" class="form-control" id="tel" name="tel" required></div>
+                        <div><input type="tel" class="form-control" id="tel" name="tel" required maxlength="10"></div>
                     </div>
                     <div class="col-md-12 mt-3">
                         <button type="button" id="submitChangeName" class="btn btn-primary">ส่งข้อมูลเพื่อแก้ไข</button>
@@ -464,6 +464,13 @@ if (empty($_SESSION["user_status"])) {
         let statusRecipient = "ผู้ปกครอง"
 
         $("#submitChangeName").click(function() {
+            if ($("#NewName").val() == "") {
+                return alert("กรุณากรอกชื่อที่ต้องการแก้ไข")
+            }
+            if ($("#tel").val() == "") {
+                return alert("กรุณากรอกเบอร์โทรศัพท์")
+            }
+
             $.ajax({
                 type: "POST",
                 url: "change_name.php",
@@ -476,7 +483,7 @@ if (empty($_SESSION["user_status"])) {
                 },
                 success: function(result) {
                     console.log(result)
-                    if(result == "true"){
+                    if (result == "true") {
                         alert("ส่งข้อมูลเรียบร้อย กรุณารอเพื่อตรวจสอบ");
                     } else {
                         alert("ส่งข้อมูลไม่สำเร็จ");
