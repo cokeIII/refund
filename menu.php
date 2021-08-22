@@ -9,7 +9,7 @@
             <ul class="navbar-nav ms-auto me-4 my-3 my-lg-0">
                 <?php if (!empty($_SESSION["user_status"])) { ?>
                     <?php if ($_SESSION["user_status"] == "student") { ?>
-                        <li class="nav-item"><a class="nav-link me-lg-3" href="enroll_2000.php"><i class="fas fa-address-book"></i> ลงทะเบียนรับเงิน</a></li>
+                        <li class="nav-item"><a class="nav-link me-lg-3" href="enroll_2000V2.php"><i class="fas fa-address-book"></i> ลงทะเบียนรับเงิน</a></li>
                         <li class="nav-item"><a class="nav-link me-lg-3" href="listEnroll_std.php"><i class="fas fa-clipboard-list"></i> รายการที่ลงทะเบียน</a></li>
                     <?php } else if ($_SESSION["user_status"] == "staff") { ?>
                         <li class="nav-item"><a class="nav-link me-lg-3" href="listEnroll.php"><i class="fas fa-home"></i> หน้าแรก</a></li>
@@ -21,7 +21,9 @@
                             <span class="">ออกจากระบบ</span>
                         </button></a></li>
                 <?php } else {?>
-                    <li class="nav-item" data-toggle="modal" data-target="#manual"><i class="fas fa-clipboard-list"></i> คู่มือ</li>
+                    <li class="nav-item" data-toggle="modal" data-target="#manual" ><a class="nav-link me-lg-3" href="#"><i class="fas fa-clipboard-list"></i> คู่มือ</a></li>
+                    <li class="nav-item"><a class="nav-link me-lg-3" href="q_a.php"><i class="fas fa-question"></i> ถามตอบ Q&A</a></li>
+                    <li class="nav-item"><a class="nav-link me-lg-3" href="index.php"><i class="fas fa-sign-in-alt"></i> เข้าสู่ระบบ</a></li>
                 <!-- <li class="nav-item"><a class="nav-link me-lg-3" href="https://youtu.be/7UqigLgab18"><i class="fas fa-video"></i> วิดิโอคู่มือ</a></li> -->
                 <?php }?>
             </ul>
@@ -33,6 +35,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
+
                 <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-clipboard-list"></i> คู่มือ</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>

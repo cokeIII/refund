@@ -42,8 +42,9 @@
                                             <p>หมายเหตุ:</p>
                                             <p> - เข้าสู่ระบบโดยใช้ ชื่อผู้ใช้งานคือ รหัสประจำตัวนักเรียน
                                                 รหัสผ่านคือ วัน/เดือน/ปีเกิด เช่น 30/12/2540</p>
+                                            <a class="nav-link me-lg-3" href="#" data-toggle="modal" data-target="#manual"><i class="fas fa-clipboard-list"></i> คู่มือ</a></li>
 
-                                            <li class="nav-item" data-toggle="modal" data-target="#manual"><i class="fas fa-clipboard-list"></i> คู่มือ</li>
+                                            <a class="nav-link me-lg-3" href="q_a.php"><i class="fas fa-question"></i> ถามตอบ Q&A</a>
                                             <!-- <p>
 - ค่าธรรมเนียมการโอนเงิน หักจากยอดเงินที่โอนไปยังผู้รับโอน
 </p> -->
@@ -75,7 +76,7 @@
                     },
                     success: function(result) {
                         if (result.trim() == "ok") {
-                            window.location.replace("enroll_2000.php");
+                            window.location.replace("enroll_2000V2.php");
                         } else if (result.trim() == "ok staff") {
                             window.location.replace("listEnroll.php");
                         } else {
