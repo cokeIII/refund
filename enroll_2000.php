@@ -117,7 +117,7 @@ if (empty($_SESSION["user_status"])) {
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group p-1">
-                                    <label>เบอร์โทรศัพท์มือถือ<span class="re_status"></span></label>
+                                    <label>หมายเลขโทรศัพท์ที่ใช้รับ SMS</label>
                                     <input type="tel" class="form-control" id="phone" name="phone" maxlength="10" required>
                                 </div>
                             </div>
