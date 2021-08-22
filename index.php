@@ -40,7 +40,7 @@
                                         <div class="note">
                                             <p>หมายเหตุ:</p>
                                             <p> - เข้าสู่ระบบโดยใช้ ชื่อผู้ใช้งานคือ รหัสประจำตัวนักเรียน นักศึกษา
-                                                รหัสผ่านคือ วัน/เดือน/ปีเกิด เช่น 30/12/2540</p>
+                                            <div>รหัสผ่านคือ วัน/เดือน/ปีเกิด เช่น 30/12/2540</div></p>
                                             <a class="nav-link me-lg-3" href="#" data-toggle="modal" data-target="#manual"><i class="fas fa-clipboard-list"></i> คู่มือ</a></li>
 
                                             <a class="nav-link me-lg-3" href="q_a.php"><i class="fas fa-question"></i> ถามตอบ Q&A</a>
