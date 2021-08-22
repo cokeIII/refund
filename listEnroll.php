@@ -64,7 +64,7 @@ $res = mysqli_query($conn, $sql);
                                 <th>สถานะ</th>
                                 <th></th>
                                 <th></th>
-                                <th></th>
+                                <!-- <th></th> -->
                             </tr>
                         </thead>
                         <tbody>
@@ -97,11 +97,11 @@ $res = mysqli_query($conn, $sql);
                                         <?php if ($row["status"] == "ลงทะเบียนสำเร็จ") { ?>
                                             <td><button enrollId="<?php echo $row["id"]; ?>" class="btn btn-danger btnCancel"><i class="fas fa-window-close"></i> ยกเลิก</button></td>
                                             <td></td>
-                                            <td></td>
+                                            <!-- <td></td> -->
                                         <?php } else { ?>
                                             <td></td>
                                             <td></td>
-                                            <td></td>
+                                            <!-- <td></td> -->
                                         <?php } ?>
                                     <?php } ?>
                                 </tr>
