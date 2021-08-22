@@ -76,7 +76,7 @@
                     },
                     success: function(result) {
                         if (result.trim() == "ok") {
-                            window.location.replace("enroll_2000V2.php");
+                            window.location.replace("enroll_2000.php");
                         } else if (result.trim() == "ok staff") {
                             window.location.replace("listEnroll.php");
                         } else {
