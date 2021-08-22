@@ -100,15 +100,15 @@ if (empty($_SESSION["user_status"])) {
                         <input type="hidden" name="recipient_fname" id="recipient_fname" required>
                         <input type="hidden" name="recipient_lname" id="recipient_lname" required>
                         <div class="row">
-                            <div class="col-md-8">
+                            <div class="col-md-5 col-sm-4">
                                 <div class="form-group p-1">
                                     <label>ชื่อ-สกุล ผู้รับเงิน</label>
                                     <input type="text" name="recipient_name" id="recipient_name" class="form-control readonly" required>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-4 col-sm-4">
                                 <div class="form-group p-1">
-                                    <label>แก้ไขชื่อ</label>
+                                    <label>แก้ไขชื่อ<span class="re_status"></span></label>
                                     <div><button type="button" id="btnChangeName" data-toggle="modal" data-target="#exampleModalName" class="btn btn-primary">แก้ไข</button></div>
                                 </div>
                             </div>
