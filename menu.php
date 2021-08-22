@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light fixed-top shadow-sm" id="mainNav">
     <div class="container px-5">
-        <a class="navbar-brand fw-bold" href="#">ระบบลงทะเบียนขอรับเงินเยียวยา</a>
+        <a class="navbar-brand fw-bold" href="#"><div>โครงการให้ความช่วยเหลือบรรเทาภาระค่าใช้จ่ายด้านการศึกษา</div>ในช่วงการแพร่ระบาดของโรคติดเชื้อไวรัสโคโรนา 2019</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             เมนู
             <i class="bi-list"></i>

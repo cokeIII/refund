@@ -22,7 +22,6 @@
                             <div class="col-md-7">
                                 <div class="border-left p-5  mb-3">
                                     <div class="text-center">
-                                        <h4 class="้h4 mb-4">ลงทะเบียนขอรับเงินเยียวยา</h4>
                                         <h6 class="h6 mb-4">กรุณาใส่ชื่อผู้ใช้และรหัสผ่านเพื่อเข้าสู่ระบบ</h6>
                                     </div>
                                     <form class="user">
@@ -40,7 +39,7 @@
                                         </div>
                                         <div class="note">
                                             <p>หมายเหตุ:</p>
-                                            <p> - เข้าสู่ระบบโดยใช้ ชื่อผู้ใช้งานคือ รหัสประจำตัวนักเรียน
+                                            <p> - เข้าสู่ระบบโดยใช้ ชื่อผู้ใช้งานคือ รหัสประจำตัวนักเรียน นักศึกษา
                                                 รหัสผ่านคือ วัน/เดือน/ปีเกิด เช่น 30/12/2540</p>
                                             <a class="nav-link me-lg-3" href="#" data-toggle="modal" data-target="#manual"><i class="fas fa-clipboard-list"></i> คู่มือ</a></li>
 
