@@ -91,9 +91,9 @@ $res = mysqli_query($conn, $sql);
                                     <td width="">
                                         <select enrollId="<?php echo $row["id"]; ?>" name="status" id="status" class="form-control status">
                                             <option value="พิมพ์แล้ว" <?php echo ($row["status"] == "พิมพ์แล้ว" ? "selected" : ""); ?>>พิมพ์แล้ว</option>
-                                            <option value="ตรวจแล้ว" <?php echo ($row["status"] == "เอกสารไม่ถูกต้องสมบูรณ์" ? "selected" : ""); ?>>เอกสารไม่ถูกต้องสมบูรณ์</option>
+                                            <option value="เอกสารไม่ถูกต้องสมบูรณ์" <?php echo ($row["status"] == "เอกสารไม่ถูกต้องสมบูรณ์" ? "selected" : ""); ?>>เอกสารไม่ถูกต้องสมบูรณ์</option>
                                             <option value="โอนแล้ว" <?php echo ($row["status"] == "โอนแล้ว" ? "selected" : ""); ?>>โอนแล้ว</option>
-                                            <option value="ลงทะเบียนสำเร็จ" <?php echo ($row["status"] == "ส่งเอกสารแล้ว" ? "selected" : ""); ?>>ส่งเอกสารแล้ว</option>
+                                            <option value="ส่งเอกสารแล้ว" <?php echo ($row["status"] == "ส่งเอกสารแล้ว" ? "selected" : ""); ?>>ส่งเอกสารแล้ว</option>
                                             <option value="ยกเลิก" <?php echo ($row["status"] == "ยกเลิก" ? "selected" : ""); ?>>ยกเลิก</option>
                                         </select>
                                     </td>
