@@ -46,7 +46,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <img id="imageZoom" src="img/manual2000.jpeg" alt="">
+                <img id="imageZoom" src="img/manual2000.jpg" alt="">
                 <h3><a target="_blank" href="https://youtu.be/7UqigLgab18"><i class="fas fa-video"></i> วิดีโอคู่มือ</a></h3>
             </div>
             <div class="modal-footer">
