@@ -92,9 +92,12 @@ $res = mysqli_query($conn, $sql);
                             <tr>
                                 <th></th>
                                 <th></th>
-                                <th>สาขาวิชา</th>
-                                <th>ระดับชั้น</th>
-                                <th>สถานะ</th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
                             </tr>
                         </tfoot>
                     </table>
@@ -136,7 +139,7 @@ $res = mysqli_query($conn, $sql);
                 this.api().columns().every(function() {
                     var column = this;
                     // console.log(column)
-                    if (column.selector.cols != 0 && column.selector.cols != 1) {
+                    if (column.selector.cols != 0 && column.selector.cols != 1 && column.selector.cols != 2 && column.selector.cols != 4  && column.selector.cols != 5  && column.selector.cols != 6) {
                         var select = $('<select class="form-control"><option value=""></option></select>')
                             .appendTo($(column.footer()).empty())
                             .on('change', function() {
