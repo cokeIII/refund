@@ -171,7 +171,7 @@ $res = mysqli_query($conn, $sql);
         });
 
         $("#room").change(function() {
-            $.redirect("listEnroll_teacher.php", {
+            $.redirect("listEnroll_finance.php", {
                 room_name: $(this).val(),
             }, "POST");
         })
