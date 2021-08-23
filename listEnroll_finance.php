@@ -81,7 +81,7 @@ $res = mysqli_query($conn, $sql);
                                     <!-- <td><button class="btn btn-info see-pic" title="รูปบัตรประชาชนนักเรียน/นักศึกษา" pic="<?php echo $row["id_card_pic_std"]; ?>">ดูรูป</button></td>
                                     <td><button class="btn btn-info see-pic" title="รูปบัตรประชาชนผู้ปกครอง" pic="<?php echo $row["id_card_pic"]; ?>">ดูรูป</button></td>
                                     <td><button class="btn btn-info see-pic" title="รูปหน้าสมุดบัญชี" pic="<?php echo $row["account_book_pic"]; ?>">ดูรูป</button></td> -->
-                                    <td class="col-status-<?php echo $row["id"]; ?> <?php if ($row["status"] == "ยกเลิก") {
+                                    <td class="col-status-<?php echo $row["id"]; ?> <?php if ($row["status"] == "ยกเลิก" || $row["status"] == "เอกสารไม่ถูกต้องสมบูรณ์") {
                                                                                         echo "text-danger";
                                                                                     } else {
                                                                                         echo "text-success";
