@@ -4,7 +4,7 @@ $username = $_POST["std_id"];
 $password = $_POST["password"];
 session_start();
 if (strlen($username) != 13) {
-    $sql = "select student_id,birthday from student where student_id='$username' and birthday='$password'";
+    $sql = "select student_id,birthday from student where student_id='$username' and birthday='$password' and status = '0'";
     $res = mysqli_query($conn, $sql);
     $rowcount = mysqli_num_rows($res);
     if ($rowcount > 0) {
