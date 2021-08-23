@@ -183,7 +183,7 @@ $res = mysqli_query($conn, $sql);
             $("#pic").attr("src", "uploads/" + $(this).attr("pic"))
             $('#picSee').modal('show');
         })
-        $(".status").change(function() {
+        $(document).on('change','.status',function(){
             let id = $(this).attr("enrollId")
             let val = $(this).val()
             $.ajax({
