@@ -79,7 +79,7 @@ if (strlen($username) != 13) {
             $row = mysqli_fetch_array($res);
             $_SESSION["people_id"] = $row["people_id"];
             $_SESSION["people_name"] = $row["people_name"];
-            $_SESSION["user_status"] = "admin";
+            $_SESSION["user_status"] = "registration";
             echo "ok registration";
         } else {
             echo "fail";
