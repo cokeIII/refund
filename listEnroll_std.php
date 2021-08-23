@@ -52,7 +52,7 @@ $res = mysqli_query($conn, $sql);
                                         <td><button enrollId="<?php echo $row["id"]; ?>" class="btn btn-info btnPrint"><i class="fas fa-print"></i>แสดงข้อมูล</button></td>
                                         <td><button enrollId="<?php echo $row["id"]; ?>" class="btn btn-danger btnCancel"><i class="fas fa-window-close"></i> ยกเลิก</button></td>
                                     <?php } else { ?>
-                                        <td></td>
+                                        <td><button enrollId="<?php echo $row["id"]; ?>" class="btn btn-info btnPrint"><i class="fas fa-print"></i>แสดงข้อมูล</button></td>
                                         <td></td>
                                     <?php } ?>
                                 </tr>
