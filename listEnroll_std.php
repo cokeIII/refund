@@ -28,6 +28,7 @@ $res = mysqli_query($conn, $sql);
                                 <th>รหัสลงทะเบียน</th>
                                 <th width="20%">ผู้รับเงิน</th>
                                 <th>เลขบัญชี</th>
+                                <th>เบอร์โทรศัพท์ที่รับ SMS</th>
                                 <th>สถานะ</th>
                                 <th></th>
                                 <th></th>
@@ -39,17 +40,19 @@ $res = mysqli_query($conn, $sql);
                                     <td><?php echo $row["id"]; ?></td>
                                     <td><?php echo $row["recipient_fname"] . " " . $row["recipient_lname"]; ?></td>
                                     <td><?php echo $row["recipient_bank_number"]; ?></td>
-                                    <td class="<?php if ($row["status"] == "ยกเลิก") {
+                                    <td><?php echo $row["phone"]; ?></td>
+                                    <td class="<?php if ($row["status"] == "ยกเลิก" || $row["status"] == "เอกสารไม่ถูกต้องสมบูรณ์") {
                                                     echo "text-danger";
                                                 } else {
                                                     echo "text-success";
                                                 } ?>">
                                         <?php echo $row["status"]; ?>
                                     </td>
-                                    <?php if ($row["status"] == "ส่งเอกสารแล้ว" ) { ?>
+                                    <?php if ($row["status"] == "ส่งเอกสารแล้ว" || $row["status"] == "เอกสารไม่ถูกต้องสมบูรณ์") { ?>
                                         <td><button enrollId="<?php echo $row["id"]; ?>" class="btn btn-info btnPrint"><i class="fas fa-print"></i>พิมพ์</button></td>
                                         <td><button enrollId="<?php echo $row["id"]; ?>" class="btn btn-danger btnCancel"><i class="fas fa-window-close"></i> ยกเลิก</button></td>
                                     <?php } else { ?>
+                                        <td></td>
                                         <td></td>
                                     <?php } ?>
                                 </tr>
