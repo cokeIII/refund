@@ -61,6 +61,7 @@ $res = mysqli_query($conn, $sql);
                                 <th>รหัสนักศึกษา</th>
                                 <th width="20%">ชื่อ - สกุล</th>
                                 <th>ช่าง</th>
+                                <th>เบอร์โทรศัพท์</th>
                                 <!-- <th>รูปบัตรประชาชนนักเรียน/นักศึกษา</th>
                                 <th>รูปบัตรประชาชนผู้ปกครอง</th>
                                 <th>รูปหน้าสมุดบัญชี</th> -->
@@ -78,6 +79,7 @@ $res = mysqli_query($conn, $sql);
                                     <td><?php echo $row["student_id"]; ?></td>
                                     <td><?php echo $row["stu_fname"] . " " . $row["stu_lname"]; ?></td>
                                     <td><?php echo $row["student_group_short_name"]; ?></td>
+                                    <td><?php echo $row["phone"]; ?></td>
                                     <!-- <td><button class="btn btn-info see-pic" title="รูปบัตรประชาชนนักเรียน/นักศึกษา" pic="<?php echo $row["id_card_pic_std"]; ?>">ดูรูป</button></td>
                                     <td><button class="btn btn-info see-pic" title="รูปบัตรประชาชนผู้ปกครอง" pic="<?php echo $row["id_card_pic"]; ?>">ดูรูป</button></td>
                                     <td><button class="btn btn-info see-pic" title="รูปหน้าสมุดบัญชี" pic="<?php echo $row["account_book_pic"]; ?>">ดูรูป</button></td> -->
@@ -106,6 +108,7 @@ $res = mysqli_query($conn, $sql);
                                 <th></th>
                                 <th></th>
                                 <th></th>
+                                <td></td>
                                 <th></th>
                                 <!-- <th></th>
                                 <th></th>
@@ -145,28 +148,28 @@ $res = mysqli_query($conn, $sql);
 <script>
     $(document).ready(function() {
         $('#enrollTable').DataTable({
-            initComplete: function() {
-                this.api().columns().every(function() {
-                    var column = this;
-                    // console.log(column)
-                    if (column.selector.cols != 0 && column.selector.cols != 1 && column.selector.cols != 2 && column.selector.cols != 3 && column.selector.cols != 4 && column.selector.cols != 5 && column.selector.cols != 6) {
-                        var select = $('<select class="form-control"><option value=""></option></select>')
-                            .appendTo($(column.footer()).empty())
-                            .on('change', function() {
-                                var val = $.fn.dataTable.util.escapeRegex(
-                                    $(this).val()
-                                );
-                                column
-                                    .search(val ? '^' + val + '$' : '', true, false)
-                                    .draw();
-                            });
+            // initComplete: function() {
+            //     this.api().columns().every(function() {
+            //         var column = this;
+            //         // console.log(column)
+            //         if (column.selector.cols != 0 && column.selector.cols != 1 && column.selector.cols != 2 && column.selector.cols != 3 && column.selector.cols != 4 && column.selector.cols != 5 && column.selector.cols != 6) {
+            //             var select = $('<select class="form-control"><option value=""></option></select>')
+            //                 .appendTo($(column.footer()).empty())
+            //                 .on('change', function() {
+            //                     var val = $.fn.dataTable.util.escapeRegex(
+            //                         $(this).val()
+            //                     );
+            //                     column
+            //                         .search(val ? '^' + val + '$' : '', true, false)
+            //                         .draw();
+            //                 });
 
-                        column.data().unique().sort().each(function(d, j) {
-                            select.append('<option value="' + d + '">' + d + '</option>')
-                        });
-                    }
-                });
-            },
+            //             column.data().unique().sort().each(function(d, j) {
+            //                 select.append('<option value="' + d + '">' + d + '</option>')
+            //             });
+            //         }
+            //     });
+            // },
             fixedColumns: true
         });
 
@@ -196,7 +199,7 @@ $res = mysqli_query($conn, $sql);
                 success: function(result) {
                     console.log(result)
                     if (result == "ok") {
-                        if (val != "ยกเลิก") {
+                        if (val != "ยกเลิก" || val != "เอกสารไม่ถูกต้องสมบูรณ์") {
                             $(".col-status-" + id).removeClass("text-danger");
                             $(".col-status-" + id).addClass("text-success");
                         } else {
