@@ -21,9 +21,9 @@ if ($_SESSION["user_status"] == "staff") {
     $room_name = "";
     if (!empty($_POST["room_name"])) {
         $room_name = $_POST["room_name"];
-        $sql = "select * from enroll where student_group_short_name = '$room_name'";
+        $sql = "select * from enroll where student_group_short_name = '$room_name' and status != 'ยกเลิก'";
     } else {
-        $sql = "select * from enroll";
+        $sql = "select * from enroll where status != 'ยกเลิก'";
     }
 }
 $res = mysqli_query($conn, $sql);
