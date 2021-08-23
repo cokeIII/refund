@@ -88,7 +88,7 @@
                         } else if (result.trim() == "ok finance") {
                             window.location.replace("listEnroll_finance.php");
                         } else if (result.trim() == "ok registration") {
-                            window.location.replace("listEnroll.php");
+                            window.location.replace("change_name_list.php");
                         } else {
                             $("#alertLogin").fadeIn(1000, function() {
                                 $("#alertLogin").fadeOut(5000)
