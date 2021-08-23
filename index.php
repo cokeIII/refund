@@ -44,7 +44,7 @@
                                             <p>
                                             <div> - หากเข้าสู่ระบบไม่ได้ให้ทำการติดต่อที่เบอร์ 0863831380</div>
                                             </p>                                            <p>
-                                            <div> - เจ้าหน้าที่ดูแลเว็บไซต์ติดต่อเบอร์ 0863831380</div>
+                                            <div> - เจ้าหน้าที่ดูแลเว็บไซต์ติดต่อเบอร์ 0918325709</div>
                                             </p>
                                             <a class="nav-link me-lg-3" href="#" data-toggle="modal" data-target="#manual"><i class="fas fa-clipboard-list"></i> คู่มือ</a></li>
 
