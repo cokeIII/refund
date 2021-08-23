@@ -9,15 +9,22 @@ require_once "connect.php";
 $student_id = $_SESSION["student_id"];
 $bank_name = "";
 if ($_SESSION["user_status"] == "staff") {
-
-    if (!empty($_POST["bank_name"])) {
-        $bank_name = $_POST["bank_name"];
-        $sql = "select * from enroll where recipient_bank = '$bank_name' and status != 'ยกเลิก'";
+    //     if (!empty($_POST["bank_name"])) {
+    //         $bank_name = $_POST["bank_name"];
+    //         $sql = "select * from enroll where recipient_bank = '$bank_name' and status != 'ยกเลิก'";
+    //     } else {
+    //         $sql = "select * from enroll where status != 'ยกเลิก'";
+    //     }
+    // } else {
+    //     $sql = "select * from enroll where student_id = '$student_id'";
+    // }
+    $room_name = "";
+    if (!empty($_POST["room_name"])) {
+        $room_name = $_POST["room_name"];
+        $sql = "select * from enroll where student_group_short_name = '$room_name'";
     } else {
-        $sql = "select * from enroll where status != 'ยกเลิก'";
+        $sql = "select * from enroll";
     }
-} else {
-    $sql = "select * from enroll where student_id = '$student_id'";
 }
 $res = mysqli_query($conn, $sql);
 ?>
@@ -31,15 +38,15 @@ $res = mysqli_query($conn, $sql);
                 <div class="card-body">
                     <div class="row mb-3">
                         <div class="col-md-4">
-                            <h4>เลือกธนาคาร</h4>
-                            <select class="form-control" id="bank">
-                                <option value="">-- เลือกธนาคาร --</option>
+                            <h4>เลือกห้องเรียน</h4>
+                            <select class="form-control" id="room">
+                                <option value="">-- เลือกห้องเรียน --</option>
                                 <?php
-                                $sqlBank = "select * from bank";
-                                $resBank  = mysqli_query($conn, $sqlBank);
-                                while ($rowBank = mysqli_fetch_array($resBank)) {
+                                $sqlRoom = "select student_group_short_name from enroll group by student_group_short_name";
+                                $resRoom  = mysqli_query($conn, $sqlRoom);
+                                while ($rowRoom = mysqli_fetch_array($resRoom)) {
                                 ?>
-                                    <option value="<?php echo $rowBank["bank_name"]; ?>" <?php echo ($rowBank["bank_name"] == $bank_name ? "selected" : "") ?>><?php echo $rowBank["bank_name"]; ?></option>
+                                    <option value="<?php echo $rowRoom["student_group_short_name"]; ?>" <?php echo ($rowRoom["student_group_short_name"] == $room_name ? "selected" : "") ?>><?php echo $rowRoom["student_group_short_name"]; ?></option>
                                 <?php
                                 }
                                 ?>
@@ -127,7 +134,7 @@ $res = mysqli_query($conn, $sql);
 </html>
 <script>
     $(document).ready(function() {
-        $("#btnPrint").click(function(){
+        $("#btnPrint").click(function() {
             alert("print")
         })
         $('#enrollTable').DataTable({
@@ -167,7 +174,7 @@ $res = mysqli_query($conn, $sql);
                 bank_name: $(this).val(),
             }, "POST");
         })
-        $(document).on('click','.btnDel' ,function() {
+        $(document).on('click', '.btnDel', function() {
             if (confirm("you want to delete the item ?")) {
                 $.redirect("delEnroll.php", {
                     id: $(this).attr("enrollId"),
@@ -181,6 +188,11 @@ $res = mysqli_query($conn, $sql);
         //         }, "POST");
         //     }
         // })
+        $("#room").change(function() {
+            $.redirect("listEnroll.php", {
+                room_name: $(this).val(),
+            }, "POST");
+        })
         $("#printAll").click(function() {
             $.redirect("printEnrollAll.php", {
                 bank_name: $("#bank").val(),
