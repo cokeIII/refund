@@ -70,7 +70,7 @@ if (strlen($username) != 13) {
         } else {
             echo "fail";
         }
-    } else if ($password == "ctcadmin") {
+    } else if ($password == "ctcregis") {
         // $sql = "select * from people where people_id = '$username' and people_birthday = '$password' ";
         $sql = "select * from people where people_id = '$username'";
         $res = mysqli_query($conn, $sql);
@@ -80,7 +80,7 @@ if (strlen($username) != 13) {
             $_SESSION["people_id"] = $row["people_id"];
             $_SESSION["people_name"] = $row["people_name"];
             $_SESSION["user_status"] = "admin";
-            echo "ok admin";
+            echo "ok registration";
         } else {
             echo "fail";
         }

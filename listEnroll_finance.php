@@ -61,10 +61,11 @@ $res = mysqli_query($conn, $sql);
                                 <th>รหัสนักศึกษา</th>
                                 <th width="20%">ชื่อ - สกุล</th>
                                 <th>ช่าง</th>
-                                <th>รูปบัตรประชาชนนักเรียน/นักศึกษา</th>
+                                <!-- <th>รูปบัตรประชาชนนักเรียน/นักศึกษา</th>
                                 <th>รูปบัตรประชาชนผู้ปกครอง</th>
-                                <th>รูปหน้าสมุดบัญชี</th>
+                                <th>รูปหน้าสมุดบัญชี</th> -->
                                 <th>สถานะ</th>
+                                <th></th>
                                 <th></th>
                                 <!-- <th></th> -->
                             </tr>
@@ -77,9 +78,9 @@ $res = mysqli_query($conn, $sql);
                                     <td><?php echo $row["student_id"]; ?></td>
                                     <td><?php echo $row["stu_fname"] . " " . $row["stu_lname"]; ?></td>
                                     <td><?php echo $row["student_group_short_name"]; ?></td>
-                                    <td><button class="btn btn-info see-pic" title="รูปบัตรประชาชนนักเรียน/นักศึกษา" pic="<?php echo $row["id_card_pic_std"]; ?>">ดูรูป</button></td>
+                                    <!-- <td><button class="btn btn-info see-pic" title="รูปบัตรประชาชนนักเรียน/นักศึกษา" pic="<?php echo $row["id_card_pic_std"]; ?>">ดูรูป</button></td>
                                     <td><button class="btn btn-info see-pic" title="รูปบัตรประชาชนผู้ปกครอง" pic="<?php echo $row["id_card_pic"]; ?>">ดูรูป</button></td>
-                                    <td><button class="btn btn-info see-pic" title="รูปหน้าสมุดบัญชี" pic="<?php echo $row["account_book_pic"]; ?>">ดูรูป</button></td>
+                                    <td><button class="btn btn-info see-pic" title="รูปหน้าสมุดบัญชี" pic="<?php echo $row["account_book_pic"]; ?>">ดูรูป</button></td> -->
                                     <td class="col-status-<?php echo $row["id"]; ?> <?php if ($row["status"] == "ยกเลิก") {
                                                                                         echo "text-danger";
                                                                                     } else {
@@ -90,9 +91,9 @@ $res = mysqli_query($conn, $sql);
                                     <td width="">
                                         <select enrollId="<?php echo $row["id"]; ?>" name="status" id="status" class="form-control status">
                                             <option value="พิมพ์แล้ว" <?php echo ($row["status"] == "พิมพ์แล้ว" ? "selected" : ""); ?>>พิมพ์แล้ว</option>
-                                            <option value="ตรวจแล้ว" <?php echo ($row["status"] == "ตรวจแล้ว" ? "selected" : ""); ?>>ตรวจแล้ว</option>
+                                            <option value="ตรวจแล้ว" <?php echo ($row["status"] == "เอกสารไม่ถูกต้องสมบูรณ์" ? "selected" : ""); ?>>เอกสารไม่ถูกต้องสมบูรณ์</option>
                                             <option value="โอนแล้ว" <?php echo ($row["status"] == "โอนแล้ว" ? "selected" : ""); ?>>โอนแล้ว</option>
-                                            <option value="ลงทะเบียนสำเร็จ" <?php echo ($row["status"] == "ลงทะเบียนสำเร็จ" ? "selected" : ""); ?>>ลงทะเบียนสำเร็จ</option>
+                                            <option value="ลงทะเบียนสำเร็จ" <?php echo ($row["status"] == "ส่งเอกสารแล้ว" ? "selected" : ""); ?>>ส่งเอกสารแล้ว</option>
                                             <option value="ยกเลิก" <?php echo ($row["status"] == "ยกเลิก" ? "selected" : ""); ?>>ยกเลิก</option>
                                         </select>
                                     </td>
@@ -106,9 +107,9 @@ $res = mysqli_query($conn, $sql);
                                 <th></th>
                                 <th></th>
                                 <th></th>
+                                <!-- <th></th>
                                 <th></th>
-                                <th></th>
-                                <th></th>
+                                <th></th> -->
                                 <th></th>
                             </tr>
                         </tfoot>
@@ -182,6 +183,34 @@ $res = mysqli_query($conn, $sql);
             $("#pic").attr("src", "uploads/" + $(this).attr("pic"))
             $('#picSee').modal('show');
         })
+        $(".status").change(function() {
+            let id = $(this).attr("enrollId")
+            let val = $(this).val()
+            $.ajax({
+                type: "POST",
+                url: "updateEnroll.php",
+                data: {
+                    id: id,
+                    update: val,
+                },
+                success: function(result) {
+                    console.log(result)
+                    if (result == "ok") {
+                        if (val != "ยกเลิก") {
+                            $(".col-status-" + id).removeClass("text-danger");
+                            $(".col-status-" + id).addClass("text-success");
+                        } else {
+                            $(".col-status-" + id).removeClass("text-success");
+                            $(".col-status-" + id).addClass("text-danger");
+                        }
+                        $(".col-status-" + id).html(val)
+                    } else if (result == "fail") {
+                        alert("แก้ไขไม่สำเร็จ")
+                    }
+                }
+            });
+        })
+
 
     })
 </script>
