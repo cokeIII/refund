@@ -12,9 +12,9 @@ if ($_SESSION["user_status"] == "staff") {
 
     if (!empty($_POST["bank_name"])) {
         $bank_name = $_POST["bank_name"];
-        $sql = "select * from enroll where recipient_bank = '$bank_name' a";
+        $sql = "select * from enroll where recipient_bank = '$bank_name' and status != 'ยกเลิก'";
     } else {
-        $sql = "select * from enroll";
+        $sql = "select * from enroll where status != 'ยกเลิก'";
     }
 } else {
     $sql = "select * from enroll where student_id = '$student_id'";
@@ -62,7 +62,7 @@ $res = mysqli_query($conn, $sql);
                                 <th>สาขาวิชา</th>
                                 <th>ชั้น</th>
                                 <th>สถานะ</th>
-                                <th></th>
+                                <!-- <th></th> -->
                                 <th></th>
                                 <!-- <th></th> -->
                             </tr>
@@ -82,7 +82,7 @@ $res = mysqli_query($conn, $sql);
                                         <?php echo $row["status"]; ?>
                                     </td>
                                     <?php if ($_SESSION["user_status"] == "staff") { ?>
-                                        <td width="20%">
+                                        <!-- <td width="20%">
                                             <select enrollId="<?php echo $row["id"]; ?>" name="status" id="status" class="form-control status">
                                                 <option value="พิมพ์แล้ว" <?php echo ($row["status"] == "พิมพ์แล้ว" ? "selected" : ""); ?>>พิมพ์แล้ว</option>
                                                 <option value="ตรวจแล้ว" <?php echo ($row["status"] == "ตรวจแล้ว" ? "selected" : ""); ?>>ตรวจแล้ว</option>
@@ -90,7 +90,7 @@ $res = mysqli_query($conn, $sql);
                                                 <option value="ลงทะเบียนสำเร็จ" <?php echo ($row["status"] == "ลงทะเบียนสำเร็จ" ? "selected" : ""); ?>>ลงทะเบียนสำเร็จ</option>
                                                 <option value="ยกเลิก" <?php echo ($row["status"] == "ยกเลิก" ? "selected" : ""); ?>>ยกเลิก</option>
                                             </select>
-                                        </td>
+                                        </td> -->
                                         <td width="10%"><a id="btnPrint" href="report_2.php?id=<?php echo $row["id"]; ?>" target="_blank"><button class="btn btn-info"><i class="fas fa-print"></i> พิมพ์</button></a></td>
                                         <!-- <td width="10%"><button enrollId="<?php echo $row["id"]; ?>" class="btn btn-danger btnDel"><i class="fas fa-trash-alt"></i> ลบ</button></td> -->
                                     <?php } else { ?>
