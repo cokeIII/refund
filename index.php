@@ -78,7 +78,7 @@
                         if (result.trim() == "ok") {
                             window.location.replace("enroll_2000V2.php");
                         } else if (result.trim() == "ok teacher") {
-                            window.location.replace("listEnroll_teacher.php");
+                            window.location.replace("listEnroll.php");
                         } else if (result.trim() == "ok checker") {
                             window.location.replace("listEnroll_checker.php");
                         } else if (result.trim() == "ok admin") {
