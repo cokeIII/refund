@@ -8,7 +8,7 @@ if (empty($_SESSION["user_status"])) {
 require_once "connect.php";
 $student_id = $_SESSION["student_id"];
 if ($_SESSION["user_status"] == "staff") {
-    $sql = "select c.*,s.stu_fname,s.stu_lname from change_name c, student s where c.student_id = s.student_id";
+    $sql = "select c.*,s.stu_fname,s.stu_lname from change_name_old c, student s where c.student_id = s.student_id";
 } else {
     $sql = "";
 }
