@@ -40,7 +40,9 @@
                                         <div class="note">
                                             <p>หมายเหตุ:</p>
                                             <p> - เข้าสู่ระบบโดยใช้ ชื่อผู้ใช้งานคือ รหัสประจำตัวนักเรียน นักศึกษา
-                                            <div>รหัสผ่านคือ วัน/เดือน/ปีเกิด เช่น 30/12/2540</div>
+                                            <div>รหัสผ่านคือ วัน/เดือน/ปีเกิด เช่น 30/12/2540</div></p>
+                                            <p>
+                                            <div> - หากเข้าสู่ระบบไม่ได้ให้ทำการติดต่อ ที่เบอร์ 0863831380</div>
                                             </p>
                                             <a class="nav-link me-lg-3" href="#" data-toggle="modal" data-target="#manual"><i class="fas fa-clipboard-list"></i> คู่มือ</a></li>
 
@@ -84,6 +86,8 @@
                         } else if (result.trim() == "ok admin") {
                             window.location.replace("listEnroll.php");
                         } else if (result.trim() == "ok finance") {
+                            window.location.replace("listEnroll_finance.php");
+                        } else if (result.trim() == "ok regis") {
                             window.location.replace("listEnroll_finance.php");
                         } else {
                             $("#alertLogin").fadeIn(1000, function() {
