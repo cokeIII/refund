@@ -8,7 +8,7 @@ if (empty($_SESSION["user_status"])) {
 require_once "connect.php";
 $student_id = $_SESSION["student_id"];
 $bank_name = "";
-if ($_SESSION["user_status"] == "staff") {
+if ($_SESSION["user_status"] == "staff" || $_SESSION["user_status"] == "registration") {
     //     if (!empty($_POST["bank_name"])) {
     //         $bank_name = $_POST["bank_name"];
     //         $sql = "select * from enroll where recipient_bank = '$bank_name' and status != 'ยกเลิก'";
