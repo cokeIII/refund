@@ -206,7 +206,7 @@ if ($rowcount == 0) {
     }
 } else {
     $rowCheck = mysqli_fetch_array($resCheck);
-    if ($rowCheck["status"] == "ยกเลิก") {
+    if ($rowCheck["status"] == "ยกเลิก" || $rowCheck["status"] == "เอกสารไม่ถูกต้องสมบูรณ์") {
         date_default_timezone_set("Asia/Bangkok");
         $nameDate = date("YmdHis");
         $target_dir = "uploads/";
