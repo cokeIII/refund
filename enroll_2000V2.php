@@ -109,7 +109,7 @@ if (empty($_SESSION["user_status"])) {
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group p-1">
-                                    <label>แก้ไขชื่อ<span class="re_status"></span></label>
+                                    <label>แก้ไขข้อความที่พิมพ์ชื่อ<span class="re_status"></span>ผิด</label>
                                     <div><button type="button" id="btnChangeName" data-toggle="modal" data-target="#exampleModalName" class="btn btn-primary">แก้ไข</button></div>
                                 </div>
                             </div>
@@ -283,7 +283,7 @@ if (empty($_SESSION["user_status"])) {
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">แก้ไขชื่อ<span class="re_status"></span></h5>
+                <h5 class="modal-title" id="exampleModalLabel">แก้ไขข้อความที่พิมพ์ชื่อ<span class="re_status"></span>ผิด</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>

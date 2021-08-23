@@ -150,7 +150,7 @@ $row = mysqli_fetch_assoc($res);
 <body>
     <h2 class="center">วิทยาลัยเทคนิคชลบุรี</h2>
     <div class="center text-size">หลักฐานการรับเงินเยียวยาที่ได้รับผลกระทบจากสถานการณ์การระบาดของโรคติดเชื้อไวรัสโคโรน่า 2019</div>
-    <div class="text-size">1.สำเนาบัตรประชาชนของนักเรียน/นักศึกษา</div>
+    <div class="text-size">1.สำเนาบัตรประชาชนของนักเรียน/นักศึกษา หมายเลขโทรศัพท์  <?php echo $row["phone"]; ?></div>
     <div class="text-size txt-right">ชั้น/ช่าง <?php echo $row["student_group_short_name"]; ?> รหัส <?php echo $row["student_id"]; ?></div>
     <div class="center"><img src="uploads/<?php echo $row["id_card_pic_std"]; ?>" alt="" height="135" width="275"></div>
     <div class="text-size center">สำเนาถูกต้อง</div>
@@ -161,7 +161,7 @@ $row = mysqli_fetch_assoc($res);
     <div class="text-size center">สำเนาถูกต้อง</div>
     <div class="text-size width-sig">ลงชื่อ <img class="sig-size" src="uploads/signature/<?php echo $row["parent_signature"]; ?>" width="75px" height="30px"></div>
     <div class="text-size center">(<?php echo $row["recipient_fname"] . " " . $row["recipient_lname"]; ?>)</div>
-    <div class="text-size">3.เลขบัญชีธนาคารของ<?php echo $row["recipient"];?>โดยถ่ายหน้าบัญชีธนาคาร</div>
+    <div class="text-size">3.เลขบัญชีธนาคารของ<?php echo $row["recipient"];?>โดยถ่ายหน้าบัญชีธนาคาร หมายเลขบัญชี <?php echo $row["recipient_bank_number"];?></div>
     <div class="center"><img src="uploads/<?php echo $row["account_book_pic"]; ?>" alt="" height="135" width="275"></div>
     <div class="text-size tab">ขอรับรองว่าเป็น<?php echo $row["recipient"];?>ของ <?php echo $row["prefix_name"] . $row["stu_fname"] . " " . $row["stu_lname"]; ?></div>
     <div class="text-size">ได้รับเงินช่วยเหลือจากรัฐบาล จำนวน 2,000 บาท เรียบร้อยแล้ว</div>
