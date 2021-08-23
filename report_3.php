@@ -45,7 +45,7 @@ function DateThai($strDate)
     return "$strDay $strMonthThai $strYear";
 }
 ob_start(); // Start get HTML code
-$sql = "select c.*,s.stu_fname,s.stu_lname from change_name c, student s where c.student_id = s.student_id";
+$sql = "select c.*,s.stu_fname,s.stu_lname from change_name_old c, student s where c.student_id = s.student_id";
 $res = mysqli_query($conn, $sql);
 ?>
 
@@ -126,6 +126,7 @@ $res = mysqli_query($conn, $sql);
     <table width="100%">
         <tr>
             <th>ที่</th>
+            <th>วันที่</th>
             <th>รหัสนักศึกษา</th>
             <th width="20%">ชื่อ - สกุล</th>
             <th>ชื่อเดิม</th>
@@ -137,6 +138,7 @@ $res = mysqli_query($conn, $sql);
             while ($row = mysqli_fetch_array($res)) { ?>
                 <tr>
                     <td><?php echo ++$i; ?></td>
+                    <td><?php echo $row["time_stamp"]; ?></td>
                     <td><?php echo $row["student_id"]; ?></td>
                     <td><?php echo $row["stu_fname"] . " " . $row["stu_lname"]; ?></td>
                     <td><?php echo $row["th_name_old"]; ?></td>
