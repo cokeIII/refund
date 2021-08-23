@@ -5,25 +5,28 @@ $student_id = $_POST["student_id"];
 $data = array();
 
 if ($_POST["get_status"] == "บิดา") {
-    $sql = "select father_th_name,father_th_surname from student_family where student_id = '$student_id'";
+    $sql = "select prefix_name,father_th_name,father_th_surname from student_family,data_prefix where student_id = '$student_id' and father_th_prefix  = prefix_id";
     $res = mysqli_query($conn,$sql);
     while($row = mysqli_fetch_array($res)){
+        $data["prefix_name"] = $row["prefix_name"];
         $data["recipient_fname"] = $row["father_th_name"];
         $data["recipient_lname"] = $row["father_th_surname"];
     }
     echo json_encode($data, JSON_UNESCAPED_UNICODE);
 } else if ($_POST["get_status"] == "มารดา") {
-    $sql = "select mother_th_name,mother_th_surname from student_family where student_id = '$student_id'";
+    $sql = "select prefix_name,mother_th_name,mother_th_surname from student_family,data_prefix where student_id = '$student_id' and mother_th_prefix = prefix_id";
     $res = mysqli_query($conn,$sql);
     while($row = mysqli_fetch_array($res)){
+        $data["prefix_name"] = $row["prefix_name"];
         $data["recipient_fname"] = $row["mother_th_name"];
         $data["recipient_lname"] = $row["mother_th_surname"];
     }
     echo json_encode($data, JSON_UNESCAPED_UNICODE);
 } else if ($_POST["get_status"] == "ผู้ปกครอง") {
-    $sql = "select parent_th_name,parent_th_surname from student_family where student_id = '$student_id'";
+    $sql = "select prefix_name,parent_th_name,parent_th_surname from student_family,data_prefix where student_id = '$student_id' and parent_th_prefix = prefix_id";
     $res = mysqli_query($conn,$sql);
     while($row = mysqli_fetch_array($res)){
+        $data["prefix_name"] = $row["prefix_name"];
         $data["recipient_fname"] = $row["parent_th_name"];
         $data["recipient_lname"] = $row["parent_th_surname"];
     }

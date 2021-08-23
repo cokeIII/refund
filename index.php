@@ -40,7 +40,8 @@
                                         <div class="note">
                                             <p>หมายเหตุ:</p>
                                             <p> - เข้าสู่ระบบโดยใช้ ชื่อผู้ใช้งานคือ รหัสประจำตัวนักเรียน นักศึกษา
-                                            <div>รหัสผ่านคือ วัน/เดือน/ปีเกิด เช่น 30/12/2540</div></p>
+                                            <div>รหัสผ่านคือ วัน/เดือน/ปีเกิด เช่น 30/12/2540</div>
+                                            </p>
                                             <a class="nav-link me-lg-3" href="#" data-toggle="modal" data-target="#manual"><i class="fas fa-clipboard-list"></i> คู่มือ</a></li>
 
                                             <a class="nav-link me-lg-3" href="q_a.php"><i class="fas fa-question"></i> ถามตอบ Q&A</a>
@@ -75,9 +76,15 @@
                     },
                     success: function(result) {
                         if (result.trim() == "ok") {
-                            window.location.replace("enroll_2000.php");
-                        } else if (result.trim() == "ok staff") {
+                            window.location.replace("enroll_2000V2.php");
+                        } else if (result.trim() == "ok teacher") {
+                            window.location.replace("listEnroll_teacher.php");
+                        } else if (result.trim() == "ok checker") {
+                            window.location.replace("listEnroll_checker.php");
+                        } else if (result.trim() == "ok admin") {
                             window.location.replace("listEnroll.php");
+                        } else if (result.trim() == "ok finance") {
+                            window.location.replace("listEnroll_finance.php");
                         } else {
                             $("#alertLogin").fadeIn(1000, function() {
                                 $("#alertLogin").fadeOut(5000)

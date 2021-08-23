@@ -26,11 +26,14 @@ if ($conn2->connect_error) {
 
 $sql = "select 
 student_id,
+parent_th_prefix,
 parent_th_name,
 parent_th_surname,
+father_th_prefix,
 father_th_name,
 father_th_surname,
 father_middle_name,
+mother_th_prefix,
 mother_th_name,
 mother_th_surname,
 mother_middle_name
@@ -46,23 +49,32 @@ while($row = mysqli_fetch_assoc($res)){
     $mother_th_name = $row["mother_th_name"];
     $mother_th_surname = $row["mother_th_surname"];
     $mother_middle_name = $row["mother_middle_name"];
+    $parent_th_prefix = $row["parent_th_prefix"];
+    $father_th_prefix = $row["father_th_prefix"];
+    $mother_th_prefix = $row["mother_th_prefix"];
     $sqlInsert = "insert into student_family (
     student_id,
+    parent_th_prefix,
     parent_th_name,
     parent_th_surname,
+    father_th_prefix,
     father_th_name,
     father_th_surname,
     father_middle_name,
+    mother_th_prefix,
     mother_th_name,
     mother_th_surname,
     mother_middle_name
 ) value(
     '$student_id',
+    '$parent_th_prefix',
     '$parent_th_name',
     '$parent_th_surname',
+    '$father_th_prefix',
     '$father_th_name',
     '$father_th_surname',
     '$father_middle_name',
+    '$mother_th_prefix',
     '$mother_th_name',
     '$mother_th_surname',
     '$mother_middle_name'

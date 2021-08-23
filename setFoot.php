@@ -35,9 +35,9 @@
  <script src="vendor/cropzee-image-cropper/dist/cropzee.js" defer></script>
  <!-- google code-prettify -->
  <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
- <script src="node_modules/cropperjs/dist/cropper.js"></script>
- <script src="node_modules/jquery-cropper/dist/jquery-cropper.js"></script>
- 
+ <!-- <script src="node_modules/cropperjs/dist/cropper.js"></script>
+ <script src="node_modules/jquery-cropper/dist/jquery-cropper.js"></script> -->
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.js" integrity="sha512-ZK6m9vADamSl5fxBPtXw6ho6A4TuX89HUbcfvxa2v2NYNT/7l8yFGJ3JlXyMN4hlNbz0il4k6DvqbIW5CCwqkw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
  <script>
  	$(function() {
  		$('#imageZoom').imageZoom();

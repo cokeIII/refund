@@ -15,6 +15,7 @@ $minor_name = $_POST["minor_name"];
 $grade_name = $_POST["grade_name"];
 $student_group_no = $_POST["student_group_no"];
 $recipient = $_POST["recipient"];
+$recipient_prefix = $_POST["recipient_prefix"];
 $recipient_fname = $_POST["recipient_fname"];
 $recipient_lname = $_POST["recipient_lname"];
 $recipient_bank = $_POST["recipient_bank"];
@@ -160,6 +161,7 @@ if ($rowcount == 0) {
         account_book_pic,
         status,
         recipient,
+        recipient_prefix,
         recipient_fname,
         recipient_lname,
         recipient_bank,
@@ -186,6 +188,7 @@ if ($rowcount == 0) {
         '$account_book_pic',
         'ลงทะเบียนสำเร็จ',
         '$recipient',
+        '$recipient_prefix',
         '$recipient_fname',
         '$recipient_lname',
         '$recipient_bank',
@@ -327,6 +330,7 @@ if ($rowcount == 0) {
             account_book_pic,
             status,
             recipient,
+            recipient_prefix,
             recipient_fname,
             recipient_lname,
             recipient_bank,
@@ -353,6 +357,7 @@ if ($rowcount == 0) {
             '$account_book_pic',
             'ลงทะเบียนสำเร็จ',
             '$recipient',
+            '$recipient_prefix',
             '$recipient_fname',
             '$recipient_lname',
             '$recipient_bank',

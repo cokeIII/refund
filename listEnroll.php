@@ -92,7 +92,7 @@ $res = mysqli_query($conn, $sql);
                                             </select>
                                         </td>
                                         <td width="10%"><a id="btnPrint" href="report_2.php?id=<?php echo $row["id"]; ?>" target="_blank"><button class="btn btn-info"><i class="fas fa-print"></i> พิมพ์</button></a></td>
-                                        <!-- <td width="10%"><button enrollId="<?php echo $row["id"]; ?>" class="btn btn-danger btnDel"><i class="fas fa-trash-alt"></i> ลบ</button></td> -->
+                                        <td width="10%"><button enrollId="<?php echo $row["id"]; ?>" class="btn btn-danger btnDel"><i class="fas fa-trash-alt"></i> ลบ</button></td>
                                     <?php } else { ?>
                                         <?php if ($row["status"] == "ลงทะเบียนสำเร็จ") { ?>
                                             <td><button enrollId="<?php echo $row["id"]; ?>" class="btn btn-danger btnCancel"><i class="fas fa-window-close"></i> ยกเลิก</button></td>

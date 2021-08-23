@@ -43,6 +43,7 @@
 	<link href="https://unpkg.com/sanitize.css" rel="stylesheet">
     <link rel="stylesheet" href="css/image-zoom.css" />
     <link rel="stylesheet" href="vendor/datatables/dataTables.bootstrap4.css">
-    <link rel="stylesheet" href="node_modules/cropperjs/src/css/cropper.css">
+    <!-- <link rel="stylesheet" href="node_modules/cropperjs/src/css/cropper.css"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.css" integrity="sha512-+VDbDxc9zesADd49pfvz7CgsOl2xREI/7gnzcdyA9XjuTxLXrdpuz21VVIqc5HPfZji2CypSbxx1lgD7BgBK5g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <?php session_start(); ?>
