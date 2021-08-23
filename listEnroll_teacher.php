@@ -120,6 +120,7 @@ $res = mysqli_query($conn, $sql);
         </button>
       </div>
       <div class="modal-body">
+          <div id="alertText"></div>
         <img id="pic" src="" alt="" width="100%" height="100%">
       </div>
       <div class="modal-footer">
@@ -171,6 +172,9 @@ $res = mysqli_query($conn, $sql);
         $(".see-pic").click(function(){
             $("#modalLabel").html($(this).attr("title"))
             $("#pic").attr("src", "uploads/"+$(this).attr("pic"))
+            if($(this).attr("pic")==""){
+
+            }
             $('#picSee').modal('show');
         })
 
