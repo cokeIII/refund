@@ -13,7 +13,7 @@
                     <?php if ($_SESSION["user_status"] == "student") { ?>
                         <li class="nav-item"><a class="nav-link me-lg-3" href="enroll_2000V2.php"><i class="fas fa-address-book"></i> ลงทะเบียนรับเงิน</a></li>
                         <li class="nav-item"><a class="nav-link me-lg-3" href="listEnroll_std.php"><i class="fas fa-clipboard-list"></i> ตรวจสอบข้อมูลลงทะเบียน</a></li>
-                    <?php } else if ($_SESSION["user_status"] == "staff" || $_SESSION["user_status"] == "finance") { ?>
+                    <?php } else if ($_SESSION["user_status"] == "staff") { ?>
                         <li class="nav-item"><a class="nav-link me-lg-3" href="listEnroll.php"><i class="fas fa-home"></i> หน้าแรก</a></li>
                         <li class="nav-item"><a class="nav-link me-lg-3" href="form_report.php"><i class="fas fa-list-alt"></i> พิมพ์รายงาน</a></li>
                         <li class="nav-item"><a class="nav-link me-lg-3" href="sum_everyday.php"><i class="fas fa-list"></i> รายงานสรุป</a></li>
@@ -22,6 +22,10 @@
                         <li class="nav-item"><a class="nav-link me-lg-3" href="sum_everyday.php"><i class="fas fa-list"></i> รายงานสรุป</a></li>
                     <?php } else if ($_SESSION["user_status"] == "registration") { ?>
                         <li class="nav-item"><a class="nav-link me-lg-3" href="change_name_list.php"><i class="fas fa-list"></i> รายการที่แก้ไขชื่อ</a></li>
+                    <?php } else if ($_SESSION["user_status"] == "finance") { ?>
+                        <li class="nav-item"><a class="nav-link me-lg-3" href="listEnroll_finance.php"><i class="fas fa-home"></i> หน้าแรก</a></li>
+                        <li class="nav-item"><a class="nav-link me-lg-3" href="form_report.php"><i class="fas fa-list-alt"></i> พิมพ์รายงาน</a></li>
+                        <li class="nav-item"><a class="nav-link me-lg-3" href="sum_everyday.php"><i class="fas fa-list"></i> รายงานสรุป</a></li>
                     <?php } ?>
                     <li class="nav-item"><a href="logout.php"><button class="btn btn-primary rounded-pill">
                                 <i class="fas fa-sign-out-alt"></i>
