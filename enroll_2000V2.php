@@ -92,8 +92,8 @@ if (empty($_SESSION["user_status"])) {
                                         <option value="มารดา">มารดา</option>
                                     </select> -->
                                     <div><input type="radio" id="recipient" name="recipient" value="ผู้ปกครอง" checked> ผู้ปกครอง </div>
-                                    <div><input type="radio" name="recipient" value="บิดา"> บิดา</div>
-                                    <div><input type="radio" name="recipient" value="มารดา"> มารดา</div>
+                                    <!-- <div><input type="radio" name="recipient" value="บิดา"> บิดา</div>
+                                    <div><input type="radio" name="recipient" value="มารดา"> มารดา</div> -->
                                 </div>
                             </div>
                         </div>
