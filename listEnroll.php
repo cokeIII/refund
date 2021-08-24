@@ -6,7 +6,7 @@ if (empty($_SESSION["user_status"])) {
     header("location: index.php");
 }
 require_once "connect.php";
-$student_id = $_SESSION["student_id"];
+$people_id = $_SESSION["people_id"];
 $bank_name = "";
 if ($_SESSION["user_status"] == "staff" || $_SESSION["user_status"] == "registration") {
     //     if (!empty($_POST["bank_name"])) {
@@ -23,7 +23,13 @@ if ($_SESSION["user_status"] == "staff" || $_SESSION["user_status"] == "registra
         $room_name = $_POST["room_name"];
         $sql = "select * from enroll where student_group_short_name = '$room_name' and status != 'ยกเลิก'";
     } else {
-        $sql = "select * from enroll where status != 'ยกเลิก'";
+        $sql = "select * from enroll 
+        where 
+        group_id in
+        (select student_group_id from student_group where 
+        teacher_id1 = '$people_id' 
+        or teacher_id2 = '$people_id' 
+        or teacher_id3 = '$people_id') and status != 'ยกเลิก'";
     }
 }
 $res = mysqli_query($conn, $sql);
@@ -38,19 +44,19 @@ $res = mysqli_query($conn, $sql);
                 <div class="card-body">
                     <div class="row mb-3">
                         <div class="col-md-4">
-                            <h4>เลือกห้องเรียน</h4>
+                            <!-- <h4>เลือกห้องเรียน</h4>
                             <select class="form-control" id="room">
                                 <option value="">-- เลือกห้องเรียน --</option>
                                 <?php
-                                $sqlRoom = "select student_group_short_name from enroll group by student_group_short_name";
-                                $resRoom  = mysqli_query($conn, $sqlRoom);
-                                while ($rowRoom = mysqli_fetch_array($resRoom)) {
+                               // $sqlRoom = "select student_group_short_name from enroll group by student_group_short_name";
+                                //$resRoom  = mysqli_query($conn, $sqlRoom);
+                                //while ($rowRoom = mysqli_fetch_array($resRoom)) {
                                 ?>
-                                    <option value="<?php echo $rowRoom["student_group_short_name"]; ?>" <?php echo ($rowRoom["student_group_short_name"] == $room_name ? "selected" : "") ?>><?php echo $rowRoom["student_group_short_name"]; ?></option>
+                                    <option value="<?php //echo $rowRoom["student_group_short_name"]; ?>" <?php //echo ($rowRoom["student_group_short_name"] == $room_name ? "selected" : "") ?>><?php //echo $rowRoom["student_group_short_name"]; ?></option>
                                 <?php
-                                }
+                               // }
                                 ?>
-                            </select>
+                            </select> -->
                         </div>
                         <div class="col-md-8">
                             <div class="row justify-content-end">
@@ -81,7 +87,7 @@ $res = mysqli_query($conn, $sql);
                                     <td><?php echo $row["stu_fname"] . " " . $row["stu_lname"]; ?></td>
                                     <td><?php echo $row["major_name"]; ?></td>
                                     <td><?php echo $row["student_group_short_name"]; ?></td>
-                                    <td class="col-status-<?php echo $row["id"]; ?> <?php if ($row["status"] == "ยกเลิก") {
+                                    <td class="col-status-<?php echo $row["id"]; ?> <?php if ($row["status"] == "ยกเลิก" || $row["status"] == "เอกสารไม่ถูกต้องสมบูรณ์") {
                                                                                         echo "text-danger";
                                                                                     } else {
                                                                                         echo "text-success";

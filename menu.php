@@ -15,7 +15,7 @@
                         <li class="nav-item"><a class="nav-link me-lg-3" href="listEnroll_std.php"><i class="fas fa-clipboard-list"></i> ตรวจสอบข้อมูลลงทะเบียน</a></li>
                     <?php } else if ($_SESSION["user_status"] == "staff") { ?>
                         <li class="nav-item"><a class="nav-link me-lg-3" href="listEnroll.php"><i class="fas fa-home"></i> หน้าแรก</a></li>
-                        <li class="nav-item"><a class="nav-link me-lg-3" href="form_report.php"><i class="fas fa-list-alt"></i> พิมพ์รายงาน</a></li>
+                        <!-- <li class="nav-item"><a class="nav-link me-lg-3" href="form_report.php"><i class="fas fa-list-alt"></i> พิมพ์รายงาน</a></li> -->
                         <li class="nav-item"><a class="nav-link me-lg-3" href="sum_everyday.php"><i class="fas fa-list"></i> รายงานสรุป</a></li>
                     <?php } else if ($_SESSION["user_status"] == "teacher") { ?>
                         <li class="nav-item"><a class="nav-link me-lg-3" href="listEnroll_teacher.php"><i class="fas fa-home"></i> หน้าแรก</a></li>

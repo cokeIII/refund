@@ -7,14 +7,16 @@ if (empty($_SESSION["user_status"])) {
     header("location: index.php");
 }
 require_once "connect.php";
-$student_id = $_SESSION["student_id"];
+$people_id = $_SESSION["people_id"];
 $room_name = "";
 if ($_SESSION["user_status"] == "teacher") {
     if (!empty($_POST["room_name"])) {
-        $room_name = $_POST["room_name"];
-        $sql = "select * from enroll where student_group_short_name = '$room_name'";
+        // $room_name = $_POST["room_name"];
+        // $sql = "select * from enroll where student_group_short_name = '$room_name'";
     } else {
-        $sql = "select * from enroll";
+        $sql = "select * from enroll 
+        where 
+        group_id in(select student_group_id from student_group where teacher_id1 = '$people_id' or teacher_id2 = '$people_id' or teacher_id3 = '$people_id')";
     }
 }
 
