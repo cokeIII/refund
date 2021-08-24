@@ -8,7 +8,14 @@ if (empty($_SESSION["user_status"])) {
 require_once "connect.php";
 $student_id = $_SESSION["student_id"];
 if ($_SESSION["user_status"] == "registration") {
-    $sql = "select c.*,s.stu_fname,s.stu_lname from change_name_old c, student s where c.student_id = s.student_id";
+    $sql = "select 
+    c.*,
+    s.stu_fname,
+    s.stu_lname 
+    from 
+    change_name c, student s 
+    where 
+    c.student_id = s.student_id";
 } else {
     $sql = "";
 }
@@ -40,11 +47,13 @@ $res = mysqli_query($conn, $sql);
                             <tr>
                                 <th>ที่</th>
                                 <th>รหัสนักศึกษา</th>
-                                <th width="20%">ชื่อ - สกุล</th>
+                                <th>ชื่อ - สกุล นักศึกาษา</th>
                                 <th>ชื่อเดิม</th>
                                 <th>เกี่ยวข้องเป็น</th>
                                 <th>ชื่อที่ต้องการเปลี่ยน</th>
                                 <th>เบอร์ติดต่อกลับ</th>
+                                <th>สถานะแก้ไข</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -54,10 +63,19 @@ $res = mysqli_query($conn, $sql);
                                     <td><?php echo ++$i; ?></td>
                                     <td><?php echo $row["student_id"]; ?></td>
                                     <td><?php echo $row["stu_fname"] . " " . $row["stu_lname"]; ?></td>
-                                    <td><?php echo $row["th_name_old"]; ?></td>
+                                    <td><?php echo $row["th_prefix_old"] . $row["th_name_old"] . " " . $row["th_lname_old"]; ?></td>
                                     <td><?php echo $row["status"]; ?></td>
-                                    <td><?php echo $row["th_name_new"]; ?></td>
+                                    <td><?php echo $row["th_prefix_new"] . $row["th_name_new"] . " " . $row["th_lname_new"]; ?></td>
                                     <td><?php echo $row["tel"]; ?></td>
+                                    <td class="col-status-<?php echo $row["student_id"]; ?> <?php if ($row["change_status"] == "ยังไม่ได้แก้ไข") {
+                                                                                        echo "text-danger";
+                                                                                    } else {
+                                                                                        echo "text-success";
+                                                                                    } ?>"><?php echo $row["change_status"]; ?></td>
+                                    <td><select class="form-control" chId="<?php echo $row["student_id"]; ?>" chStatus="<?php echo $row["status"]; ?>" id="fixName">
+                                            <option value="แก้ไขแล้ว" <?php echo ($row["change_status"] == "แก้ไขแล้ว" ? "selected" : ""); ?>>แก้ไขแล้ว</option>
+                                            <option value="ยังไม่ได้แก้ไข" <?php echo ($row["change_status"] == "ยังไม่ได้แก้ไข" ? "selected" : "") ?>>ยังไม่ได้แก้ไข</option>
+                                        </select></td>
                                 </tr>
                             <?php } ?>
                         </tbody>
@@ -79,8 +97,37 @@ $res = mysqli_query($conn, $sql);
 
             $.redirect("report_3.php", {
                 id: $(this).attr("enrollId"),
-            }, "POST","_blank");
+            }, "POST", "_blank");
 
         })
+    })
+    $(document).on('change', '#fixName', function() {
+        let val = $(this).val()
+        let id = $(this).attr("chId")
+        let status = $(this).attr("chStatus")
+        $.ajax({
+            type: "POST",
+            url: "updateChangeName.php",
+            data: {
+                id: id,
+                val: val,
+                status: status
+            },
+            success: function(result) {
+                console.log(result)
+                if (result == "ok") {
+                    if (val == "ยังไม่ได้แก้ไข") {
+                        $(".col-status-" + id).removeClass("text-success");
+                        $(".col-status-" + id).addClass("text-danger");
+                    } else {
+                        $(".col-status-" + id).removeClass("text-danger");
+                        $(".col-status-" + id).addClass("text-success");
+                    }
+                    $(".col-status-" + id).html(val)
+                } else if (result == "fail") {
+                    alert("แก้ไขไม่สำเร็จ")
+                }
+            }
+        });
     })
 </script>
