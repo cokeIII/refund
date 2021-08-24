@@ -2,7 +2,7 @@
 
 $servername = "localhost";
 $username = "root";
-$password = '';
+$password = 'chontech2020!';
 $database = "refund";
 // Create connection
 $conn = new mysqli($servername, $username, $password,$database);
