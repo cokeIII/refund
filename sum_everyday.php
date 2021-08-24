@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<?php
+require_once "setHead.php";
+if (empty($_SESSION["user_status"])) {
+    header("location: index.php");
+}
+require_once "connect.php";
+
+if (isset($_POST['level'])){
+    $level=$_POST['level'];
+    $_SESSION['level']=$level;
+}
+?>
+
+<body id="page-top">
+    <!-- Navigation-->
+    <?php require_once "menu.php"; ?>
+    <div class="masthead">
+        <div class="container ">
+            
+            <!-- <div class="card"> -->
+                <h3>สรุปการส่งข้อมูล  วันที่ <?php echo $date = date("Y-m-d");?></h3>
+                
+                <div class="row">
+                    <div class="card bg-primary" style="width:200px">
+                        <div class="card-header text-white">จำนวนข้อมูลทั้งหมด</div>
+                        <div class="card-body text-white text-center"><?php echo $s1=get_all()?></div>
+                    </div>
+                    &nbsp;&nbsp;&nbsp;
+                    <div class="card bg-warning" style="width:230px">
+                        <div class="card-header ">จำนวนข้อมูล ไม่ถูกต้อง</div>
+                        <div class="card-body text-white text-center"><?php echo $s2=get_no()?></div>
+                    </div>
+                    &nbsp;&nbsp;&nbsp;
+                    <div class="card bg-success" style="width:200px">
+                        <div class="card-header text-white text-center">จำนวนที่พิมพ์แล้ว</div>
+                        <div class="card-body text-white text-center"><?php echo $s3=get_print()?></div>
+                    </div>
+                    &nbsp;&nbsp;&nbsp;
+                    <div class="card bg-info" style="width:200px">
+                        <div class="card-header text-white text-center">จำนวนที่รอตรวจ</div>
+                        <div class="card-body text-white text-center"><?php echo $s1-$s2-$s3?></div>
+                    </div>
+                </div>
+                <br>
+                <div class="form-group">
+                    <form action="" method="post">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label style="display:block; text-align: right;">เลือกระดับชั้น:</label>
+                            </div>
+                            <div class="col-md-3">
+                                <select class="form-control" name="level" id="">
+                                    <?php
+                                    $a1='';$a2='';$a3='';$a4='';$a5='';
+                                    if (isset($_SESSION['level'])){
+                                        if ($_SESSION['level']=='642')
+                                            $a1="selected";
+                                        elseif ($_SESSION['level']=='632')
+                                            $a2="selected";
+                                        elseif ($_SESSION['level']=='622')
+                                            $a3="selected";
+                                        elseif ($_SESSION['level']=='643')
+                                            $a4="selected";
+                                        elseif ($_SESSION['level']=='633')
+                                            $a5="selected";
+                                    }
+                                    ?>
+                                    <option value="">--เลือกระดับชั้น--</option>
+                                    <option value="642" <?php echo $a1?>>ปวช.1</option>
+                                    <option value="632" <?php echo $a2?>>ปวช.2</option>
+                                    <option value="622" <?php echo $a3?>>ปวช.3</option>
+                                    <option value="643" <?php echo $a4?>>ปวส.1</option>
+                                    <option value="633" <?php echo $a5?>>ปวส.2</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2">
+                                <button type="submit" class="btn btn-primary"> OK </button>
+                            </div>
+                        </div>
+                        
+                        
+                        <br>
+                        
+                    </form>
+                </div>
+                <?php
+                if (isset($_SESSION['level'])){
+                    $level=$_SESSION['level'];
+                
+                    $sql="SELECT stdg.`student_group_short_name` as name ,sg.group_name
+                    FROM `student_group` stdg
+                    INNER JOIN std_group sg on sg.group_id=stdg.`student_group_id`
+                    where substr(stdg.`student_group_id`,1,3) = '$level'
+                    ORDER by stdg.`student_group_id`";
+                    $res=mysqli_query($conn, $sql);
+                ?>
+                
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th colspan=6>ระดับ ปวช.</th>
+                        </tr>
+                        <tr>
+                            <th>ที่</th>
+                            <th>รหัสกลุ่ม</th>
+                            <th>ชื่อกลุ่ม</th>
+                            <th>จำนวนนักเรียนทั้งหมด</th>
+                            <th>ส่งเอกสาร</th>
+                            <th>พิมพ์แล้ว</th>
+                            <th>ส่ง SMS</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        $counter=1;
+                        while ($row = mysqli_fetch_array($res)){
+                        ?>
+                        <tr>
+                            <td><?php echo $counter++?></td>
+                            <td><?php echo $row['name']?></td>
+                            <td><?php echo $row['group_name']?></td>
+                            <td><?php echo $csum[]=count_sum($row['name'])?></td>
+                            <td><?php echo $csent[]=status_sent($row['name'])?></td>
+                            <td><?php echo $cprint[]=status_print($row['name'])?></td>
+                            <td></td>
+                        </tr>
+                        <?php
+                        }
+                        ?>    
+                    
+                <?php
+                }
+                ?>   
+                    <tr class="bg-info">
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td><?php echo Array_sum($csum)?></td>
+                        <td><?php echo Array_sum($csent)?></td>
+                        <td><?php echo Array_sum($cprint)?></td>
+                    </tr>                        
+                    </tbody>
+                </table>
+
+
+
+                </div>
+            <!-- </div> -->
+        </div>
+    </div>
+</body>
+<?php require_once "setFoot.php"; ?>
+
+</html>
+<script>
+    $(document).ready(function() {
+
+
+
+
+
+
+    })
+</script>
+<?php
+function get_all(){
+    global $conn;
+    $sql="SELECT count(*) as c FROM `enroll` where `status`!='ยกเลิก' ";
+    // echo $sql;
+    $res=mysqli_query($conn,$sql);
+    $row=mysqli_fetch_assoc($res);
+    return $row['c'];
+}
+
+function get_no(){
+    global $conn;
+    $sql="SELECT count(*) as c FROM `enroll` where `status` LIKE 'เอกสารไม่ถูกต้องสมบูรณ์'";
+    // echo $sql;
+    $res=mysqli_query($conn,$sql);
+    $row=mysqli_fetch_assoc($res);
+    return $row['c'];
+}
+
+function get_print(){
+    global $conn;
+    $sql="SELECT count(*) as c FROM `enroll` where `status` LIKE 'พิมพ์แล้ว'";
+    // echo $sql;
+    $res=mysqli_query($conn,$sql);
+    $row=mysqli_fetch_assoc($res);
+    return $row['c'];
+}
+
+function count_sum($s){
+    global $conn;
+    $sql="SELECT count(*) as c FROM `student` 
+    INNER JOIN std_group on student.group_id=std_group.group_id
+    WHERE `group_shortname` = '$s'
+    and `status`='0'";
+    // echo $sql;
+    $res=mysqli_query($conn,$sql);
+    $row=mysqli_fetch_assoc($res);
+    return $row['c'];
+}
+
+function status_sent($s){
+    global $conn;
+    $sql="SELECT count(*) as c FROM `enroll` where `status`!='ยกเลิก' AND `student_group_short_name`='$s'";
+    // echo $sql;
+    $res=mysqli_query($conn,$sql);
+    $row=mysqli_fetch_assoc($res);
+    return $row['c'];
+}
+
+function status_print($s){
+    global $conn;
+    $sql="SELECT count(*) as c FROM `enroll` where `status`='พิมพ์แล้ว' AND `student_group_short_name`='$s'";
+    // echo $sql;
+    $res=mysqli_query($conn,$sql);
+    $row=mysqli_fetch_assoc($res);
+    return $row['c'];
+}
