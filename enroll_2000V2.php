@@ -596,7 +596,7 @@ if (empty($_SESSION["user_status"])) {
                     $("#recipient_fname").val(obj.recipient_fname)
                     $("#recipient_lname").val(obj.recipient_lname)
                     if (obj.recipient_fname != "") {
-                        $("#recipient_name").val(obj.prefix_name + obj.recipient_fname + " " + obj.recipient_lname)
+                        $("#recipient_name").val(obj.recipient_fname + " " + obj.recipient_lname)
                     } else {
                         $("#recipient_name").val("")
                     }

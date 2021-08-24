@@ -52,7 +52,7 @@ while($row = mysqli_fetch_assoc($res)){
     $parent_th_prefix = $row["parent_th_prefix"];
     $father_th_prefix = $row["father_th_prefix"];
     $mother_th_prefix = $row["mother_th_prefix"];
-    $sqlInsert = "insert into student_family (
+    $sqlInsert = "insert into student_family_temp (
     student_id,
     parent_th_prefix,
     parent_th_name,
