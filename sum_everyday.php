@@ -20,9 +20,9 @@ if (isset($_POST['level'])){
         <div class="container ">
             
             <!-- <div class="card"> -->
-                <h3>สรุปการส่งข้อมูล  วันที่ <?php echo $date = date("Y-m-d");?></h3>
+                <h3>สรุปการส่งข้อมูล  วันที่ <?php echo chDay(date("Y-m-d"));?></h3>
                 
-                <div class="row">
+                <div class="row justify-content-center" style="margin:auto">
                     <div class="card bg-primary" style="width:200px">
                         <div class="card-header text-white">จำนวนข้อมูลทั้งหมด</div>
                         <div class="card-body text-white text-center"><?php echo $s1=get_all()?></div>
@@ -106,9 +106,9 @@ if (isset($_POST['level'])){
                             <th>ที่</th>
                             <th>รหัสกลุ่ม</th>
                             <th>ชื่อกลุ่ม</th>
-                            <th>จำนวนนักเรียนทั้งหมด</th>
-                            <th>ส่งเอกสาร</th>
-                            <th>พิมพ์แล้ว</th>
+                            <th class="text-center">จำนวนนักเรียนทั้งหมด</th>
+                            <th class="text-center">ส่งเอกสาร</th>
+                            <th class="text-center">พิมพ์แล้ว</th>
                             <th>ส่ง SMS</th>
                         </tr>
                     </thead>
@@ -121,9 +121,9 @@ if (isset($_POST['level'])){
                             <td><?php echo $counter++?></td>
                             <td><?php echo $row['name']?></td>
                             <td><?php echo $row['group_name']?></td>
-                            <td><?php echo $csum[]=count_sum($row['name'])?></td>
-                            <td><?php echo $csent[]=status_sent($row['name'])?></td>
-                            <td><?php echo $cprint[]=status_print($row['name'])?></td>
+                            <td class="text-center"><?php echo $csum[]=count_sum($row['name'])?></td>
+                            <td class="text-center"><?php echo $csent[]=status_sent($row['name'])?></td>
+                            <td class="text-center"><?php echo $cprint[]=status_print($row['name'])?></td>
                             <td></td>
                         </tr>
                         <?php
@@ -137,9 +137,9 @@ if (isset($_POST['level'])){
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td><?php echo Array_sum($csum)?></td>
-                        <td><?php echo Array_sum($csent)?></td>
-                        <td><?php echo Array_sum($cprint)?></td>
+                        <td class="text-center"><?php echo Array_sum($csum)?></td>
+                        <td class="text-center"><?php echo Array_sum($csent)?></td>
+                        <td class="text-center"><?php echo Array_sum($cprint)?></td>
                     </tr>                        
                     </tbody>
                 </table>
@@ -220,4 +220,25 @@ function status_print($s){
     $res=mysqli_query($conn,$sql);
     $row=mysqli_fetch_assoc($res);
     return $row['c'];
+}
+
+//แปลง 2011-03-08 to 8 มีนาคม 2554
+function chDay($s){
+	$d=explode("-",$s);
+	//print_r($d);
+	$arr_month=array('มกราคม','กุมภาพันธ์','มีนาคม','เมษายน','พฤษภาคม','มิถุนายน',
+                     'กรกฎาคม','สิงหาคม','กันยายน','ตุลาคม','พฤศจิกายน','ธันวาคม');
+	$y=$d[0]+543;
+	//$da=ins0($d[0]);
+    return del0($d[2])." ".$arr_month[$d[1]-1]." ".$y;
+}
+
+//ตัดเลข 0 ถ้าไม่ถึง 10 //=== 08 >> 8
+function del0($s){
+    if ($s<10){
+        $r=substr($s,1);
+    }else{
+        $r=$s;
+    }
+    return $r;
 }
