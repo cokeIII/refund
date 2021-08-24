@@ -121,7 +121,7 @@ $res = mysqli_query($conn, $sql);
 </head>
 
 <body>
-    <h2 class="center">รายชื่อผู้ปกครอง/บิดา/มารดาที่ต้องการปรับเแลี่ยนชื่อ</h2>
+    <h2 class="center">รายชื่อผู้ปกครอง/บิดา/มารดาที่ต้องการปรับเปลี่ยนชื่อ</h2>
     <h2 class="center">วันที่ <?php echo DateThai($dateD); ?></h2>
     <table width="100%">
         <tr>
