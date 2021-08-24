@@ -13,7 +13,7 @@ if ($_SESSION["user_status"] == "finance") {
 
     if (!empty($_POST["room_name"])) {
         $room_name = $_POST["room_name"];
-        $sql = "select * from enroll where student_group_short_name = '$room_name'  and status != 'ยกเลิก'";
+        $sql = "select * from enroll where student_group_short_name = '$room_name'  and status != 'ยกเลิก' order by student_id";
     } else {
         $sql = "select * from enroll where status != 'ยกเลิก'";
     }
