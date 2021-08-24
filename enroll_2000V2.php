@@ -591,7 +591,6 @@ if (empty($_SESSION["user_status"])) {
                 if (result) {
                     console.log(result)
                     let obj = JSON.parse(result)
-
                     $("#recipient_prefix").val(obj.prefix_name)
                     $("#recipient_fname").val(obj.recipient_fname)
                     $("#recipient_lname").val(obj.recipient_lname)

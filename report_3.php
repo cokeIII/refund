@@ -45,7 +45,8 @@ function DateThai($strDate)
     return "$strDay $strMonthThai $strYear";
 }
 ob_start(); // Start get HTML code
-$sql = "select c.*,s.stu_fname,s.stu_lname from change_name c, student s where c.student_id = s.student_id order by time_stamp";
+$valDate = $_REQUEST["valDate"];
+$sql = "select c.*,s.stu_fname,s.stu_lname from change_name c, student s where c.student_id = s.student_id and date(time_stamp) = '$valDate'";
 $res = mysqli_query($conn, $sql);
 ?>
 
@@ -122,7 +123,7 @@ $res = mysqli_query($conn, $sql);
 
 <body>
     <h2 class="center">รายชื่อผู้ปกครอง/บิดา/มารดาที่ต้องการปรับเปลี่ยนชื่อ</h2>
-    <h2 class="center">วันที่ <?php echo DateThai($dateD); ?></h2>
+    <h2 class="center">วันที่ <?php echo DateThai($valDate); ?></h2>
     <table width="100%">
         <tr>
             <th>ที่</th>
