@@ -49,10 +49,10 @@ $res = mysqli_query($conn, $sql);
                                         <?php echo $row["status"]; ?>
                                     </td>
                                     <?php if ($row["status"] == "ส่งเอกสารแล้ว" || $row["status"] == "เอกสารไม่ถูกต้องสมบูรณ์") { ?>
-                                        <td><button enrollId="<?php echo $row["id"]; ?>" class="btn btn-info btnPrint"><i class="fas fa-print"></i>พิมพ์</button></td>
+                                        <td><button enrollId="<?php echo $row["id"]; ?>" class="btn btn-info btnPrint"><i class="fas fa-print"></i>แสดงข้อมูล</button></td>
                                         <td><button enrollId="<?php echo $row["id"]; ?>" class="btn btn-danger btnCancel"><i class="fas fa-window-close"></i> ยกเลิก</button></td>
                                     <?php } else { ?>
-                                        <td></td>
+                                        <td><button enrollId="<?php echo $row["id"]; ?>" class="btn btn-info btnPrint"><i class="fas fa-print"></i>แสดงข้อมูล</button></td>
                                         <td></td>
                                     <?php } ?>
                                 </tr>

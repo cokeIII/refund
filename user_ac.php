@@ -1,15 +1,23 @@
 <?php
 header('Content-Type: text/html; charset=UTF-8');
 require_once "connect.php";
-$id = $_REQUEST["id"];
-$username = $_REQUEST["username"];
-$data = array();
-
-$sql = "update enroll set user_action = '$username' where id = '$id'";
+session_start();
+$detail = $_REQUEST["detail"];
+$people_id = $_SESSION["people_id"];
+$enroll_id = $_REQUEST["enroll_id"];
+$sql = "insert into log_data (
+    detail, 
+    people_id, 
+    enroll_id
+) value(
+    '$detail',
+    '$people_id',
+    '$enroll_id'
+)";
 $res = mysqli_query($conn,$sql);
 
 if($res){
     echo "upDateAction";
 } else {
-    echo "failUpDateAction";
+    echo $sql;
 }

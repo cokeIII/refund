@@ -63,8 +63,8 @@ if (empty($_SESSION["user_status"])) {
                                     <label>เกี่ยวข้องเป็น</label>
                                     <select name="recipient" id="recipient" class="form-control">
                                         <option value="ผู้ปกครอง">ผู้ปกครอง</option>
-                                        <option value="บิดา">บิดา</option>
-                                        <option value="มารดา">มารดา</option>
+                                        <!-- <option value="บิดา">บิดา</option>
+                                        <option value="มารดา">มารดา</option> -->
                                     </select>
                                 </div>
                             </div>

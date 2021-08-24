@@ -45,7 +45,8 @@ function DateThai($strDate)
     return "$strDay $strMonthThai $strYear";
 }
 ob_start(); // Start get HTML code
-$sql = "select c.*,s.stu_fname,s.stu_lname from change_name_old c, student s where c.student_id = s.student_id order by time_stamp";
+$valDate = $_REQUEST["valDate"];
+$sql = "select c.*,s.stu_fname,s.stu_lname from change_name c, student s where c.student_id = s.student_id and date(time_stamp) = '$valDate'";
 $res = mysqli_query($conn, $sql);
 ?>
 
@@ -121,31 +122,31 @@ $res = mysqli_query($conn, $sql);
 </head>
 
 <body>
-    <h2 class="center">รายชื่อผู้ปกครอง/บิดา/มารดาที่ต้องการปรับเแลี่ยนชื่อ</h2>
-    <h2 class="center">วันที่ <?php echo DateThai($dateD); ?></h2>
+    <h2 class="center">รายชื่อผู้ปกครอง/บิดา/มารดาที่ต้องการปรับเปลี่ยนชื่อ</h2>
+    <h2 class="center">วันที่ <?php echo DateThai($valDate); ?></h2>
     <table width="100%">
         <tr>
             <th>ที่</th>
-            <th>วันที่</th>
             <th>รหัสนักศึกษา</th>
-            <th width="20%">ชื่อ - สกุล</th>
+            <th>ชื่อ - สกุล นักศึกาษา</th>
             <th>ชื่อเดิม</th>
             <th>เกี่ยวข้องเป็น</th>
             <th>ชื่อที่ต้องการเปลี่ยน</th>
-            <th>เบอร์โทร</th>
+            <th>เบอร์ติดต่อกลับ</th>
+            <th>สถานะแก้ไข</th>
         </tr>
         <tbody>
             <?php $i = 0;
             while ($row = mysqli_fetch_array($res)) { ?>
                 <tr>
                     <td><?php echo ++$i; ?></td>
-                    <td><?php echo $row["time_stamp"]; ?></td>
                     <td><?php echo $row["student_id"]; ?></td>
                     <td><?php echo $row["stu_fname"] . " " . $row["stu_lname"]; ?></td>
-                    <td><?php echo $row["th_name_old"]; ?></td>
+                    <td><?php echo $row["th_prefix_old"] . $row["th_name_old"] . " " . $row["th_lname_old"]; ?></td>
                     <td><?php echo $row["status"]; ?></td>
-                    <td><?php echo $row["th_name_new"]; ?></td>
+                    <td><?php echo $row["th_prefix_new"] . $row["th_name_new"] . " " . $row["th_lname_new"]; ?></td>
                     <td><?php echo $row["tel"]; ?></td>
+                    <td><?php echo $row["change_status"]; ?></td>
                 </tr>
             <?php } ?>
         </tbody>

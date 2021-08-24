@@ -92,8 +92,8 @@ if (empty($_SESSION["user_status"])) {
                                         <option value="มารดา">มารดา</option>
                                     </select> -->
                                     <div><input type="radio" id="recipient" name="recipient" value="ผู้ปกครอง" checked> ผู้ปกครอง </div>
-                                    <div><input type="radio" name="recipient" value="บิดา"> บิดา</div>
-                                    <div><input type="radio" name="recipient" value="มารดา"> มารดา</div>
+                                    <!-- <div><input type="radio" name="recipient" value="บิดา"> บิดา</div>
+                                    <div><input type="radio" name="recipient" value="มารดา"> มารดา</div> -->
                                 </div>
                             </div>
                         </div>
@@ -109,7 +109,7 @@ if (empty($_SESSION["user_status"])) {
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group p-1">
-                                    <label>แก้ไขชื่อ<span class="re_status"></span></label>
+                                    <label>แก้ไขข้อความที่พิมพ์ชื่อ<span class="re_status"></span>ผิด</label>
                                     <div><button type="button" id="btnChangeName" data-toggle="modal" data-target="#exampleModalName" class="btn btn-primary">แก้ไข</button></div>
                                 </div>
                             </div>
@@ -283,7 +283,7 @@ if (empty($_SESSION["user_status"])) {
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">แก้ไขชื่อ<span class="re_status"></span></h5>
+                <h5 class="modal-title" id="exampleModalLabel">แก้ไขข้อความที่พิมพ์ชื่อ<span class="re_status"></span>ผิด</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -591,12 +591,11 @@ if (empty($_SESSION["user_status"])) {
                 if (result) {
                     console.log(result)
                     let obj = JSON.parse(result)
-
                     $("#recipient_prefix").val(obj.prefix_name)
                     $("#recipient_fname").val(obj.recipient_fname)
                     $("#recipient_lname").val(obj.recipient_lname)
                     if (obj.recipient_fname != "") {
-                        $("#recipient_name").val(obj.prefix_name + obj.recipient_fname + " " + obj.recipient_lname)
+                        $("#recipient_name").val(obj.recipient_fname + " " + obj.recipient_lname)
                     } else {
                         $("#recipient_name").val("")
                     }

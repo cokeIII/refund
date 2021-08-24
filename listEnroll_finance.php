@@ -13,7 +13,7 @@ if ($_SESSION["user_status"] == "finance") {
 
     if (!empty($_POST["room_name"])) {
         $room_name = $_POST["room_name"];
-        $sql = "select * from enroll where student_group_short_name = '$room_name'  and status != 'ยกเลิก'";
+        $sql = "select * from enroll where student_group_short_name = '$room_name'  and status != 'ยกเลิก' order by student_id";
     } else {
         $sql = "select * from enroll where status != 'ยกเลิก'";
     }
@@ -53,7 +53,7 @@ $res = mysqli_query($conn, $sql);
                             </div>
                         </div>
                     </div>
-
+                    
                     <table class="table " id="enrollTable">
                         <thead>
                             <tr>
@@ -91,7 +91,7 @@ $res = mysqli_query($conn, $sql);
                                         <?php echo $row["status"]; ?>
                                     </td>
                                     <td width="">
-                                        <select enrollId="<?php echo $row["id"]; ?>" name="status" id="status" class="form-control status">
+                                        <select enrollId="<?php echo $row["id"]; ?>" std_id="<?php echo $row["student_id"]; ?>" name="status" id="status" class="form-control status">
                                             <option value="พิมพ์แล้ว" <?php echo ($row["status"] == "พิมพ์แล้ว" ? "selected" : ""); ?>>พิมพ์แล้ว</option>
                                             <option value="เอกสารไม่ถูกต้องสมบูรณ์" <?php echo ($row["status"] == "เอกสารไม่ถูกต้องสมบูรณ์" ? "selected" : ""); ?>>เอกสารไม่ถูกต้องสมบูรณ์</option>
                                             <option value="โอนแล้ว" <?php echo ($row["status"] == "โอนแล้ว" ? "selected" : ""); ?>>โอนแล้ว</option>
@@ -188,7 +188,20 @@ $res = mysqli_query($conn, $sql);
         })
         $(document).on('change','.status',function(){
             let id = $(this).attr("enrollId")
+            let std_id = $(this).attr("std_id")
             let val = $(this).val()
+
+            $.ajax({
+                type: "POST",
+                url: "user_ac.php",
+                data: {
+                    detail: std_id+":"+val,
+                    enroll_id: id,
+                },
+                success: function(result) {
+                   
+                }
+            });
             $.ajax({
                 type: "POST",
                 url: "updateEnroll.php",
@@ -199,12 +212,12 @@ $res = mysqli_query($conn, $sql);
                 success: function(result) {
                     console.log(result)
                     if (result == "ok") {
-                        if (val != "ยกเลิก" || val != "เอกสารไม่ถูกต้องสมบูรณ์") {
-                            $(".col-status-" + id).removeClass("text-danger");
-                            $(".col-status-" + id).addClass("text-success");
-                        } else {
+                        if (val == "ยกเลิก" || val == "เอกสารไม่ถูกต้องสมบูรณ์") {
                             $(".col-status-" + id).removeClass("text-success");
                             $(".col-status-" + id).addClass("text-danger");
+                        } else {
+                            $(".col-status-" + id).removeClass("text-danger");
+                            $(".col-status-" + id).addClass("text-success");
                         }
                         $(".col-status-" + id).html(val)
                     } else if (result == "fail") {
