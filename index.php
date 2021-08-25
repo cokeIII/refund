@@ -60,6 +60,19 @@
                     </form>
                 </div>
             </div>
+
+            <!-- The Modal -->
+            <div class="modal fade" id="myModal">
+                <div class="modal-dialog modal-lg">
+                <div class="modal-content">                    
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <img src="img/info.jpg" alt="">
+                    </div>
+                </div>
+                </div>
+            </div>
+
         </div>
     </div>
 </body>
@@ -68,6 +81,7 @@
 </html>
 <script>
     $(document).ready(function() {
+        $("#myModal").modal('show');
         $("#alertLogin").hide()
         $("#btnLogin").click(function() {
             if ($("#std_id").val()) {
