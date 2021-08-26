@@ -409,7 +409,7 @@ if (empty($_SESSION["user_status"])) {
     $("#btn_account_book_pic_alert").show()
 
     function set_id_card_pic_std(val) {
-        alert(val)
+
         btn_id_card_pic_std = !btn_id_card_pic_std;
         if (btn_id_card_pic_std) {
             $("#btn_id_card_pic_std").removeClass("btn-success");
@@ -432,7 +432,7 @@ if (empty($_SESSION["user_status"])) {
     }
 
     function set_id_card_pic(val) {
-        alert(val)
+
         btn_id_card_pic = !btn_id_card_pic;
         if (btn_id_card_pic) {
             $("#btn_id_card_pic").removeClass("btn-success");
@@ -454,7 +454,7 @@ if (empty($_SESSION["user_status"])) {
     }
 
     function set_account_book_pic(val) {
-        alert(val)
+
         btn_account_book_pic = !btn_account_book_pic;
         if (btn_account_book_pic) {
             $("#btn_account_book_pic").removeClass("btn-success");
@@ -561,15 +561,15 @@ if (empty($_SESSION["user_status"])) {
         })
 
         $("#id_card_pic_std").cropzee({
-            returnImageMode: 'blob',
+            returnImageMode: 'data-url',
             startSize: [60, 60, '%']
         })
         $("#id_card_pic").cropzee({
-            returnImageMode: 'blob',
+            returnImageMode: 'data-url',
             startSize: [60, 60, '%']
         })
         $("#account_book_pic").cropzee({
-            returnImageMode: 'blob',
+            returnImageMode: 'data-url',
             startSize: [60, 60, '%']
         })
 
