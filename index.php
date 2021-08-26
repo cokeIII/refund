@@ -70,6 +70,9 @@
                         <img src="img/info.jpg" alt="">
                     </div>
                 </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal" style="width:100%">Close</button>
+                </div>
                 </div>
             </div>
 

@@ -65,6 +65,8 @@ if (isset($_POST['level'])){
                                             $a4="selected";
                                         elseif ($_SESSION['level']=='633')
                                             $a5="selected";
+                                        elseif ($_SESSION['level']=='623')
+                                            $a5="selected";    
                                     }
                                     ?>
                                     <option value="">--เลือกระดับชั้น--</option>
@@ -73,6 +75,7 @@ if (isset($_POST['level'])){
                                     <option value="622" <?php echo $a3?>>ปวช.3</option>
                                     <option value="643" <?php echo $a4?>>ปวส.1</option>
                                     <option value="633" <?php echo $a5?>>ปวส.2</option>
+                                    <option value="623" <?php echo $a5?>>ปวส.3</option>
                                 </select>
                             </div>
                             <div class="col-md-2">
