@@ -180,7 +180,8 @@ $res = mysqli_query($conn, $sql);
 <script>
     $(document).ready(function() {
         $('#modalNote').on('hidden.bs.modal', function() {
-            $('input:checkbox').removeAttr('checked');
+            $('input:checkbox').removeAttr('checked')
+            $("#noteText").val("")
         })
         let enrollId
         $(".submitNote").click(function() {
