@@ -207,6 +207,11 @@ $res = mysqli_query($conn, $sql);
                 $(this).attr('checked', false);
                 selected = []
             });
+            $("#notePhone").attr('checked', false)
+            $("#noteIdCard").attr('checked', false)
+            $("#noteIdCardParrent").attr('checked', false)
+            $("#noteBookBank").attr('checked', false)
+            
             $("#noteText").val("")
         })
         $(".modal-note").click(function() {
