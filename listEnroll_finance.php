@@ -197,6 +197,7 @@ $res = mysqli_query($conn, $sql);
                     console.log(result)
                     if(result == "ok"){
                         $('#modalNote').modal('hide');
+                        $('input:checkbox').removeAttr('checked');
                     }
                 }
             });
@@ -207,10 +208,7 @@ $res = mysqli_query($conn, $sql);
                 $(this).attr('checked', false);
                 selected = []
             });
-            $("#notePhone").attr('checked', false)
-            $("#noteIdCard").attr('checked', false)
-            $("#noteIdCardParrent").attr('checked', false)
-            $("#noteBookBank").attr('checked', false)
+            $('input:checkbox').removeAttr('checked');
             
             $("#noteText").val("")
         })
