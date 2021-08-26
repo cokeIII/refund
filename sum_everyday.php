@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php
+date_default_timezone_set("Asia/Bangkok");
 require_once "setHead.php";
 if (empty($_SESSION["user_status"])) {
     header("location: index.php");
@@ -20,7 +21,7 @@ if (isset($_POST['level'])){
         <div class="container ">
             
             <!-- <div class="card"> -->
-                <h3>สรุปการส่งข้อมูล  วันที่ <?php echo chDay(date("Y-m-d"));?></h3>
+                <h3>สรุปการส่งข้อมูล  วันที่ <?php echo chDay(date("Y-m-d"));?> &nbsp; เวลา <?php echo date("H:i")?> น.</h3>
                 
                 <div class="row justify-content-center" style="margin:auto">
                     <div class="card bg-primary" style="width:200px">
