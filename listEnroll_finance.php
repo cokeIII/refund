@@ -179,6 +179,9 @@ $res = mysqli_query($conn, $sql);
 </div>
 <script>
     $(document).ready(function() {
+        $('#modalNote').on('hidden.bs.modal', function() {
+            $('input:checkbox').removeAttr('checked');
+        })
         let enrollId
         $(".submitNote").click(function() {
             var selected = [];
@@ -195,7 +198,7 @@ $res = mysqli_query($conn, $sql);
                 },
                 success: function(result) {
                     console.log(result)
-                    if(result == "ok"){
+                    if (result == "ok") {
                         $('#modalNote').modal('hide');
                         $('input:checkbox').removeAttr('checked');
                     }
@@ -209,7 +212,7 @@ $res = mysqli_query($conn, $sql);
                 selected = []
             });
             $('input:checkbox').removeAttr('checked');
-            
+
             $("#noteText").val("")
         })
         $(".modal-note").click(function() {
@@ -227,7 +230,7 @@ $res = mysqli_query($conn, $sql);
                             if (value != "")
                                 $("input[value=" + value + "]").attr('checked', true)
                             if (value == "other") {
-                               $("#noteText").val(data[index+1])
+                                $("#noteText").val(data[index + 1])
                                 return false; // breaks
                             }
                         });
