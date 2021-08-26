@@ -13,7 +13,10 @@ if ($_SESSION["user_status"] == "finance") {
 
     if (!empty($_POST["room_name"])) {
         $room_name = $_POST["room_name"];
-        $sql = "select * from enroll where student_group_short_name = '$room_name'  and status != 'ยกเลิก' order by student_id";
+        $sql = "select * from enroll 
+        where 
+        student_group_short_name = '$room_name'  and 
+        status != 'ยกเลิก' order by student_id";
     } else {
         $sql = "select * from enroll where status != 'ยกเลิก'";
     }
@@ -53,7 +56,7 @@ $res = mysqli_query($conn, $sql);
                             </div>
                         </div>
                     </div>
-                    
+
                     <table class="table " id="enrollTable">
                         <thead>
                             <tr>
@@ -66,6 +69,7 @@ $res = mysqli_query($conn, $sql);
                                 <th>รูปบัตรประชาชนผู้ปกครอง</th>
                                 <th>รูปหน้าสมุดบัญชี</th> -->
                                 <th>สถานะ</th>
+                                <th></th>
                                 <th></th>
                                 <th></th>
                                 <!-- <th></th> -->
@@ -98,6 +102,9 @@ $res = mysqli_query($conn, $sql);
                                             <option value="ส่งเอกสารแล้ว" <?php echo ($row["status"] == "ส่งเอกสารแล้ว" ? "selected" : ""); ?>>ส่งเอกสารแล้ว</option>
                                             <option value="ยกเลิก" <?php echo ($row["status"] == "ยกเลิก" ? "selected" : ""); ?>>ยกเลิก</option>
                                         </select>
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-warning modal-note" enrollId="<?php echo $row["id"]; ?>"><i class="fas fa-sticky-note"></i> หมายเหตุ</button>
                                     </td>
                                     <td><a id="btnPrint" href="report_2.php?id=<?php echo $row["id"]; ?>" target="_blank"><button class="btn btn-info"><i class="fas fa-print"></i> พิมพ์</button></a></td>
                                 </tr>
@@ -144,9 +151,87 @@ $res = mysqli_query($conn, $sql);
         </div>
     </div>
 </div>
-
+<!-- Modal -->
+<div class="modal fade" id="modalNote" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">หมายเหตุ</h5>
+                <button type="button" class="close closeModal" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="checkboxes">
+                    <div><input type="checkbox" class="note" id="notePhone" value="ไม่มีเบอร์โทรศัพท์"> : ไม่มีเบอร์โทรศัพท์</div>
+                    <div><input type="checkbox" class="note" id="noteIdCard" value="รูปภาพบัตรประชาชนนักเรียนนักศึกษาไม่สมบูรณ์"> : รูปภาพบัตรประชาชนนักเรียน นักศึกษาไม่สมบูรณ์</div>
+                    <div><input type="checkbox" class="note" id="noteIdCardParrent" value="รูปภาพบัตรประชาชนผู้ปกครองไม่สมบูรณ์"> : รูปภาพบัตรประชาชนผู้ปกครองไม่สมบูรณ์</div>
+                    <div><input type="checkbox" class="note" id="noteBookBank" value="รูปภาพหน้าสมุดบัญชีธนาคารไม่สมบูรณ์"> : รูปภาพหน้าสมุดบัญชีธนาคารไม่สมบูรณ์</div>
+                    <div>อื่นๆ : <input type="text" class="note" id="noteText" class="formcontrol"></div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary submitNote">ใส่หมายเหตุ</button>
+                <button type="button" class="btn btn-secondary closeModal" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 <script>
     $(document).ready(function() {
+        let enrollId
+        $(".submitNote").click(function() {
+            var selected = [];
+            $('#checkboxes input:checked').each(function() {
+                selected.push($(this).val());
+            });
+            selected.push("other," + $("#noteText").val())
+            $.ajax({
+                type: "POST",
+                url: "updateNote.php",
+                data: {
+                    enroll_id: enrollId,
+                    note: selected,
+                },
+                success: function(result) {
+                    console.log(result)
+
+                }
+            });
+        })
+        $(".closeModal").click(function() {
+            $('#modalNote').modal('hide');
+            $('#checkboxes input:checked').each(function() {
+                $(this).attr('checked', false);
+                selected = []
+            });
+            $("#noteText").val("")
+        })
+        $(".modal-note").click(function() {
+            enrollId = $(this).attr("enrollId")
+            $.ajax({
+                type: "POST",
+                url: "getCheckList.php",
+                data: {
+                    id: enrollId,
+                },
+                success: function(result) {
+                    let data = result.split(",")
+                    console.log(data.length)
+                    if (data.length > 0) {
+                        $.each(data, function(index, value) {
+                            if (value != "")
+                                $("input[value=" + value + "]").attr('checked', true)
+                            if (value == "other") {
+                               $("#noteText").val(data[index+1])
+                                return false; // breaks
+                            }
+                        });
+                    }
+                    $('#modalNote').modal('show');
+                }
+            });
+        })
         $('#enrollTable').DataTable({
             // initComplete: function() {
             //     this.api().columns().every(function() {
@@ -186,7 +271,7 @@ $res = mysqli_query($conn, $sql);
             $("#pic").attr("src", "uploads/" + $(this).attr("pic"))
             $('#picSee').modal('show');
         })
-        $(document).on('change','.status',function(){
+        $(document).on('change', '.status', function() {
             let id = $(this).attr("enrollId")
             let std_id = $(this).attr("std_id")
             let val = $(this).val()
@@ -195,11 +280,11 @@ $res = mysqli_query($conn, $sql);
                 type: "POST",
                 url: "user_ac.php",
                 data: {
-                    detail: std_id+":"+val,
+                    detail: std_id + ":" + val,
                     enroll_id: id,
                 },
                 success: function(result) {
-                   
+
                 }
             });
             $.ajax({
@@ -226,7 +311,5 @@ $res = mysqli_query($conn, $sql);
                 }
             });
         })
-
-
     })
 </script>
