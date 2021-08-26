@@ -66,16 +66,19 @@ if (isset($_POST['level'])){
                                         elseif ($_SESSION['level']=='633')
                                             $a5="selected";
                                         elseif ($_SESSION['level']=='623')
-                                            $a5="selected";    
+                                            $a6="selected"; 
+                                        elseif ($_SESSION['level']=='612')
+                                            $a7="selected";   
                                     }
                                     ?>
                                     <option value="">--เลือกระดับชั้น--</option>
                                     <option value="642" <?php echo $a1?>>ปวช.1</option>
                                     <option value="632" <?php echo $a2?>>ปวช.2</option>
                                     <option value="622" <?php echo $a3?>>ปวช.3</option>
+                                    <option value="612" <?php echo $a7?>>ปวช.3 ตกค้าง</option>
                                     <option value="643" <?php echo $a4?>>ปวส.1</option>
                                     <option value="633" <?php echo $a5?>>ปวส.2</option>
-                                    <option value="623" <?php echo $a5?>>ปวส.3</option>
+                                    <option value="623" <?php echo $a6?>>ปวส.3</option>
                                 </select>
                             </div>
                             <div class="col-md-2">
@@ -102,9 +105,9 @@ if (isset($_POST['level'])){
                 
                 <table class="table">
                     <thead>
-                        <tr>
-                            <th colspan=6>ระดับ ปวช.</th>
-                        </tr>
+                        <!-- <tr>
+                            <th colspan=6>ระดับ <?php echo $level ?></th>
+                        </tr> -->
                         <tr>
                             <th>ที่</th>
                             <th>รหัสกลุ่ม</th>
@@ -124,9 +127,9 @@ if (isset($_POST['level'])){
                             <td><?php echo $counter++?></td>
                             <td><?php echo $row['name']?></td>
                             <td><?php echo $row['group_name']?></td>
-                            <td class="text-center"><?php echo $csum[]=count_sum($row['name'])?></td>
-                            <td class="text-center"><?php echo $csent[]=status_sent($row['name'])?></td>
-                            <td class="text-center"><?php echo $cprint[]=status_print($row['name'])?></td>
+                            <td class="text-center"><?php echo $csum[]=count_sum($level,$row['name'])?></td>
+                            <td class="text-center"><?php echo $csent[]=status_sent($level,$row['name'])?></td>
+                            <td class="text-center"><?php echo $cprint[]=status_print($level,$row['name'])?></td>
                             <td></td>
                         </tr>
                         <?php
@@ -195,30 +198,35 @@ function get_print(){
     return $row['c'];
 }
 
-function count_sum($s){
+function count_sum($level,$s){
     global $conn;
+    $id=$level."%";
     $sql="SELECT count(*) as c FROM `student` 
     INNER JOIN std_group on student.group_id=std_group.group_id
     WHERE `group_shortname` = '$s'
-    and `status`='0'";
+    and `status`='0' and `student_id` like '$id' ";
     // echo $sql;
     $res=mysqli_query($conn,$sql);
     $row=mysqli_fetch_assoc($res);
     return $row['c'];
 }
 
-function status_sent($s){
+function status_sent($level,$s){
     global $conn;
-    $sql="SELECT count(*) as c FROM `enroll` where `status`!='ยกเลิก' AND `student_group_short_name`='$s'";
+    $id=$level."%";
+    $sql="SELECT count(*) as c FROM `enroll` where `status`!='ยกเลิก' 
+    AND `student_group_short_name`='$s' and `student_id` like '$id' ";
     // echo $sql;
     $res=mysqli_query($conn,$sql);
     $row=mysqli_fetch_assoc($res);
     return $row['c'];
 }
 
-function status_print($s){
+function status_print($level,$s){
     global $conn;
-    $sql="SELECT count(*) as c FROM `enroll` where `status`='พิมพ์แล้ว' AND `student_group_short_name`='$s'";
+    $id=$level."%";
+    $sql="SELECT count(*) as c FROM `enroll` where `status`='พิมพ์แล้ว' 
+    AND `student_group_short_name`='$s' and `student_id` like '$id'";
     // echo $sql;
     $res=mysqli_query($conn,$sql);
     $row=mysqli_fetch_assoc($res);
