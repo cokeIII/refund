@@ -195,7 +195,9 @@ $res = mysqli_query($conn, $sql);
                 },
                 success: function(result) {
                     console.log(result)
-
+                    if(result == "ok"){
+                        $('#modalNote').modal('hide');
+                    }
                 }
             });
         })
@@ -217,7 +219,6 @@ $res = mysqli_query($conn, $sql);
                 },
                 success: function(result) {
                     let data = result.split(",")
-                    console.log(data.length)
                     if (data.length > 0) {
                         $.each(data, function(index, value) {
                             if (value != "")
