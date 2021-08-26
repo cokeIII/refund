@@ -104,7 +104,7 @@ if (empty($_SESSION["user_status"])) {
                             <div class="col-md-5">
                                 <div class="form-group p-1">
                                     <label>ชื่อ-สกุล ผู้รับเงิน</label>
-                                    <input type="text" name="recipient_name" id="recipient_name" class="form-control readonly" required>
+                                    <input type="text" name="recipient_name" id="recipient_name" class="form-control readonly" required readonly>
                                 </div>
                             </div>
                             <div class="col-md-4">
