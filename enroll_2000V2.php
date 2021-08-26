@@ -92,8 +92,8 @@ if (empty($_SESSION["user_status"])) {
                                         <option value="มารดา">มารดา</option>
                                     </select> -->
                                     <div><input type="radio" id="recipient" name="recipient" value="ผู้ปกครอง" checked> ผู้ปกครอง </div>
-                                    <!-- <div><input type="radio" name="recipient" value="บิดา"> บิดา</div>
-                                    <div><input type="radio" name="recipient" value="มารดา"> มารดา</div> -->
+                                    <div><input type="radio" name="recipient" value="บิดา"> บิดา</div>
+                                    <div><input type="radio" name="recipient" value="มารดา"> มารดา</div>
                                 </div>
                             </div>
                         </div>
@@ -190,7 +190,7 @@ if (empty($_SESSION["user_status"])) {
                                             <div id="signature"></div>
                                         </div>
                                         <div class="mt-2">
-                                            <button class="btn btn-secondary" id="clear" type="button">Clear</button>
+                                            <button class="btn btn-secondary" id="clear" type="button">ลบลายเซ็น</button>
                                         </div>
 
                                         <!-- <div class="wrapper">
@@ -214,7 +214,7 @@ if (empty($_SESSION["user_status"])) {
                                             <div id="signature2"></div>
                                         </div>
                                         <div class="mt-2">
-                                            <button class="btn btn-secondary" id="clear2" type="button">Clear</button>
+                                            <button class="btn btn-secondary" id="clear2" type="button">ลบลายเซ็น</button>
                                         </div>
                                         <!-- <div class="wrapper">
                                             <div id="sig2"></div>
@@ -409,6 +409,7 @@ if (empty($_SESSION["user_status"])) {
     $("#btn_account_book_pic_alert").show()
 
     function set_id_card_pic_std(val) {
+        alert(val)
         btn_id_card_pic_std = !btn_id_card_pic_std;
         if (btn_id_card_pic_std) {
             $("#btn_id_card_pic_std").removeClass("btn-success");
@@ -431,6 +432,7 @@ if (empty($_SESSION["user_status"])) {
     }
 
     function set_id_card_pic(val) {
+        alert(val)
         btn_id_card_pic = !btn_id_card_pic;
         if (btn_id_card_pic) {
             $("#btn_id_card_pic").removeClass("btn-success");
@@ -452,6 +454,7 @@ if (empty($_SESSION["user_status"])) {
     }
 
     function set_account_book_pic(val) {
+        alert(val)
         btn_account_book_pic = !btn_account_book_pic;
         if (btn_account_book_pic) {
             $("#btn_account_book_pic").removeClass("btn-success");
@@ -558,15 +561,15 @@ if (empty($_SESSION["user_status"])) {
         })
 
         $("#id_card_pic_std").cropzee({
-            returnImageMode: 'data-url',
+            returnImageMode: 'blob',
             startSize: [60, 60, '%']
         })
         $("#id_card_pic").cropzee({
-            returnImageMode: 'data-url',
+            returnImageMode: 'blob',
             startSize: [60, 60, '%']
         })
         $("#account_book_pic").cropzee({
-            returnImageMode: 'data-url',
+            returnImageMode: 'blob',
             startSize: [60, 60, '%']
         })
 
@@ -595,7 +598,7 @@ if (empty($_SESSION["user_status"])) {
                     $("#recipient_fname").val(obj.recipient_fname)
                     $("#recipient_lname").val(obj.recipient_lname)
                     if (obj.recipient_fname != "") {
-                        $("#recipient_name").val(obj.recipient_fname + " " + obj.recipient_lname)
+                        $("#recipient_name").val(obj.prefix_name+obj.recipient_fname + " " + obj.recipient_lname)
                     } else {
                         $("#recipient_name").val("")
                     }
