@@ -30,6 +30,7 @@ $res = mysqli_query($conn, $sql);
                                 <th>เลขบัญชี</th>
                                 <th>เบอร์โทรศัพท์ที่รับ SMS</th>
                                 <th>สถานะ</th>
+                                <th>หมายเหตุ</th>
                                 <th></th>
                                 <th></th>
                                 <th></th>
@@ -38,7 +39,8 @@ $res = mysqli_query($conn, $sql);
                         <tbody>
                             <?php while ($row = mysqli_fetch_array($res)) { ?>
                                 <tr>
-                                    <td><?php echo $row["id"]; $enrollId = $row["id"];?></td>
+                                    <td><?php echo $row["id"];
+                                        $enrollId = $row["id"]; ?></td>
                                     <td><?php echo $row["recipient_fname"] . " " . $row["recipient_lname"]; ?></td>
                                     <td><?php echo $row["recipient_bank_number"]; ?></td>
                                     <td><?php echo $row["phone"]; ?></td>
@@ -48,6 +50,19 @@ $res = mysqli_query($conn, $sql);
                                                     echo "text-success";
                                                 } ?>">
                                         <?php echo $row["status"]; ?>
+                                    </td>
+                                    <td>
+                                        <?php
+                                        if (count(explode(",", $row["note"])) > 0) {
+                                            $arrNote = explode(",", $row["note"]);
+                                            $i = 0;
+                                            while ($i < count($arrNote)) {
+                                                if($arrNote[$i] != "other")
+                                                echo "<div>- " . $arrNote[$i] . "</div>";
+                                                $i++;
+                                            }
+                                        }
+                                        ?>
                                     </td>
                                     <?php if ($row["status"] == "ส่งเอกสารแล้ว" || $row["status"] == "เอกสารไม่ถูกต้องสมบูรณ์") { ?>
                                         <td><button enrollId="<?php echo $row["id"]; ?>" class="btn btn-info btnPrint"><i class="fas fa-print"></i>แสดงข้อมูล</button></td>
@@ -127,11 +142,11 @@ $res = mysqli_query($conn, $sql);
                 type: "POST",
                 url: "editPhone.php",
                 data: {
-                    enrollId: "<?php echo $enrollId;?>",
+                    enrollId: "<?php echo $enrollId; ?>",
                     phone: $("#phone").val()
                 },
                 success: function(result) {
-                    if(result == "ok"){
+                    if (result == "ok") {
                         alert("แก้ไขสำเร็จ กรุณาตรวจสอบข้อมูลอีกรอบ")
                     } else {
                         alert("แก้ไขไม่สำเร็จ กรุณาติดต่อเจ้าหน้าที่")
