@@ -69,6 +69,7 @@ $res = mysqli_query($conn, $sql);
                                 <th>รูปบัตรประชาชนผู้ปกครอง</th>
                                 <th>รูปหน้าสมุดบัญชี</th> -->
                                 <th>สถานะ</th>
+                                <th>วันเวลา</th>
                                 <th></th>
                                 <th></th>
                                 <th></th>
@@ -94,6 +95,7 @@ $res = mysqli_query($conn, $sql);
                                                                                     } ?>">
                                         <?php echo $row["status"]; ?>
                                     </td>
+                                    <td><?php echo $row["time_stamp"]; ?></td>
                                     <td width="">
                                         <select enrollId="<?php echo $row["id"]; ?>" std_id="<?php echo $row["student_id"]; ?>" name="status" id="status" class="form-control status">
                                             <option value="พิมพ์แล้ว" <?php echo ($row["status"] == "พิมพ์แล้ว" ? "selected" : ""); ?>>พิมพ์แล้ว</option>
@@ -263,7 +265,8 @@ $res = mysqli_query($conn, $sql);
             //         }
             //     });
             // },
-            fixedColumns: true
+            fixedColumns: true,
+            "pageLength": 30
         });
 
         $("#room").change(function() {
