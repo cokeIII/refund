@@ -17,17 +17,21 @@ $image_type = $image_type_aux[1];
 
 $image_base64 = base64_decode($image_parts[1]);
 
-$file = $folderPath . $student_id . "_" . $nameDate . '.' . $image_type;
-$signature = $student_id . "_" . $nameDate . '.' . $image_type;
-file_put_contents($file, $image_base64);
-if($status == "นักเรียน นักศึกษา"){
+
+if ($status == "นักเรียน นักศึกษา") {
+    $file = $folderPath . $student_id . "_SF" . $nameDate . '.' . $image_type;
+    $signature = $student_id . "_SF" . $nameDate . '.' . $image_type;
+    file_put_contents($file, $image_base64);
     $sql = "update enroll set stu_signature ='$signature' where id = '$enrollId'";
 } else {
+    $file = $folderPath . $student_id . "_PF" . $nameDate . '.' . $image_type;
+    $signature = $student_id . "_PF" . $nameDate . '.' . $image_type;
+    file_put_contents($file, $image_base64);
     $sql = "update enroll set parent_signature ='$signature' where id = '$enrollId'";
 }
 
-$res = mysqli_query($conn,$sql);
-if($res){
+$res = mysqli_query($conn, $sql);
+if ($res) {
     echo "ok";
 } else {
     echo "fail";
