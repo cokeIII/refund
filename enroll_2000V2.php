@@ -119,7 +119,7 @@ if (empty($_SESSION["user_status"])) {
                             <div class="col-md-12">
                                 <div class="form-group p-1">
                                     <label>หมายเลขโทรศัพท์<span class="re_status"></span>ที่ใช้รับ SMS</label>
-                                    <input type="tel" class="form-control" id="phone" name="phone" maxlength="10" required>
+                                    <input class="form-control" id="phone" name="phone" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type="number" maxlength="10">
                                 </div>
                             </div>
                         </div>
@@ -484,7 +484,7 @@ if (empty($_SESSION["user_status"])) {
         //         alert("กรุณากดยืนยันรูปบัตรประชาชนนักเรียน/นักศึกษา")
         //         return false
         //     } else {
-                
+
         //     }
         // })
         // $("#account_book_pic").click(function(e) {
@@ -598,7 +598,7 @@ if (empty($_SESSION["user_status"])) {
                     $("#recipient_fname").val(obj.recipient_fname)
                     $("#recipient_lname").val(obj.recipient_lname)
                     if (obj.recipient_fname != "") {
-                        $("#recipient_name").val(obj.prefix_name+obj.recipient_fname + " " + obj.recipient_lname)
+                        $("#recipient_name").val(obj.prefix_name + obj.recipient_fname + " " + obj.recipient_lname)
                     } else {
                         $("#recipient_name").val("")
                     }

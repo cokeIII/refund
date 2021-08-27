@@ -69,6 +69,7 @@ $res = mysqli_query($conn, $sql);
                                 <th>รูปบัตรประชาชนผู้ปกครอง</th>
                                 <th>รูปหน้าสมุดบัญชี</th> -->
                                 <th>สถานะ</th>
+                                <th>วันเวลา</th>
                                 <th></th>
                                 <th></th>
                                 <th></th>
@@ -94,6 +95,7 @@ $res = mysqli_query($conn, $sql);
                                                                                     } ?>">
                                         <?php echo $row["status"]; ?>
                                     </td>
+                                    <td><?php echo $row["time_stamp"]; ?></td>
                                     <td width="">
                                         <select enrollId="<?php echo $row["id"]; ?>" std_id="<?php echo $row["student_id"]; ?>" name="status" id="status" class="form-control status">
                                             <option value="พิมพ์แล้ว" <?php echo ($row["status"] == "พิมพ์แล้ว" ? "selected" : ""); ?>>พิมพ์แล้ว</option>
@@ -179,6 +181,10 @@ $res = mysqli_query($conn, $sql);
 </div>
 <script>
     $(document).ready(function() {
+        $('#modalNote').on('hidden.bs.modal', function() {
+            $('input:checkbox').removeAttr('checked')
+            $("#noteText").val("")
+        })
         let enrollId
         $(".submitNote").click(function() {
             var selected = [];
@@ -195,7 +201,7 @@ $res = mysqli_query($conn, $sql);
                 },
                 success: function(result) {
                     console.log(result)
-                    if(result == "ok"){
+                    if (result == "ok") {
                         $('#modalNote').modal('hide');
                         $('input:checkbox').removeAttr('checked');
                     }
@@ -209,7 +215,7 @@ $res = mysqli_query($conn, $sql);
                 selected = []
             });
             $('input:checkbox').removeAttr('checked');
-            
+
             $("#noteText").val("")
         })
         $(".modal-note").click(function() {
@@ -227,7 +233,7 @@ $res = mysqli_query($conn, $sql);
                             if (value != "")
                                 $("input[value=" + value + "]").attr('checked', true)
                             if (value == "other") {
-                               $("#noteText").val(data[index+1])
+                                $("#noteText").val(data[index + 1])
                                 return false; // breaks
                             }
                         });
@@ -259,7 +265,8 @@ $res = mysqli_query($conn, $sql);
             //         }
             //     });
             // },
-            fixedColumns: true
+            fixedColumns: true,
+            "pageLength": 30
         });
 
         $("#room").change(function() {
