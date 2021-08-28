@@ -12,7 +12,7 @@ if (isset($_POST['level'])){
     $level=$_POST['level'];
     $_SESSION['level']=$level;
 }
-$student_all='2405';
+$student_all='2277';
 ?>
 
 <body id="page-top">
@@ -28,7 +28,7 @@ $student_all='2405';
                     <div class="card bg-primary" style="width:200px">
                         <div class="card-header text-white">จำนวนที่ส่งข้อมูล</div>
                         <div class="card-body text-white text-center"><?php echo $s1=get_all_sent()?> 
-                        &nbsp;&nbsp;(<?php echo number_format($s1/$student_all*100,2) ?> %)
+                        &nbsp;&nbsp;( <?php echo number_format($s1/$student_all*100,2) ?> % )
                         </div>
                     </div>
                     &nbsp;&nbsp;&nbsp;
@@ -40,7 +40,7 @@ $student_all='2405';
                     <div class="card bg-success" style="width:200px">
                         <div class="card-header text-white text-center">จำนวนที่พิมพ์แล้ว</div>
                         <div class="card-body text-white text-center"><?php echo $s3=get_print()?>
-                        &nbsp;&nbsp;(<?php echo number_format($s3/$student_all*100,2) ?> %)
+                        &nbsp;&nbsp;( <?php echo number_format($s3/$student_all*100,2) ?> % )
                         </div>
                     </div>
                     &nbsp;&nbsp;&nbsp;
@@ -80,7 +80,9 @@ $student_all='2405';
                                         elseif ($_SESSION['level']=='592')
                                             $a9="selected";
                                         elseif ($_SESSION['level']=='613')
-                                            $a9="selected";
+                                            $a10="selected";
+                                        elseif ($_SESSION['level']=='603')
+                                            $a11="selected";
                                     }
                                     ?>
                                     <option value="">--เลือกระดับชั้น--</option>
@@ -94,6 +96,7 @@ $student_all='2405';
                                     <option value="633" <?php echo $a5?>>ปวส.2</option>
                                     <option value="623" <?php echo $a6?>>ปวส.2 ตกค้าง+ปวส.3  (รหัส 62) </option>
                                     <option value="613" <?php echo $a10?>>ปวส.2 ตกค้าง (รหัส 61) </option>
+                                    <option value="603" <?php echo $a11?>>ปวส.2 ตกค้าง (รหัส 60) </option>
                                 </select>
                             </div>
                             <div class="col-md-2">
@@ -114,6 +117,8 @@ $student_all='2405';
                     FROM `student_group` stdg
                     INNER JOIN std_group sg on sg.group_id=stdg.`student_group_id`
                     where substr(stdg.`student_group_id`,1,3) = '$level'
+                    and stdg.`student_group_id` !='632090103' and stdg.`student_group_id` !='632090104'
+                    and stdg.`student_group_id` not LIKE '62202%'
                     ORDER by stdg.`student_group_id`";
 
 
@@ -237,8 +242,8 @@ function count_sum($level,$s){
     $id=$level."%";
     $sql="SELECT count(*) as c FROM `student` 
     INNER JOIN std_group on student.group_id=std_group.group_id
-    WHERE `group_shortname` = '$s'
-    and `status`='0' and `student_id` like '$id' ";
+    WHERE student.`group_shortname` = '$s'
+    and student.`status`='0' and std_group.`group_id` like '$id' ";
     // echo $sql;
     $res=mysqli_query($conn,$sql);
     $row=mysqli_fetch_assoc($res);
@@ -248,8 +253,10 @@ function count_sum($level,$s){
 function status_sent($level,$s){
     global $conn;
     $id=$level."%";
-    $sql="SELECT count(*) as c FROM `enroll` where `status`!='ยกเลิก' 
-    AND `student_group_short_name`='$s' and `student_id` like '$id' ";
+    $sql="SELECT count(*) as c FROM `enroll` 
+    INNER JOIN student on student.student_id=enroll.student_id
+    where enroll.`status`!='ยกเลิก' 
+    AND `student_group_short_name`='$s' and student.`group_id` like '$id' ";
     // echo $sql;
     $res=mysqli_query($conn,$sql);
     $row=mysqli_fetch_assoc($res);
@@ -259,8 +266,10 @@ function status_sent($level,$s){
 function status_print($level,$s){
     global $conn;
     $id=$level."%";
-    $sql="SELECT count(*) as c FROM `enroll` where `status`='พิมพ์แล้ว' 
-    AND `student_group_short_name`='$s' and `student_id` like '$id'";
+    $sql="SELECT count(*) as c FROM `enroll` 
+    INNER JOIN student on student.student_id=enroll.student_id
+    where enroll.`status`='พิมพ์แล้ว' 
+    AND `student_group_short_name`='$s' and student.`group_id` like '$id'";
     // echo $sql;
     $res=mysqli_query($conn,$sql);
     $row=mysqli_fetch_assoc($res);
