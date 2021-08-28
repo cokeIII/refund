@@ -227,22 +227,41 @@ function checkSamePhone($phone)
         })
         let phoneNumber = ""
         $("#exportPhone").click(function() {
-            if(confirm("ยืนยันการส่งออก สถานะจะเปลี่ยนเป็น 'ส่งแล้ว'")) {
+            if (confirm("ยืนยันการส่งออก สถานะจะเปลี่ยนเป็น 'ส่งแล้ว'")) {
                 phoneNumber = ""
+                let i = 1;
+                let no = 1;
                 let dataArr = table.rows('.selected').data()
+                let numberFile = dataArr.length / 200
                 Object.entries(dataArr).forEach(entry => {
                     const [key, value] = entry
                     if (key <= dataArr.length) {
-                        phoneNumber += value[5] + (key < dataArr.length - 1 ? "," : "")
                         updateSMS(value[2], value[5])
+
+                        var d = new Date()
+                        let month = '' + (d.getMonth() + 1)
+                        let day = '' + d.getDate()
+                        let year = d.getFullYear()
+
+                        phoneNumber += value[5] + ","
+                        if (i % 200 == 0) {
+                            exportFile(day + "/" + month + "/" + year + "_" + no, phoneNumber.slice(0, -1))
+                            phoneNumber = ""
+                            i = 0
+                            no++
+                            numberFile = numberFile-1
+                        } else if (numberFile < 1 && i == dataArr.length-200*(Math.floor(dataArr.length / 200))) {
+                            exportFile(day + "/" + month + "/" + year + "_" + no, phoneNumber.slice(0, -1))
+                        }
+                        i++;
                     }
                 });
-                // Start file download.
-                var d = new Date()
-
-                download("phone_" + d + ".txt", phoneNumber)
             }
         })
+
+        function exportFile(d, phoneNumber) {
+            download("phone_" + d + ".txt", phoneNumber)
+        }
 
         function download(filename, text) {
             var element = document.createElement('a');
