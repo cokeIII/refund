@@ -28,7 +28,7 @@ $student_all='2405';
                     <div class="card bg-primary" style="width:200px">
                         <div class="card-header text-white">จำนวนที่ส่งข้อมูล</div>
                         <div class="card-body text-white text-center"><?php echo $s1=get_all_sent()?> 
-                        &nbsp;&nbsp;<?php echo number_format($s1/$student_all*100,2) ?> %
+                        &nbsp;&nbsp;(<?php echo number_format($s1/$student_all*100,2) ?> %)
                         </div>
                     </div>
                     &nbsp;&nbsp;&nbsp;
@@ -39,7 +39,9 @@ $student_all='2405';
                     &nbsp;&nbsp;&nbsp;
                     <div class="card bg-success" style="width:200px">
                         <div class="card-header text-white text-center">จำนวนที่พิมพ์แล้ว</div>
-                        <div class="card-body text-white text-center"><?php echo $s3=get_print()?></div>
+                        <div class="card-body text-white text-center"><?php echo $s3=get_print()?>
+                        &nbsp;&nbsp;(<?php echo number_format($s3/$student_all*100,2) ?> %)
+                        </div>
                     </div>
                     &nbsp;&nbsp;&nbsp;
                     <div class="card bg-info" style="width:200px">
