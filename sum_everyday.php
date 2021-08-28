@@ -12,7 +12,7 @@ if (isset($_POST['level'])){
     $level=$_POST['level'];
     $_SESSION['level']=$level;
 }
-$student_all='2363';
+$student_all='2405';
 ?>
 
 <body id="page-top">
@@ -28,6 +28,7 @@ $student_all='2363';
                     <div class="card bg-primary" style="width:200px">
                         <div class="card-header text-white">จำนวนที่ส่งข้อมูล</div>
                         <div class="card-body text-white text-center"><?php echo $s1=get_all_sent()?></div>
+                        <div class="card-body text-white text-center"><?php echo $s1/$student_all*100 ?> %</div>
                     </div>
                     &nbsp;&nbsp;&nbsp;
                     <div class="card bg-warning" style="width:230px">
