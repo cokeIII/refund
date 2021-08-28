@@ -251,8 +251,10 @@ function count_sum($level,$s){
 function status_sent($level,$s){
     global $conn;
     $id=$level."%";
-    $sql="SELECT count(*) as c FROM `enroll` where `status`!='ยกเลิก' 
-    AND `student_group_short_name`='$s' and std_group.`group_id` like '$id' ";
+    $sql="SELECT count(*) as c FROM `enroll` 
+    INNER JOIN student on student.student_id=enroll.student_id
+    where enroll.`status`!='ยกเลิก' 
+    AND `student_group_short_name`='$s' and student.`group_id` like '$id' ";
     // echo $sql;
     $res=mysqli_query($conn,$sql);
     $row=mysqli_fetch_assoc($res);
@@ -262,8 +264,10 @@ function status_sent($level,$s){
 function status_print($level,$s){
     global $conn;
     $id=$level."%";
-    $sql="SELECT count(*) as c FROM `enroll` where `status`='พิมพ์แล้ว' 
-    AND `student_group_short_name`='$s' and std_group.`group_id` like '$id'";
+    $sql="SELECT count(*) as c FROM `enroll` 
+    INNER JOIN student on student.student_id=enroll.student_id
+    where enroll.`status`='พิมพ์แล้ว' 
+    AND `student_group_short_name`='$s' and student.`group_id` like '$id'";
     // echo $sql;
     $res=mysqli_query($conn,$sql);
     $row=mysqli_fetch_assoc($res);
