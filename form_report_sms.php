@@ -227,19 +227,21 @@ function checkSamePhone($phone)
         })
         let phoneNumber = ""
         $("#exportPhone").click(function() {
-            phoneNumber = ""
-            let dataArr = table.rows('.selected').data()
-            Object.entries(dataArr).forEach(entry => {
-                const [key, value] = entry
-                if (key <= dataArr.length) {
-                    phoneNumber += value[5] + (key < dataArr.length - 1 ? "," : "")
-                    updateSMS(value[2],value[5])
-                }
-            });
-            // Start file download.
-            var d = new Date()
-            
-            download("phone_" + d + ".txt", phoneNumber)
+            if(confirm("ยืนยันการส่งออก สถานะจะเปลี่ยนเป็น 'ส่งแล้ว'")) {
+                phoneNumber = ""
+                let dataArr = table.rows('.selected').data()
+                Object.entries(dataArr).forEach(entry => {
+                    const [key, value] = entry
+                    if (key <= dataArr.length) {
+                        phoneNumber += value[5] + (key < dataArr.length - 1 ? "," : "")
+                        updateSMS(value[2], value[5])
+                    }
+                });
+                // Start file download.
+                var d = new Date()
+
+                download("phone_" + d + ".txt", phoneNumber)
+            }
         })
 
         function download(filename, text) {
@@ -252,13 +254,13 @@ function checkSamePhone($phone)
             document.body.removeChild(element);
         }
 
-        function updateSMS(valId,valPhone) {
+        function updateSMS(valId, valPhone) {
             $.ajax({
                 type: "POST",
                 url: "updateSMS.php",
                 data: {
                     id: valId,
-                    phone:valPhone
+                    phone: valPhone
                 },
                 success: function(result) {
                     if (result == "ok") {
