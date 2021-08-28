@@ -23,7 +23,7 @@
                     <?php } else if ($_SESSION["user_status"] == "registration") { ?>
                         <li class="nav-item"><a class="nav-link me-lg-3" href="change_name_list.php"><i class="fas fa-list"></i> รายการที่แก้ไขชื่อ</a></li>
                     <?php } else if ($_SESSION["user_status"] == "finance") { ?>
-                        <li class="nav-item"><a class="nav-link me-lg-3" href="listEnroll_finance.php"><i class="fas fa-home"></i> หน้าแรก</a></li>
+                        <li class="nav-item"><a class="nav-link me-lg-3" href="listEnroll_finance_fix.php"><i class="fas fa-home"></i> หน้าแรก</a></li>
                         <li class="nav-item"><a class="nav-link me-lg-3" href="form_report.php"><i class="fas fa-list-alt"></i> พิมพ์รายงาน</a></li>
                         <li class="nav-item"><a class="nav-link me-lg-3" href="sum_everyday.php"><i class="fas fa-list"></i> รายงานสรุป</a></li>
                     <?php } ?>
