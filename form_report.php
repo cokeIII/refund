@@ -74,7 +74,25 @@ require_once "connect.php";
                     <hr>
                     <div class="row">
                         <div class="col-md-12">
-                            
+                            <div class="col-md-5">
+                                <h4>ข้อมูลการโอนเงินคืนค่าลงทะเบียน</h4>
+                                <label>เลือกกลุ่มเรียน</label>
+                                <form action="form_report_sms.php" method="post">
+                                    <select class="form-control" name="group_name" id="group_name">
+                                        <option value="">เลือกทุกกลุ่ม</option>
+                                        <?php
+
+                                        $sqlSMS = "select student_group_short_name from enroll group by student_group_short_name";
+                                        $resSMS = mysqli_query($conn, $sqlSMS);
+
+                                        while ($rowSMS = mysqli_fetch_array($resSMS)) {
+                                        ?>
+                                            <option value="<?php echo $rowSMS["student_group_short_name"] ?>"><?php echo $rowSMS["student_group_short_name"] ?></option>
+                                        <?php } ?>
+                                    </select>
+                                    <button type="submit" class="btn btn-info mt-2">รายงานส่ง SMS</button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
