@@ -96,58 +96,67 @@ if (isset($_POST['level'])){
                 if (isset($_SESSION['level'])){
                     $level=$_SESSION['level'];
                 
-                    $sql="SELECT stdg.`student_group_short_name` as name ,sg.group_name
+                    $sql="SELECT stdg.`student_group_short_name` as name ,sg.group_name,stdg.`teacher_id1`
                     FROM `student_group` stdg
                     INNER JOIN std_group sg on sg.group_id=stdg.`student_group_id`
                     where substr(stdg.`student_group_id`,1,3) = '$level'
                     ORDER by stdg.`student_group_id`";
+
+
                     $res=mysqli_query($conn, $sql);
-                ?>
+                    ?>
                 
-                <table class="table">
-                    <thead>
-                        <!-- <tr>
-                            <th colspan=6>ระดับ <?php echo $level ?></th>
-                        </tr> -->
-                        <tr>
-                            <th>ที่</th>
-                            <th>รหัสกลุ่ม</th>
-                            <th>ชื่อกลุ่ม</th>
-                            <th class="text-center">จำนวนนักเรียนทั้งหมด</th>
-                            <th class="text-center">ส่งเอกสาร</th>
-                            <th class="text-center">พิมพ์แล้ว</th>
-                            <th>ส่ง SMS</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        $counter=1;
-                        while ($row = mysqli_fetch_array($res)){
-                        ?>
-                        <tr>
-                            <td><?php echo $counter++?></td>
-                            <td><?php echo $row['name']?></td>
-                            <td><?php echo $row['group_name']?></td>
-                            <td class="text-center"><?php echo $csum[]=count_sum($level,$row['name'])?></td>
-                            <td class="text-center"><?php echo $csent[]=status_sent($level,$row['name'])?></td>
-                            <td class="text-center"><?php echo $cprint[]=status_print($level,$row['name'])?></td>
-                            <td></td>
-                        </tr>
-                        <?php
-                        }
-                        ?>    
-                    
-                <?php
+                    <table class="table">
+                        <thead>
+                            <!-- <tr>
+                                <th colspan=6>ระดับ <?php echo $level ?></th>
+                            </tr> -->
+                            <tr>
+                                <th>ที่</th>
+                                <th>รหัสกลุ่ม</th>
+                                <th>ชื่อกลุ่ม</th>
+                                <th>ชื่อครูที่ปรึกษา</th>
+                                <th class="text-center">จำนวนนักเรียนทั้งหมด</th>
+                                <th class="text-center">ส่งเอกสาร</th>
+                                <th class="text-center">พิมพ์แล้ว</th>
+                                <th>ส่ง SMS</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $counter=1;
+                            while ($row = mysqli_fetch_array($res)){
+                            ?>
+                            <tr>
+                                <td><?php echo $counter++?></td>
+                                <td><?php echo $row['name']?></td>
+                                <td><?php echo $row['group_name']?></td>
+                                <td><?php echo get_teacher_name($row['teacher_id1'])?></td>
+                                <td class="text-center"><?php echo $csum[]=count_sum($level,$row['name'])?></td>
+                                <td class="text-center"><?php echo $csent[]=status_sent($level,$row['name'])?></td>
+                                <td class="text-center"><?php echo $cprint[]=status_print($level,$row['name'])?></td>
+                                <td></td>
+                            </tr>
+                            <?php
+                            }
+                            ?>    
+                        
+                    <?php
                 }
+                if (is_array($csum)){
                 ?>   
                     <tr class="bg-info">
+                        <td></td>
                         <td></td>
                         <td></td>
                         <td></td>
                         <td class="text-center"><?php echo Array_sum($csum)?></td>
                         <td class="text-center"><?php echo Array_sum($csent)?></td>
                         <td class="text-center"><?php echo Array_sum($cprint)?></td>
-                    </tr>                        
+                    </tr>  
+                    <?php
+                }
+                ?>                      
                     </tbody>
                 </table>
 
@@ -197,6 +206,16 @@ function get_print(){
     $res=mysqli_query($conn,$sql);
     $row=mysqli_fetch_assoc($res);
     return $row['c'];
+}
+
+function get_teacher_name($id){
+    global $conn;
+    $sql="SELECT concat(`people_name`,'  ',`people_surname`) as name FROM `people` 
+    WHERE `people_id`='$id'";
+    // echo $sql;
+    $res=mysqli_query($conn,$sql);
+    $row=mysqli_fetch_assoc($res);
+    return $row['name'];
 }
 
 function count_sum($level,$s){
@@ -254,3 +273,4 @@ function del0($s){
     }
     return $r;
 }
+
