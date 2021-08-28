@@ -117,6 +117,8 @@ $student_all='2405';
                     FROM `student_group` stdg
                     INNER JOIN std_group sg on sg.group_id=stdg.`student_group_id`
                     where substr(stdg.`student_group_id`,1,3) = '$level'
+                    and stdg.`student_group_id` !='632090103' and stdg.`student_group_id` !='632090104'
+                    and stdg.`student_group_id` not LIKE '62202%'
                     ORDER by stdg.`student_group_id`";
 
 
