@@ -12,6 +12,7 @@ if (isset($_POST['level'])){
     $level=$_POST['level'];
     $_SESSION['level']=$level;
 }
+$student_all='2363';
 ?>
 
 <body id="page-top">
@@ -25,8 +26,8 @@ if (isset($_POST['level'])){
                 
                 <div class="row justify-content-center" style="margin:auto">
                     <div class="card bg-primary" style="width:200px">
-                        <div class="card-header text-white">จำนวนข้อมูลทั้งหมด</div>
-                        <div class="card-body text-white text-center"><?php echo $s1=get_all()?></div>
+                        <div class="card-header text-white">จำนวนที่ส่งข้อมูล</div>
+                        <div class="card-body text-white text-center"><?php echo $s1=get_all_sent()?></div>
                     </div>
                     &nbsp;&nbsp;&nbsp;
                     <div class="card bg-warning" style="width:230px">
@@ -70,16 +71,25 @@ if (isset($_POST['level'])){
                                             $a6="selected"; 
                                         elseif ($_SESSION['level']=='612')
                                             $a7="selected";   
+                                        elseif ($_SESSION['level']=='602')
+                                            $a8="selected";
+                                        elseif ($_SESSION['level']=='592')
+                                            $a9="selected";
+                                        elseif ($_SESSION['level']=='613')
+                                            $a9="selected";
                                     }
                                     ?>
                                     <option value="">--เลือกระดับชั้น--</option>
                                     <option value="642" <?php echo $a1?>>ปวช.1</option>
                                     <option value="632" <?php echo $a2?>>ปวช.2</option>
                                     <option value="622" <?php echo $a3?>>ปวช.3</option>
-                                    <option value="612" <?php echo $a7?>>ปวช.3 ตกค้าง</option>
+                                    <option value="612" <?php echo $a7?>>ปวช.3 ตกค้าง (รหัส 61) </option>
+                                    <option value="602" <?php echo $a8?>>ปวช.3 ตกค้าง (รหัส 60) </option>
+                                    <option value="592" <?php echo $a9?>>ปวช.3 ตกค้าง (รหัส 59) </option>
                                     <option value="643" <?php echo $a4?>>ปวส.1</option>
                                     <option value="633" <?php echo $a5?>>ปวส.2</option>
-                                    <option value="623" <?php echo $a6?>>ปวส.3</option>
+                                    <option value="623" <?php echo $a6?>>ปวส.2 ตกค้าง+ปวส.3  (รหัส 62) </option>
+                                    <option value="623" <?php echo $a10?>>ปวส.2 ตกค้าง+ปวส.3  (รหัส 61) </option>
                                 </select>
                             </div>
                             <div class="col-md-2">
@@ -181,7 +191,7 @@ if (isset($_POST['level'])){
     })
 </script>
 <?php
-function get_all(){
+function get_all_sent(){
     global $conn;
     $sql="SELECT count(*) as c FROM `enroll` where `status`!='ยกเลิก' ";
     // echo $sql;
