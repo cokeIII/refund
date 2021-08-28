@@ -89,7 +89,7 @@ $student_all='2363';
                                     <option value="643" <?php echo $a4?>>ปวส.1</option>
                                     <option value="633" <?php echo $a5?>>ปวส.2</option>
                                     <option value="623" <?php echo $a6?>>ปวส.2 ตกค้าง+ปวส.3  (รหัส 62) </option>
-                                    <option value="623" <?php echo $a10?>>ปวส.2 ตกค้าง+ปวส.3  (รหัส 61) </option>
+                                    <option value="613" <?php echo $a10?>>ปวส.2 ตกค้าง (รหัส 61) </option>
                                 </select>
                             </div>
                             <div class="col-md-2">
