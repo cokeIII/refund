@@ -12,7 +12,7 @@ if (isset($_POST['level'])){
     $level=$_POST['level'];
     $_SESSION['level']=$level;
 }
-$student_all='2405';
+$student_all='2277';
 ?>
 
 <body id="page-top">
