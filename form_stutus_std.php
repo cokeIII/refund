@@ -19,7 +19,7 @@ require_once "connect.php";
         <div class="container px-5">
             <div class="card">
                 <div class="card-body">
-                    <table id="listStd">
+                    <table class="table" id="listStd">
                         <thead>
                             <th>รหัสนักศึกษา</th>
                             <th>ชื่อ-สกุล</th>
