@@ -28,7 +28,7 @@ $student_all='2409';
                 
 
                 
-                    $sql="SELECT stdg.`student_group_short_name` as name ,sg.group_name,stdg.`teacher_id1`
+                    $sql="SELECT stdg.`student_group_id`,stdg.`student_group_short_name` as name ,sg.group_name,stdg.`teacher_id1`
                     FROM `student_group` stdg
                     INNER JOIN std_group sg on sg.group_id=stdg.`student_group_id`
                     where stdg.`student_group_id` !='632090103' and stdg.`student_group_id` !='632090104'
@@ -62,9 +62,9 @@ $student_all='2409';
                                 <td><?php echo $row['name']?></td>
                                 <td><?php echo $row['group_name']?></td>
                                 <td><?php echo get_teacher_name($row['teacher_id1'])?></td>
-                                <td class="text-center"><?php echo $csum[]=count_sum($row['name'])?></td>
-                                <td class="text-center"><?php echo $csent[]=status_sent($row['name'])?></td>
-                                <td class="text-center"><?php echo $cprint[]=status_print($row['name'])?></td>
+                                <td class="text-center"><?php echo $csum[]=count_sum($row['student_group_id'])?></td>
+                                <td class="text-center"><?php echo $csent[]=status_sent($row['student_group_id'])?></td>
+                                <td class="text-center"><?php echo $cprint[]=status_print($row['student_group_id'])?></td>
                                 <td></td>
                             </tr>
                             <?php
@@ -166,7 +166,7 @@ function count_sum($s){
     global $conn;
     $sql="SELECT count(*) as c FROM `student` 
     INNER JOIN std_group on student.group_id=std_group.group_id
-    WHERE student.`group_shortname` = '$s'
+    WHERE student.`group_id` = '$s'
     and student.`status`='0'  ";
     // echo $sql;
     $res=mysqli_query($conn,$sql);
@@ -179,7 +179,7 @@ function status_sent($s){
     $sql="SELECT count(*) as c FROM `enroll` 
     INNER JOIN student on student.student_id=enroll.student_id
     where enroll.`status`!='ยกเลิก' 
-    AND `student_group_short_name`='$s'  ";
+    AND student.`group_id` = '$s'  ";
     // echo $sql;
     $res=mysqli_query($conn,$sql);
     $row=mysqli_fetch_assoc($res);
@@ -191,7 +191,7 @@ function status_print($s){
     $sql="SELECT count(*) as c FROM `enroll` 
     INNER JOIN student on student.student_id=enroll.student_id
     where enroll.`status`='พิมพ์แล้ว' 
-    AND `student_group_short_name`='$s' ";
+    AND student.`group_id` = '$s' ";
     // echo $sql;
     $res=mysqli_query($conn,$sql);
     $row=mysqli_fetch_assoc($res);
