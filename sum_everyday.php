@@ -200,27 +200,41 @@ $student_all='2409';
     })
 </script>
 <?php
+//ส่งทั้งหมด  เอา ทวิศึกษา ออก
 function get_all_sent(){
     global $conn;
-    $sql="SELECT count(*) as c FROM `enroll` where `status`!='ยกเลิก' ";
+    $sql="SELECT count(*) as c FROM `enroll` 
+    INNER JOIN student on student.student_id=enroll.student_id
+    where enroll.`status`!='ยกเลิก'
+    and student.status='0'
+    and student.group_id != '632090103' and student.group_id !='632090104'
+    and student.group_id not LIKE '62202%'";
     // echo $sql;
     $res=mysqli_query($conn,$sql);
     $row=mysqli_fetch_assoc($res);
     return $row['c'];
 }
-
+//เอกสารไม่ถูกต้อง เอา ทวิศึกษา ออก
 function get_no(){
     global $conn;
-    $sql="SELECT count(*) as c FROM `enroll` where `status` LIKE 'เอกสารไม่ถูกต้องสมบูรณ์'";
+    $sql="SELECT count(*) as c FROM `enroll` 
+    INNER JOIN student on student.student_id=enroll.student_id
+    where enroll.`status` LIKE 'เอกสารไม่ถูกต้องสมบูรณ์'
+    and student.group_id != '632090103' and student.group_id !='632090104'
+    and student.group_id not LIKE '62202%'";
     // echo $sql;
     $res=mysqli_query($conn,$sql);
     $row=mysqli_fetch_assoc($res);
     return $row['c'];
 }
-
+//พิมพ์แล้วเอา ทวิศึกษา ออก
 function get_print(){
     global $conn;
-    $sql="SELECT count(*) as c FROM `enroll` where `status` LIKE 'พิมพ์แล้ว'";
+    $sql="SELECT count(*) as c FROM `enroll` 
+    INNER JOIN student on student.student_id=enroll.student_id
+    where enroll.`status` LIKE 'พิมพ์แล้ว'
+    and student.group_id != '632090103' and student.group_id !='632090104'
+    and student.group_id not LIKE '62202%'";
     // echo $sql;
     $res=mysqli_query($conn,$sql);
     $row=mysqli_fetch_assoc($res);
