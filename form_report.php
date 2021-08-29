@@ -75,7 +75,7 @@ require_once "connect.php";
                     <div class="row">
                         <div class="col-md-12">
                             <div class="col-md-5">
-                                <h4>ข้อมูลการโอนเงินคืนค่าลงทะเบียน</h4>
+                                <h4>ส่งออกเบอร์โทรศัพท์</h4>
                                 <label>เลือกกลุ่มเรียน</label>
                                 <form action="form_report_sms.php" method="post">
                                     <select class="form-control" name="group_name" id="group_name">
