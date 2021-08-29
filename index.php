@@ -105,7 +105,7 @@
                         } else if (result.trim() == "ok admin") {
                             window.location.replace("listEnroll.php");
                         } else if (result.trim() == "ok finance") {
-                            window.location.replace("listEnroll_finance.php");
+                            window.location.replace("listEnroll_finance_fix.php");
                         } else if (result.trim() == "ok registration") {
                             window.location.replace("change_name_list.php");
                         } else {
