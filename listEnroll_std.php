@@ -98,7 +98,7 @@ $res = mysqli_query($conn, $sql);
             <div class="modal-body">
                 <label><strong>เลือกสถานะ</strong></label>
                 <select name="editSigStatus" id="editSigStatus" class=" p-3">
-                    <option value="" selected>--- เลือกสถานะายเซ็น ---</option>
+                    <option value="" selected>--- เลือกสถานะลายเซ็น ---</option>
                     <option value="นักเรียน นักศึกษา">นักเรียน นักศึกษา</option>
                     <option value="ผู้ปกครอง">ผู้ปกครอง</option>
                 </select>
@@ -163,19 +163,19 @@ $res = mysqli_query($conn, $sql);
             return false;
         })
         ///////////////////////////signatureparent
-        let enrollId 
+        let enrollId
         let signed = false
-        $(".btnSig").click(function(){
+        $(".btnSig").click(function() {
             enrollId = $(this).attr("enrollId")
         })
-        $("#submitSig").click(function(){
+        $("#submitSig").click(function() {
             let editSigStatus = $("#editSigStatus").val()
             let signedData = $("#signed").val()
 
-            if(editSigStatus == ""){
+            if (editSigStatus == "") {
                 return alert("กรุณาเลือกสถานะลายเซ็น")
             }
-            if(!signed){
+            if (!signed) {
                 return alert("กรุณาเซ็นลายเซ็น")
             }
 
@@ -212,7 +212,7 @@ $res = mysqli_query($conn, $sql);
             // background color
             "background-color": "##AEB4B2"
         });
-        
+
         $(document).on('change', "#signatureparent", function() {
             signed = true
             if (signed) {
