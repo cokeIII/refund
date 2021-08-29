@@ -29,6 +29,7 @@ while ($row = mysqli_fetch_assoc($res)) {
 </select>';
     $techlist["data"][$i]["btn_note"] = '<button class="btn btn-warning modal-note" enrollId="' . $row["id"] . '"><i class="fas fa-sticky-note"></i> หมายเหตุ</button>';
     $techlist["data"][$i]["btn_print"] = '<a id="btnPrint" href="report_2.php?id=' . $row["id"] . '" target="_blank"><button class="btn btn-info"><i class="fas fa-print"></i> พิมพ์</button></a>';
+    $techlist["data"][$i]["btn_edit"] = '<button class="btn btn-info modal-edit" enrollId="' . $row["id"] . '" stdId="'.$row["student_id"].'"><i class="fas fa-user-cog"></i>แก้ไข</button>';
     $i++;
 }
 echo json_encode($techlist, JSON_UNESCAPED_UNICODE);

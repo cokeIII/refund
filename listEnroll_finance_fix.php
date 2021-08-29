@@ -46,7 +46,7 @@ if ($_SESSION["user_status"] != "finance") {
                         </div>
                     </div>
 
-                    <table class="table" id="enrollTable">
+                    <table class="table" id="enrollTable" width="1200">
                         <thead>
                             <tr>
                                 <th>ที่</th>
@@ -57,8 +57,9 @@ if ($_SESSION["user_status"] != "finance") {
                                 <th>สถานะ</th>
                                 <th>วันเวลา</th>
                                 <th></th>
-                                <th></th>
-                                <th></th>
+                                <th width="40"></th>
+                                <th width="50"></th>
+                                <th width="50"></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -72,6 +73,7 @@ if ($_SESSION["user_status"] != "finance") {
                             <th>เบอร์โทรศัพท์</th>
                             <th>สถานะ</th>
                             <th>วันเวลา</th>
+                            <th></th>
                             <th></th>
                             <th></th>
                             <th></th>
@@ -131,14 +133,134 @@ if ($_SESSION["user_status"] != "finance") {
         </div>
     </div>
 </div>
+<!-- Modal -->
+<div class="modal fade" id="modalEdit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">แก้ไขข้อมูล</h5>
+                <button type="button" class="close closeModal" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <?php
+                        $sqlBank = "select * from bank";
+                        $resBank = mysqli_query($conn, $sqlBank);
+                        ?>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group p-1">
+                                    <form id="bank_form">
+                                        <label>ธนาคาร</label>
+                                        <select name="recipient_bank" id="recipient_bank" class="form-control" required>
+                                            <option value="">---เลือกธนาคาร---</option>
+                                            <?php while ($rowBank = mysqli_fetch_array($resBank)) { ?>
+                                                <option value="<?php echo $rowBank["bank_name"]; ?>"><?php echo $rowBank["bank_name"]; ?></option>
+                                            <?php } ?>
+                                        </select>
+                                        <button type="submit" class="btn btn-primary mt-3">แก้ไขธนาคาร</button>
+                                    </form>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="col-md-12">
+                                <div class="form-group p-1">
+                                    <form id="bank_num">
+                                        <label>เลขบัญชีธนาคาร</label>
+                                        <input type="number" name="recipient_bank_number" id="recipient_bank_number" class="form-control" required>
+                                        <button type="submit" class="btn btn-primary mt-3">แก้ไขเลขบัญชี</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <script>
     $(document).ready(function() {
+        let enrollId
+        let stdId
+        $(document).on('submit', '#bank_form', function() {
+            $.ajax({
+                type: "POST",
+                url: "update_bank.php",
+                data: {
+                    enroll_id: enrollId,
+                    bank_name: $("#recipient_bank").val(),
+                },
+                success: function(result) {
+                    console.log(result)
+
+                    if (result == "ok") {
+                        $.ajax({
+                            type: "POST",
+                            url: "user_ac.php",
+                            data: {
+                                detail: stdId + ":" + $("#recipient_bank").val(),
+                                enroll_id: enrollId,
+                            },
+                            success: function(result) {
+
+                            }
+                        });
+
+                        alert("แก้ไขสำเร็จ กรุณาพิมพ์เพื่อตรวจสอบข้อมูลใหม่")
+                        $("#recipient_bank").val("")
+                        $('#modalEdit').modal('hide');
+                    } else {
+                        alert("แก้ไขไม่สำเร็จ กรุณาติดต่อเจ้าหน้าที่")
+                    }
+                }
+            });
+            return false
+        })
+        $(document).on('submit', '#bank_num', function() {
+            $.ajax({
+                type: "POST",
+                url: "update_bank.php",
+                data: {
+                    enroll_id: enrollId,
+                    bank_num: $("#recipient_bank_number").val(),
+                },
+                success: function(result) {
+                    console.log(result)
+                    if (result == "ok") {
+                        $.ajax({
+                            type: "POST",
+                            url: "user_ac.php",
+                            data: {
+                                detail: stdId + ":" + $("#recipient_bank_number").val(),
+                                enroll_id: enrollId,
+                            },
+                            success: function(result) {
+
+                            }
+                        });
+                        alert("แก้ไขสำเร็จ กรุณาพิมพ์เพื่อตรวจสอบข้อมูลใหม่")
+                        $("#recipient_bank_number").val("")
+                        $('#modalEdit').modal('hide');
+                    } else {
+                        alert("แก้ไขไม่สำเร็จ กรุณาติดต่อเจ้าหน้าที่")
+                    }
+                }
+            });
+            return false
+        })
         loadTable("")
         $('#modalNote').on('hidden.bs.modal', function() {
             $('input:checkbox').prop('checked', false);
             $("#noteText").val("")
         })
-        let enrollId
+        $('#modalEdit').on('hidden.bs.modal', function() {
+            $("#recipient_bank").val("")
+            $("#recipient_bank_number").val("")
+        })
         $(".submitNote").click(function() {
             var selected = [];
             $('#checkboxes input:checked').each(function() {
@@ -165,6 +287,7 @@ if ($_SESSION["user_status"] != "finance") {
         $(document).on('click', '.closeModal', function() {
 
             $('#modalNote').modal('hide');
+            $('#modalEdit').modal('hide');
             $('#checkboxes input:checked').each(function() {
                 $(this).attr('checked', false);
                 selected = []
@@ -198,6 +321,12 @@ if ($_SESSION["user_status"] != "finance") {
                 }
             });
         })
+        $(document).on('click', '.modal-edit', function() {
+            stdId = $(this).attr("stdId")
+            enrollId = $(this).attr("enrollId")
+            console.log(enrollId)
+            $('#modalEdit').modal('show');
+        })
 
         function loadTable(room_name) {
             $('#enrollTable').DataTable({
@@ -210,6 +339,7 @@ if ($_SESSION["user_status"] != "finance") {
                 "responsive": true,
                 "autoWidth": false,
                 "pageLength": 30,
+                "scrollX": true,
                 "ajax": {
                     "url": "get_finance.php",
                     "type": "POST",
@@ -247,6 +377,8 @@ if ($_SESSION["user_status"] != "finance") {
                     },
                     {
                         "data": "btn_print"
+                    }, {
+                        "data": "btn_edit"
                     },
                 ],
                 "language": {
