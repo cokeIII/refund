@@ -48,7 +48,7 @@
                 <td><?php echo $row['std_name']?></td>
                 <td><?php echo $row['group_shortname']?></td>
                 <td><?php echo $row['bank_id']?></td>
-                <td class="text-center"><?php echo $row['recipient_bank_number'] ?></td>
+                <td class="text-center"><?php echo '-'.$row['recipient_bank_number'] ?></td>
                 <td><?php echo $row['recipient_name']?></td>
                 <td class="text-center"><?php echo $row['bank_name']?></td>
             </tr>
