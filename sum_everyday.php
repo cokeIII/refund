@@ -102,6 +102,10 @@ $student_all='2409';
                             <div class="col-md-2">
                                 <button type="submit" class="btn btn-primary"> OK </button>
                             </div>
+                            <div class="col-md-2">
+                            <a href="sum_everyday_ex.php">
+                            <button type="button" class="btn btn-info"> excel </button></a>
+                        </div>
                         </div>
                         
                         
