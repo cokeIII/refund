@@ -2,7 +2,27 @@
 header('Content-Type: text/html; charset=UTF-8');
 require_once "connect.php";
 
-$sql = "select 
+if(!empty($_POST["group_id"])){
+    $group_id = $_POST["group_id"];
+    $sql = "select 
+    s.student_id,
+    s.people_id,
+    s.stu_fname,
+    s.stu_lname,
+    s.group_id,
+    p.prefix_name,
+    g.grade_name,
+    g.major_name,
+    g.minor_name,
+    g.student_group_no,
+    g.student_group_short_name,
+    st.status_std
+    from student s left join student_group g on s.group_id = g.student_group_id
+    left join prefix p on p.prefix_id = s.perfix_id
+    left join student_status st on st.student_id = s.student_id
+    where status = '0' and s.group_id = '$group_id'";
+} else {
+    $sql = "select 
 s.student_id,
 s.people_id,
 s.stu_fname,
@@ -19,6 +39,8 @@ from student s left join student_group g on s.group_id = g.student_group_id
 left join prefix p on p.prefix_id = s.perfix_id
 left join student_status st on st.student_id = s.student_id
 where status = '0'";
+}
+
 
 $res = mysqli_query($conn, $sql);
 $i = 0;
