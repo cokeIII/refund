@@ -6,7 +6,9 @@ if (empty($_SESSION["user_status"])) {
     header("location: index.php");
 }
 require_once "connect.php";
-
+if ($_SESSION["user_status"] != "finance") {
+    header("location: index.php");
+}
 ?>
 
 <body id="page-top">
@@ -16,15 +18,58 @@ require_once "connect.php";
         <div class="container px-5">
             <div class="card">
                 <div class="card-body">
+
                     <div class="row">
                         <div class="col-md-12">
-                            <h4>ข้อมูลการโอนเงินคืนค่าลงทะเบียน</h4>
-                            <form action="report_1.php" method="POST" target="_blank">
+                            <div class="col-md-5">
+                                <h4>รายงานส่งธนาคารโครงการ</h4>
+                                <a href="sent_bank_01.php"><button class="btn btn-info mt-2">พิมพ์รายงาน</button></a>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-5">
+                                <h4>รายงานส่งธนาคารเงิน บกศ</h4>
+                                <a href="sent_bank_02.php"><button class="btn btn-info mt-2">พิมพ์รายงาน</button></a>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row  mt-2">
+                        <div class="col-md-12">
+                            <div class="col-md-5">
+                                <h4>ส่งออกเบอร์โทรศัพท์</h4>
+                                <label>เลือกกลุ่มเรียน</label>
+                                <form action="form_report_sms.php" method="post">
+                                    <select class="form-control" name="group_name" id="group_name">
+                                        <option value="">เลือกทุกกลุ่ม</option>
+                                        <?php
+
+                                        $sqlSMS = "select student_group_short_name from enroll group by student_group_short_name";
+                                        $resSMS = mysqli_query($conn, $sqlSMS);
+
+                                        while ($rowSMS = mysqli_fetch_array($resSMS)) {
+                                        ?>
+                                            <option value="<?php echo $rowSMS["student_group_short_name"] ?>"><?php echo $rowSMS["student_group_short_name"] ?></option>
+                                        <?php } ?>
+                                    </select>
+                                    <button type="submit" class="btn btn-info mt-2">รายงานส่ง SMS</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row mt-2">
+                        <div class="col-md-12">
+                            <!-- <h4>ข้อมูลการโอนเงินคืนค่าลงทะเบียน</h4> -->
+                            <!-- <form action="report_1.php" method="POST" target="_blank"> -->
                                 <?php
-                                $sqlMajor = "select major_name from enroll group by major_name";
-                                $resMajor = mysqli_query($conn, $sqlMajor);
+                                // $sqlMajor = "select major_name from enroll group by major_name";
+                                // $resMajor = mysqli_query($conn, $sqlMajor);
                                 ?>
-                                <div class="row">
+                                <!-- <div class="row">
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label>เลือกแผนก</label>
@@ -67,32 +112,8 @@ require_once "connect.php";
                                         <label></label>
                                         <button class="btn btn-info mt-2">พิมพ์รายงาน</button>
                                     </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="col-md-5">
-                                <h4>ส่งออกเบอร์โทรศัพท์</h4>
-                                <label>เลือกกลุ่มเรียน</label>
-                                <form action="form_report_sms.php" method="post">
-                                    <select class="form-control" name="group_name" id="group_name">
-                                        <option value="">เลือกทุกกลุ่ม</option>
-                                        <?php
-
-                                        $sqlSMS = "select student_group_short_name from enroll group by student_group_short_name";
-                                        $resSMS = mysqli_query($conn, $sqlSMS);
-
-                                        while ($rowSMS = mysqli_fetch_array($resSMS)) {
-                                        ?>
-                                            <option value="<?php echo $rowSMS["student_group_short_name"] ?>"><?php echo $rowSMS["student_group_short_name"] ?></option>
-                                        <?php } ?>
-                                    </select>
-                                    <button type="submit" class="btn btn-info mt-2">รายงานส่ง SMS</button>
-                                </form>
-                            </div>
+                                </div> -->
+                            <!-- </form> -->
                         </div>
                     </div>
                 </div>
