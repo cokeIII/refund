@@ -177,10 +177,6 @@ $row = mysqli_fetch_assoc($res);
         </tr>
     </table>
     <!-- <div class="text-size">หมายเหตุ : โดยให้<?php //echo $row["recipient"];?>นักเรียน/นักศึกษาเป็นผู้รับผิดชอบค่าธรรมเนียมในการโอนเงินฝากธนาคาร</div> -->
-
-
-
-
 </body>
 
 </html>
