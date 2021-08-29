@@ -131,6 +131,7 @@ if (isset($_POST['cash'])){
                             $sql="SELECT * FROM `cash` ORDER BY `cash`.`number` DESC limit 5";
                             $res=mysqli_query($conn,$sql);
                             while ($row=mysqli_fetch_assoc($res)){
+                                $id=$row['student_id'] ;
                             ?>
                             <tr>
                                 <td><?php echo $row['student_id']?></td>
@@ -147,7 +148,7 @@ if (isset($_POST['cash'])){
                                         <button class=" btn-info" title="แก้ไข"><i class="fas fa-pen"></i></button>
                                     </a>
                                     &nbsp;&nbsp;&nbsp;&nbsp;
-                                    <a href="get_cash.php?act=del&id=<?php echo $id?> >">
+                                    <a href="get_cash.php?act=del&id=<?php echo $id?>">
                                     <button class=" btn-danger" title="ลบ" onclick="return confirm('ต้องการลบข้อมูลนี้ ?')"><i class="fas fa-trash-alt"></i></button>
                                     </a>
                                     
