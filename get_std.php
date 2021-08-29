@@ -27,7 +27,7 @@ while ($row = mysqli_fetch_assoc($res)) {
     $techlist["data"][$i]["stu_name"] = $row["stu_fname"] . " " . $row["stu_lname"];
     $techlist["data"][$i]["student_group_short_name"] = $row["student_group_short_name"];
     $techlist["data"][$i]["status1"] = '<input type="radio" name="' . $row["student_id"] . '" stdId="' . $row["student_id"] . '" class="status-radio" value="ผ่อนผัน" ' . ($row["status_std"] == "ผ่อนผัน" ? "checked" : "") . '>: ผ่อนผัน';
-    $techlist["data"][$i]["status2"] = '<input type="radio" name="' . $row["student_id"] . '" stdId="' . $row["student_id"] . '" class="status-radio" value="ลงทะเบียนแล้ว" ' . ($row["status_std"] == "ลงทะเบียนแล้ว" ? "checked" : "") . '>: ลงทะเบียนแล้ว';
+    $techlist["data"][$i]["status2"] = '<input type="radio" name="' . $row["student_id"] . '" stdId="' . $row["student_id"] . '" class="status-radio" value="ยังไม่ได้ลงทะเบียน" ' . ($row["status_std"] == "ยังไม่ได้ลงทะเบียน" ? "checked" : "") . '>: ยังไม่ได้ลงทะเบียน';
     $techlist["data"][$i]["clear"] = '<button class="btn btn-danger btn-clear" stdId="' . $row["student_id"] . '">ล้างสถานะ</button>';
     $i++;
 }
