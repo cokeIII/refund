@@ -171,7 +171,7 @@ $row = mysqli_fetch_assoc($res);
     <table>
         <tr class="txt-right text-size ">
         <td>ลงชื่อ  <img class="sig-size" src="uploads/signature/<?php echo $row["parent_signature"]; ?>">  ผู้รับเงิน</td>
-        <td height="76">ลงชื่อ................................................ผู้จ่ายเงิน</td>
+        <td>ลงชื่อ................................................ผู้จ่ายเงิน</td>
         </tr>
         <tr>
             <td class="text-size center">(<?php echo trim($row["recipient_prefix"]).$row["recipient_fname"] . " " . $row["recipient_lname"]; ?>)</td>
