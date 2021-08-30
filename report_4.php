@@ -134,6 +134,10 @@ $row = mysqli_fetch_assoc($res);
             margin-left: 10%;
         }
 
+        .m-l {
+            margin-left: 30px;
+        }
+
         .m-r {
             margin-right: 15%;
         }
@@ -170,17 +174,17 @@ $row = mysqli_fetch_assoc($res);
     <div class="center"><img src="uploads/<?php echo $row["account_book_pic"]; ?>" alt="" height="133" width="273"></div>
     <div class="text-size tab">ขอรับรองว่าเป็น<?php echo $row["recipient"];?>ของ <?php echo $row["prefix_name"] . $row["stu_fname"] . " " . $row["stu_lname"]; ?></div>
     <div class="text-size">ได้รับเงินตามประกาศวิทยาลัยเทคนิคชลบุรี จำนวน <?php echo $row["pay2"];?> บาทเรียบร้อยแล้ว</div>
-    <table width="100%">
+    <table width="100%" border="1">
         <tr class="txt-right text-size ">
-        <td width="70%" class="center text-size">ลงชื่อ  <img class="sig-size" src="uploads/signature/<?php echo $row["parent_signature"]; ?>">  ผู้รับเงิน</td>
-        <td>ลงชื่อ................................................ผู้จ่ายเงิน</td>
+        <td width="50%" class="center text-size m-l">ลงชื่อ  <img class="sig-size" src="uploads/signature/<?php echo $row["parent_signature"]; ?>">  ผู้รับเงิน</td>
+        <td class="text-size center">ลงชื่อ................................................ผู้จ่ายเงิน</td>
         </tr>
         <tr>
-            <td width="70%" class="text-size center">(<?php echo trim($row["recipient_prefix"]).$row["recipient_fname"] . " " . $row["recipient_lname"]; ?>)</td>
+            <td width="50%" class="text-size center">(<?php echo trim($row["recipient_prefix"]).$row["recipient_fname"] . " " . $row["recipient_lname"]; ?>)</td>
             <td class="text-size center">(นางกรรณิการ์ บำรุงญาติ)<div>หัวหน้างานการเงิน</div></td>
         </tr>
         <tr>
-            <td width="70%" class="text-size center">วันที่................................................</td>
+            <td width="50%" class="text-size center">วันที่................................................</td>
             <td class="text-size center">วันที่................................................</td>
         </tr>
     </table>
