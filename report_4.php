@@ -168,9 +168,9 @@ $row = mysqli_fetch_assoc($res);
     <div class="center"><img src="uploads/<?php echo $row["account_book_pic"]; ?>" alt="" height="135" width="275"></div>
     <div class="text-size tab">ขอรับรองว่าเป็น<?php echo $row["recipient"];?>ของ <?php echo $row["prefix_name"] . $row["stu_fname"] . " " . $row["stu_lname"]; ?></div>
     <div class="text-size">ได้รับเงินตามประกาศวิทยาลัยเทคนิคชลบุรี จำนวน <?php echo $row["pay2"];?> บาทเรียบร้อยแล้ว</div>
-    <table >
+    <table width="100%">
         <tr class="txt-right text-size ">
-        <td width="70%" class="center">ลงชื่อ  <img class="sig-size" src="uploads/signature/<?php echo $row["parent_signature"]; ?>">  ผู้รับเงิน</td>
+        <td width="70%" class="center text-size">ลงชื่อ  <img class="sig-size" src="uploads/signature/<?php echo $row["parent_signature"]; ?>">  ผู้รับเงิน</td>
         <td>ลงชื่อ................................................ผู้จ่ายเงิน</td>
         </tr>
         <tr>
