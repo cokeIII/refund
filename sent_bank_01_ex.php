@@ -48,7 +48,14 @@
                 <td><?php echo $row['std_name']?></td>
                 <td><?php echo $row['group_shortname']?></td>
                 <td><?php echo $row['bank_id']?></td>
-                <td class="text-center"><?php echo '-'.$row['recipient_bank_number'] ?></td>
+                <?php
+                if (substr($row['recipient_bank_number'],0,1)==0){
+                    $num_b="A ".$row['recipient_bank_number'];
+                }else{
+                    $num_b=$row['recipient_bank_number'];
+                }
+                ?>
+                <td class="text-center"><?php echo $num_b ?></td>
                 <td><?php echo $row['recipient_name']?></td>
                 <td class="text-center"><?php echo $row['bank_name']?></td>
             </tr>
