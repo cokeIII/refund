@@ -37,9 +37,16 @@ if ($_SESSION["user_status"] != "finance") {
                                 ?>
                             </select>
                         </div>
-                        <div class="col-md-8">
+                        <div class="col-md-4">
+                            <label><strong>ตัวเลือกพิมพ์รายงาน</strong></label>
+                            <div>
+                                <input type="radio" name="printMode" id="report2" value="report2" checked> : เงินเยียวยา 2000
+                                <input type="radio" name="printMode" id="report4" value="report4" class="ml-2"> : เงิน บกศ
+                            </div>
+                        </div>
+                        <div class="col-md-4">
                             <div class="row justify-content-end">
-                                <div class="col-md-4">
+                                <div class="col-md-12">
                                     <a href="form_stutus_std.php"><button class="btn btn-info" id="stdStatus"><i class="fas fa-user-edit"></i> แก้ไขสถานะนักเรียนนักศึกษา</button></a>
                                 </div>
                             </div>
@@ -186,6 +193,17 @@ if ($_SESSION["user_status"] != "finance") {
     $(document).ready(function() {
         let enrollId
         let stdId
+        $(document).on('click', '.btnPrint', function() {
+            if ($('input[name=printMode]:checked').val() == "report2") {
+                $.redirect("report_2.php", {
+                    id: $(this).attr("enrollId"),
+                }, "GET", "_blank");
+            } else if ($('input[name=printMode]:checked').val() == "report4") {
+                $.redirect("report_4.php", {
+                    id: $(this).attr("enrollId"),
+                }, "GET", "_blank");
+            }
+        })
         $(document).on('submit', '#bank_form', function() {
             $.ajax({
                 type: "POST",
