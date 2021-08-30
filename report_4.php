@@ -74,7 +74,9 @@ $row = mysqli_fetch_assoc($res);
         .text-size {
             font-size: 20px;
         }
-
+        .text-size2 {
+            font-size: 18px;
+        }
         .text-right {
             text-align: right;
         }
@@ -169,16 +171,16 @@ $row = mysqli_fetch_assoc($res);
     <div class="text-size tab">ขอรับรองว่าเป็น<?php echo $row["recipient"];?>ของ <?php echo $row["prefix_name"] . $row["stu_fname"] . " " . $row["stu_lname"]; ?></div>
     <div class="text-size">ได้รับเงินตามประกาศวิทยาลัยเทคนิคชลบุรี จำนวน <?php echo $row["pay2"];?> บาทเรียบร้อยแล้ว</div>
     <table width="100%">
-        <tr class="txt-right text-size ">
+        <tr class="txt-right text-size2 ">
         <td width="70%" class="center text-size">ลงชื่อ  <img class="sig-size" src="uploads/signature/<?php echo $row["parent_signature"]; ?>">  ผู้รับเงิน</td>
         <td>ลงชื่อ................................................ผู้จ่ายเงิน</td>
         </tr>
         <tr>
-            <td width="70%" class="text-size center">(<?php echo trim($row["recipient_prefix"]).$row["recipient_fname"] . " " . $row["recipient_lname"]; ?>)</td>
+            <td width="70%" class="text-size2 center">(<?php echo trim($row["recipient_prefix"]).$row["recipient_fname"] . " " . $row["recipient_lname"]; ?>)</td>
             <td class="text-size center">(นางกรรณิการ์ บำรุงญาติ)<div>หัวหน้างานการเงิน</div></td>
         </tr>
         <tr>
-            <td width="70%" class="text-size center">วันที่................................................</td>
+            <td width="70%" class="text-size2 center">วันที่................................................</td>
             <td class="text-size center">วันที่................................................</td>
         </tr>
     </table>
