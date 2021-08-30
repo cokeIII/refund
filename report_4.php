@@ -148,7 +148,7 @@ $row = mysqli_fetch_assoc($res);
 </head>
 
 <body>
-    <div class="center"><strong>วิทยาลัยเทคนิคชลบุรี</strong></div>
+    <div class="center text-size"><strong>วิทยาลัยเทคนิคชลบุรี</strong></div>
     <div class="center text-size">หลักฐานการรับเงินตามประกาศวิทยาลัยเทคนิคชลบุรี เรื่องการคืนเงินบำรุงการศึกษา</div>
     <div class="center text-size">ในสถานศึกษา ค่าธรรมเนียมการเรียนและค่าธรรมเนียมอื่นในสถานศึกษา</div>
     <div class="center text-size">ประกาศ วันที่ 21 กรกฎาคม 2564</div>
@@ -175,6 +175,7 @@ $row = mysqli_fetch_assoc($res);
         </tr>
         <tr>
             <td class="text-size center">(<?php echo trim($row["recipient_prefix"]).$row["recipient_fname"] . " " . $row["recipient_lname"]; ?>)</td>
+            <td class="text-size center">(นางกรรณิการ์ บำรุงญาติ)</td>
         </tr>
         <tr>
             <td class="text-size center">วันที่................................................</td>
