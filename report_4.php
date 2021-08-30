@@ -46,7 +46,7 @@ function DateThai($strDate)
 }
 ob_start(); // Start get HTML code
 $id = $_REQUEST["id"];
-$sql = "select * from enroll e, pay p where id ='$id' and e.pay_id = p.pay_id";
+$sql = "select * from enroll e, pay p where e.id ='$id' and e.pay_id = p.pay_id";
 $res = mysqli_query($conn, $sql);
 $row = mysqli_fetch_assoc($res);
 ?>
