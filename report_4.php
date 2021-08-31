@@ -168,7 +168,7 @@ $row = mysqli_fetch_assoc($res);
     <div class="text-size">1.สำเนาบัตรประชาชนของนักเรียน/นักศึกษา หมายเลขโทรศัพท์ <?php echo $row["phone"]; ?> ชั้น/ช่าง <?php echo $row["student_group_short_name"]; ?> รหัส <?php echo $row["student_id"]; ?></div>
     <!-- <div class="text-size txt-right">ชั้น/ช่าง <?php //echo $row["student_group_short_name"]; 
                                                     ?> รหัส <?php //echo $row["student_id"]; 
-                                                                                                            ?></div> -->
+                                                            ?></div> -->
     <div class="center"><img src="uploads/<?php echo $row["id_card_pic_std"]; ?>" alt="" height="131" width="271"></div>
     <div class="text-size center">สำเนาถูกต้อง</div>
     <div class="text-size width-sig">ลงชื่อ<img class="sig-size" src="uploads/signature/<?php echo $row["stu_signature"]; ?>" width="75px" height="30px"></div>
@@ -193,27 +193,35 @@ $row = mysqli_fetch_assoc($res);
                 <div>ลงชื่อ................................................ผู้จ่ายเงิน</div>
                 <div>(นางกรรณิการ์ บำรุงญาติ)</div>
                 <div>หัวหน้างานการเงิน</div>
+                <div>วันที่................................................</div>
             </td>
         </tr>
         <!-- <tr> -->
-            <!-- <td width="50%" class="text-size2 center">(<?php //echo trim($row["recipient_prefix"]).$row["recipient_fname"] . " " . $row["recipient_lname"]; 
-                                                            ?>)</td> -->
-            <!-- <td class="text-size2 center"><div>(นางกรรณิการ์ บำรุงญาติ)</div><div>หัวหน้างานการเงิน</div> -->
-            <!-- </td> -->
+        <!-- <td width="50%" class="text-size2 center">(<?php //echo trim($row["recipient_prefix"]).$row["recipient_fname"] . " " . $row["recipient_lname"]; 
+                                                        ?>)</td> -->
+        <!-- <td class="text-size2 center"><div>(นางกรรณิการ์ บำรุงญาติ)</div><div>หัวหน้างานการเงิน</div> -->
+        <!-- </td> -->
         <!-- </tr> -->
         <!-- <tr>
             <td width="50%" class="text-size2 center">วันที่................................................</td>
             <td class="text-size2 center">วันที่................................................</td>
         </tr> -->
-        <tr width="100% text-size2">
+        <!-- <tr width="100% text-size2">
             <td class="center" width="100%" colspan="2">
                 <br>
                 <div>ลงชื่อ................................................</div>
                 <div>(นายอำนวย เหิมขุนทด)</div>
                 <div>รองผู้อำนวยการ ฝ่ายบริหารทรัพยากร</div>
             </td>
-        </tr>
+        </tr> -->
     </table>
+    <div class="center text-size2">
+        <div>ลงชื่อ................................................</div>
+        <div>(นายอำนวย เหิมขุนทด)</div>
+        <div>รองผู้อำนวยการ ฝ่ายบริหารทรัพยากร</div>
+    </div>
+    <br>
+
     <!-- <div class="text-size">หมายเหตุ : โดยให้<?php //echo $row["recipient"];
                                                     ?>นักเรียน/นักศึกษาเป็นผู้รับผิดชอบค่าธรรมเนียมในการโอนเงินฝากธนาคาร</div> -->
 </body>
