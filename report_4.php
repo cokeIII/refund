@@ -138,8 +138,11 @@ $row = mysqli_fetch_assoc($res);
 
         .tab {
             margin-left: 10%;
-        }
 
+        }
+        .m-t-5{
+            margin-top: -8px;
+        }
         .m-l {
             margin-left: 30px;
         }
@@ -181,7 +184,7 @@ $row = mysqli_fetch_assoc($res);
     <div class="text-size">3.เลขบัญชีธนาคารของ<?php echo $row["recipient"]; ?>โดยถ่ายหน้าบัญชี<?php echo $row["recipient_bank"]; ?> หมายเลขบัญชี <?php echo $row["recipient_bank_number"]; ?></div>
     <div class="center"><img src="uploads/<?php echo $row["account_book_pic"]; ?>" alt="" height="131" width="271"></div>
     <div class="text-size tab">ขอรับรองว่าเป็น<?php echo $row["recipient"]; ?>ของ <?php echo $row["prefix_name"] . $row["stu_fname"] . " " . $row["stu_lname"]; ?></div>
-    <div class="text-size">ได้รับเงินตามประกาศวิทยาลัยเทคนิคชลบุรี จำนวน <?php echo $row["pay2"]; ?> บาทเรียบร้อยแล้ว</div>
+    <div class="text-size m-t-5">ได้รับเงินตามประกาศวิทยาลัยเทคนิคชลบุรี จำนวน <?php echo $row["pay2"]; ?> บาทเรียบร้อยแล้ว</div>
     <table width="100%">
         <tr class="txt-right text-size2 ">
             <td width="50%" class="center text-size2 m-l">
