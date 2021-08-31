@@ -155,12 +155,12 @@ $row = mysqli_fetch_assoc($res);
 
 <body>
     <div class="center text-size"><strong>วิทยาลัยเทคนิคชลบุรี</strong></div>
-    <div class="center text-size">หลักฐานการรับเงินตามประกาศวิทยาลัยเทคนิคชลบุรี เรื่องการคืนเงินบำรุงการศึกษา</div>
-    <div class="center text-size">ในสถานศึกษา ค่าธรรมเนียมการเรียนและค่าธรรมเนียมอื่นในสถานศึกษา</div>
+    <div class="center text-size">หลักฐานการรับเงินตามประกาศวิทยาลัยเทคนิคชลบุรี เรื่องการคืนเงินบำรุงการศึกษา ในสถานศึกษา ค่าธรรมเนียมการเรียนและค่าธรรมเนียมอื่นในสถานศึกษา</div>
+    <!-- <div class="center text-size">ในสถานศึกษา ค่าธรรมเนียมการเรียนและค่าธรรมเนียมอื่นในสถานศึกษา</div> -->
     <div class="center text-size">ประกาศ วันที่ 21 กรกฎาคม 2564</div>
 
-    <div class="text-size">1.สำเนาบัตรประชาชนของนักเรียน/นักศึกษา หมายเลขโทรศัพท์  <?php echo $row["phone"]; ?></div>
-    <div class="text-size txt-right">ชั้น/ช่าง <?php echo $row["student_group_short_name"]; ?> รหัส <?php echo $row["student_id"]; ?></div>
+    <div class="text-size">1.สำเนาบัตรประชาชนของนักเรียน/นักศึกษา หมายเลขโทรศัพท์  <?php echo $row["phone"]; ?> ชั้น/ช่าง <?php echo $row["student_group_short_name"]; ?> รหัส <?php echo $row["student_id"]; ?></div>
+    <!-- <div class="text-size txt-right">ชั้น/ช่าง <?php //echo $row["student_group_short_name"]; ?> รหัส <?php //echo $row["student_id"]; ?></div> -->
     <div class="center"><img src="uploads/<?php echo $row["id_card_pic_std"]; ?>" alt="" height="133" width="273"></div>
     <div class="text-size center">สำเนาถูกต้อง</div>
     <div class="text-size width-sig">ลงชื่อ<img class="sig-size" src="uploads/signature/<?php echo $row["stu_signature"]; ?>" width="75px" height="30px"></div>
@@ -186,6 +186,14 @@ $row = mysqli_fetch_assoc($res);
         <tr>
             <td width="50%" class="text-size2 center">วันที่................................................</td>
             <td class="text-size2 center">วันที่................................................</td>
+        </tr>
+        <tr width="100% text-size2">
+            <td class="center" width="100%" colspan="2">
+                <br>
+                <div>ลงชื่อ................................................</div>
+                <div>(นายอำนวย เหิมขุนทด)</div>
+                <div>รองผู้อำนวยการ ฝ่ายบริหารทรัพยากร</div>
+            </td>
         </tr>
     </table>
     <!-- <div class="text-size">หมายเหตุ : โดยให้<?php //echo $row["recipient"];?>นักเรียน/นักศึกษาเป็นผู้รับผิดชอบค่าธรรมเนียมในการโอนเงินฝากธนาคาร</div> -->
