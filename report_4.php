@@ -74,9 +74,11 @@ $row = mysqli_fetch_assoc($res);
         .text-size {
             font-size: 20px;
         }
+
         .text-size2 {
             font-size: 19px;
         }
+
         .text-right {
             text-align: right;
         }
@@ -113,9 +115,11 @@ $row = mysqli_fetch_assoc($res);
             margin-left: auto;
             margin-right: auto;
         }
-        .w-100{
+
+        .w-100 {
             width: 100%;
         }
+
         .center {
             text-align: center;
         }
@@ -161,34 +165,46 @@ $row = mysqli_fetch_assoc($res);
     <!-- <div class="center text-size">ในสถานศึกษา ค่าธรรมเนียมการเรียนและค่าธรรมเนียมอื่นในสถานศึกษา</div> -->
     <div class="center text-size">ประกาศ วันที่ 21 กรกฎาคม 2564</div>
 
-    <div class="text-size">1.สำเนาบัตรประชาชนของนักเรียน/นักศึกษา หมายเลขโทรศัพท์  <?php echo $row["phone"]; ?> ชั้น/ช่าง <?php echo $row["student_group_short_name"]; ?> รหัส <?php echo $row["student_id"]; ?></div>
-    <!-- <div class="text-size txt-right">ชั้น/ช่าง <?php //echo $row["student_group_short_name"]; ?> รหัส <?php //echo $row["student_id"]; ?></div> -->
+    <div class="text-size">1.สำเนาบัตรประชาชนของนักเรียน/นักศึกษา หมายเลขโทรศัพท์ <?php echo $row["phone"]; ?> ชั้น/ช่าง <?php echo $row["student_group_short_name"]; ?> รหัส <?php echo $row["student_id"]; ?></div>
+    <!-- <div class="text-size txt-right">ชั้น/ช่าง <?php //echo $row["student_group_short_name"]; 
+                                                    ?> รหัส <?php //echo $row["student_id"]; 
+                                                                                                            ?></div> -->
     <div class="center"><img src="uploads/<?php echo $row["id_card_pic_std"]; ?>" alt="" height="131" width="271"></div>
     <div class="text-size center">สำเนาถูกต้อง</div>
     <div class="text-size width-sig">ลงชื่อ<img class="sig-size" src="uploads/signature/<?php echo $row["stu_signature"]; ?>" width="75px" height="30px"></div>
     <div class="text-size center">(<?php echo $row["prefix_name"] . $row["stu_fname"] . " " . $row["stu_lname"]; ?>)</div>
-    <div class="text-size">2.สำเนาบัตรประชาชน<?php echo $row["recipient"];?></div>
-    <div class="center"><img src="uploads/<?php echo $row["id_card_pic"]; ?>" alt="" height="131" width="271"></div>
+    <div class="text-size">2.สำเนาบัตรประชาชน<?php echo $row["recipient"]; ?></div>
+    <div class="center"><img src="uploads/<?php echo $row["id_card_pic"]; ?>" alt="" height="131" width="++271"></div>
     <div class="text-size center">สำเนาถูกต้อง</div>
     <div class="text-size width-sig">ลงชื่อ <img class="sig-size" src="uploads/signature/<?php echo $row["parent_signature"]; ?>" width="75px" height="30px"></div>
-    <div class="text-size center">(<?php echo trim($row["recipient_prefix"]).$row["recipient_fname"] . " " . $row["recipient_lname"]; ?>)</div>
-    <div class="text-size">3.เลขบัญชีธนาคารของ<?php echo $row["recipient"];?>โดยถ่ายหน้าบัญชี<?php echo $row["recipient_bank"];?> หมายเลขบัญชี <?php echo $row["recipient_bank_number"];?></div>
+    <div class="text-size center">(<?php echo trim($row["recipient_prefix"]) . $row["recipient_fname"] . " " . $row["recipient_lname"]; ?>)</div>
+    <div class="text-size">3.เลขบัญชีธนาคารของ<?php echo $row["recipient"]; ?>โดยถ่ายหน้าบัญชี<?php echo $row["recipient_bank"]; ?> หมายเลขบัญชี <?php echo $row["recipient_bank_number"]; ?></div>
     <div class="center"><img src="uploads/<?php echo $row["account_book_pic"]; ?>" alt="" height="131" width="271"></div>
-    <div class="text-size tab">ขอรับรองว่าเป็น<?php echo $row["recipient"];?>ของ <?php echo $row["prefix_name"] . $row["stu_fname"] . " " . $row["stu_lname"]; ?></div>
-    <div class="text-size">ได้รับเงินตามประกาศวิทยาลัยเทคนิคชลบุรี จำนวน <?php echo $row["pay2"];?> บาทเรียบร้อยแล้ว</div>
+    <div class="text-size tab">ขอรับรองว่าเป็น<?php echo $row["recipient"]; ?>ของ <?php echo $row["prefix_name"] . $row["stu_fname"] . " " . $row["stu_lname"]; ?></div>
+    <div class="text-size">ได้รับเงินตามประกาศวิทยาลัยเทคนิคชลบุรี จำนวน <?php echo $row["pay2"]; ?> บาทเรียบร้อยแล้ว</div>
     <table width="100%">
         <tr class="txt-right text-size2 ">
-        <td width="50%" class="center text-size2 m-l">ลงชื่อ  <img class="sig-size" src="uploads/signature/<?php echo $row["parent_signature"]; ?>">  ผู้รับเงิน</td>
-        <td class="text-size center">ลงชื่อ................................................ผู้จ่ายเงิน</td>
+            <td width="50%" class="center text-size2 m-l">
+                <div>ลงชื่อ <img class="sig-size" src="uploads/signature/<?php echo $row["parent_signature"]; ?>"> ผู้รับเงิน</div>
+                <div>(<?php echo trim($row["recipient_prefix"]) . $row["recipient_fname"] . " " . $row["recipient_lname"]; ?>)</div>
+                <div>วันที่................................................</div>
+            </td>
+            <td class="text-size center">
+                <div>ลงชื่อ................................................ผู้จ่ายเงิน</div>
+                <div>(นางกรรณิการ์ บำรุงญาติ)</div>
+                <div>หัวหน้างานการเงิน</div>
+            </td>
         </tr>
-        <tr>
-            <td width="50%" class="text-size2 center">(<?php echo trim($row["recipient_prefix"]).$row["recipient_fname"] . " " . $row["recipient_lname"]; ?>)</td>
-            <td class="text-size2 center">(นางกรรณิการ์ บำรุงญาติ)<div>หัวหน้างานการเงิน</div></td>
-        </tr>
-        <tr>
+        <!-- <tr> -->
+            <!-- <td width="50%" class="text-size2 center">(<?php //echo trim($row["recipient_prefix"]).$row["recipient_fname"] . " " . $row["recipient_lname"]; 
+                                                            ?>)</td> -->
+            <!-- <td class="text-size2 center"><div>(นางกรรณิการ์ บำรุงญาติ)</div><div>หัวหน้างานการเงิน</div> -->
+            <!-- </td> -->
+        <!-- </tr> -->
+        <!-- <tr>
             <td width="50%" class="text-size2 center">วันที่................................................</td>
             <td class="text-size2 center">วันที่................................................</td>
-        </tr>
+        </tr> -->
         <tr width="100% text-size2">
             <td class="center" width="100%" colspan="2">
                 <br>
@@ -198,7 +214,8 @@ $row = mysqli_fetch_assoc($res);
             </td>
         </tr>
     </table>
-    <!-- <div class="text-size">หมายเหตุ : โดยให้<?php //echo $row["recipient"];?>นักเรียน/นักศึกษาเป็นผู้รับผิดชอบค่าธรรมเนียมในการโอนเงินฝากธนาคาร</div> -->
+    <!-- <div class="text-size">หมายเหตุ : โดยให้<?php //echo $row["recipient"];
+                                                    ?>นักเรียน/นักศึกษาเป็นผู้รับผิดชอบค่าธรรมเนียมในการโอนเงินฝากธนาคาร</div> -->
 </body>
 
 </html>
@@ -212,7 +229,7 @@ ob_end_flush();
 echo "<script>window.location.href='$taget';</script>";
 exit;
 
-function getPrice() {
-
+function getPrice()
+{
 }
 ?>
