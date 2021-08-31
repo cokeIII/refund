@@ -113,7 +113,9 @@ $row = mysqli_fetch_assoc($res);
             margin-left: auto;
             margin-right: auto;
         }
-
+        .w-100{
+            width: 100%;
+        }
         .center {
             text-align: center;
         }
@@ -155,23 +157,23 @@ $row = mysqli_fetch_assoc($res);
 
 <body>
     <div class="center text-size"><strong>วิทยาลัยเทคนิคชลบุรี</strong></div>
-    <div class="center text-size2">หลักฐานการรับเงินตามประกาศวิทยาลัยเทคนิคชลบุรี เรื่องการคืนเงินบำรุงการศึกษาในสถานศึกษา ค่าธรรมเนียมการเรียนและค่าธรรมเนียมอื่นในสถานศึกษา</div>
+    <div class="center text-size2 w-100">หลักฐานการรับเงินตามประกาศวิทยาลัยเทคนิคชลบุรี เรื่องการคืนเงินบำรุงการศึกษาในสถานศึกษา ค่าธรรมเนียมการเรียนและค่าธรรมเนียมอื่นในสถานศึกษา</div>
     <!-- <div class="center text-size">ในสถานศึกษา ค่าธรรมเนียมการเรียนและค่าธรรมเนียมอื่นในสถานศึกษา</div> -->
     <div class="center text-size">ประกาศ วันที่ 21 กรกฎาคม 2564</div>
 
     <div class="text-size">1.สำเนาบัตรประชาชนของนักเรียน/นักศึกษา หมายเลขโทรศัพท์  <?php echo $row["phone"]; ?> ชั้น/ช่าง <?php echo $row["student_group_short_name"]; ?> รหัส <?php echo $row["student_id"]; ?></div>
     <!-- <div class="text-size txt-right">ชั้น/ช่าง <?php //echo $row["student_group_short_name"]; ?> รหัส <?php //echo $row["student_id"]; ?></div> -->
-    <div class="center"><img src="uploads/<?php echo $row["id_card_pic_std"]; ?>" alt="" height="133" width="273"></div>
+    <div class="center"><img src="uploads/<?php echo $row["id_card_pic_std"]; ?>" alt="" height="131" width="271"></div>
     <div class="text-size center">สำเนาถูกต้อง</div>
     <div class="text-size width-sig">ลงชื่อ<img class="sig-size" src="uploads/signature/<?php echo $row["stu_signature"]; ?>" width="75px" height="30px"></div>
     <div class="text-size center">(<?php echo $row["prefix_name"] . $row["stu_fname"] . " " . $row["stu_lname"]; ?>)</div>
     <div class="text-size">2.สำเนาบัตรประชาชน<?php echo $row["recipient"];?></div>
-    <div class="center"><img src="uploads/<?php echo $row["id_card_pic"]; ?>" alt="" height="133" width="273"></div>
+    <div class="center"><img src="uploads/<?php echo $row["id_card_pic"]; ?>" alt="" height="131" width="271"></div>
     <div class="text-size center">สำเนาถูกต้อง</div>
     <div class="text-size width-sig">ลงชื่อ <img class="sig-size" src="uploads/signature/<?php echo $row["parent_signature"]; ?>" width="75px" height="30px"></div>
     <div class="text-size center">(<?php echo trim($row["recipient_prefix"]).$row["recipient_fname"] . " " . $row["recipient_lname"]; ?>)</div>
     <div class="text-size">3.เลขบัญชีธนาคารของ<?php echo $row["recipient"];?>โดยถ่ายหน้าบัญชี<?php echo $row["recipient_bank"];?> หมายเลขบัญชี <?php echo $row["recipient_bank_number"];?></div>
-    <div class="center"><img src="uploads/<?php echo $row["account_book_pic"]; ?>" alt="" height="133" width="273"></div>
+    <div class="center"><img src="uploads/<?php echo $row["account_book_pic"]; ?>" alt="" height="131" width="271"></div>
     <div class="text-size tab">ขอรับรองว่าเป็น<?php echo $row["recipient"];?>ของ <?php echo $row["prefix_name"] . $row["stu_fname"] . " " . $row["stu_lname"]; ?></div>
     <div class="text-size">ได้รับเงินตามประกาศวิทยาลัยเทคนิคชลบุรี จำนวน <?php echo $row["pay2"];?> บาทเรียบร้อยแล้ว</div>
     <table width="100%">
