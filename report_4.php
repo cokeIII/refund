@@ -172,7 +172,7 @@ $row = mysqli_fetch_assoc($res);
     <div class="center text-size"><strong>วิทยาลัยเทคนิคชลบุรี</strong></div>
     <div class="center text-size2 w-100">หลักฐานการรับเงินตามประกาศวิทยาลัยเทคนิคชลบุรี เรื่องการคืนเงินบำรุงการศึกษาในสถานศึกษา ค่าธรรมเนียมการเรียนและค่าธรรมเนียมอื่นในสถานศึกษา</div>
     <!-- <div class="center text-size">ในสถานศึกษา ค่าธรรมเนียมการเรียนและค่าธรรมเนียมอื่นในสถานศึกษา</div> -->
-    <div class="center text-size">ประกาศ วันที่ 21 กรกฎาคม 2564</div>
+    <div class="center text-size m-t-5">ประกาศ วันที่ 21 กรกฎาคม 2564</div>
 
     <div class="text-size">1.สำเนาบัตรประชาชนของนักเรียน/นักศึกษา หมายเลขโทรศัพท์ <?php echo $row["phone"]; ?> ชั้น/ช่าง <?php echo $row["student_group_short_name"]; ?> รหัส <?php echo $row["student_id"]; ?></div>
     <!-- <div class="text-size txt-right">ชั้น/ช่าง <?php //echo $row["student_group_short_name"]; 
