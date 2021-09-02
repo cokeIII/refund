@@ -46,6 +46,7 @@ require_once "connect.php";
                                 and student.group_id != '632090103' and student.group_id !='632090104'
                                 and student.group_id not LIKE '62202%'
                                 and enroll.grade_name = '$group_name'
+                                and enroll.sms = ''
                                 ";
                             } else {
                                 $sql = "SELECT enroll.* FROM enroll 
@@ -53,6 +54,7 @@ require_once "connect.php";
                                 AND enroll.status='พิมพ์แล้ว'
                                 and student.group_id != '632090103' and student.group_id !='632090104'
                                 and student.group_id not LIKE '62202%'
+                                and enroll.sms = ''
                                 ";
                             }
                             $listSamePhone = [];
