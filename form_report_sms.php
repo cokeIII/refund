@@ -39,18 +39,27 @@ require_once "connect.php";
                             $i = 0;
                             if (!empty($_POST["group_name"])) {
                                 $group_name = $_POST["group_name"];
-                                $sql = "select  * from enroll where 
-                                status = 'พิมพ์แล้ว' and sms = '' and student_group_short_name = '$group_name'";
+                                $sql = "SELECT enroll.* FROM enroll 
+                                INNER JOIN student on student.student_id=enroll.student_id
+                                AND enroll.status='พิมพ์แล้ว'
+                                and student.group_id != '632090103' and student.group_id !='632090104'
+                                and student.group_id not LIKE '62202%'
+                                and enroll.grade_name = '$group_name'
+                                ";
                             } else {
-                                $sql = "select  * from enroll where 
-                                status = 'พิมพ์แล้ว' and sms = ''";
+                                $sql = "SELECT enroll.* FROM enroll 
+                                INNER JOIN student on student.student_id=enroll.student_id
+                                AND enroll.status='พิมพ์แล้ว'
+                                and student.group_id != '632090103' and student.group_id !='632090104'
+                                and student.group_id not LIKE '62202%'
+                                ";
                             }
                             $listSamePhone = [];
                             $listErrAndSamePhone = [];
                             $res = mysqli_query($conn, $sql);
                             while ($row = mysqli_fetch_array($res)) {
                                 $phone = $row["phone"];
-                                if (preg_match("/^[0-9]{10}$/", $phone) && checkSamePhone($phone)) {
+                                if (preg_match("/^[0-9]{10}$/", $phone)) {
 
                             ?>
                                     <tr>
@@ -140,45 +149,52 @@ require_once "connect.php";
             <div class="card">
                 <div class="card-body">
                     <div class="row mb-3">
-                        <h3 class="text-warning">รายการเบอร์โทรที่ซ้ำ</h3>
+                        <!-- <h3 class="text-warning">รายการเบอร์โทรที่ซ้ำ</h3> -->
                     </div>
                     <table class="table" id="listPhoneSame" style="width:100%">
                         <thead>
                             <tr>
-                                <th>ที่</th>
+                                <!-- <th>ที่</th>
                                 <th>หมายเลขลงทะเบียน</th>
                                 <th>รหัสนักศึกษา</th>
                                 <th>ชื่อ-สกุล</th>
                                 <th>หมายเลขโทรศัพท์</th>
-                                <th>กลุ่มเรียน</th>
+                                <th>กลุ่มเรียน</th> -->
                                 <!-- <th></th> -->
                             </tr>
                         </thead>
                         <tbody>
                             <?php
-                            $k = 0;
-                            foreach ($listSamePhone as $key => $value2) {
+                            // $k = 0;
+                            // foreach ($listSamePhone as $key => $value2) {
                             ?>
-                                <tr>
-                                    <td><?php echo ++$k; ?></td>
-                                    <td><?php echo $value2["id"]; ?></td>
-                                    <td><?php echo $value2["student_id"]; ?></td>
-                                    <td><?php echo $value2["prefix_name"] . $value2["stu_fname"] . " " . $value2["stu_lname"]; ?></td>
-                                    <td><?php echo $value2["phone"]; ?></td>
-                                    <td><?php echo $value2["student_group_short_name"]; ?></td>
-                                    <!-- <td><input type="checkbox" name="phone" id="phone" class="checkbox"></td> -->
-                                </tr>
+                            <tr>
+                                <!-- <td><?php //echo ++$k; 
+                                            ?></td>
+                                    <td><?php //echo $value2["id"]; 
+                                        ?></td>
+                                    <td><?php //echo $value2["student_id"]; 
+                                        ?></td>
+                                    <td><?php //echo $value2["prefix_name"] . $value2["stu_fname"] . " " . $value2["stu_lname"]; 
+                                        ?></td>
+                                    <td><?php //echo $value2["phone"]; 
+                                        ?></td>
+                                    <td><?php //echo $value2["student_group_short_name"]; 
+                                        ?></td> -->
+                                <!-- <td><input type="checkbox" name="phone" id="phone" class="checkbox"></td> -->
+                            </tr>
                             <?php
-                            } ?>
+                            //} 
+                            ?>
                         </tbody>
                         <tfoot>
                             <tr>
-                                <th>ที่</th>
+                                <!-- <th>ที่</th>
                                 <th>หมายเลขลงทะเบียน</th>
                                 <th>รหัสนักศึกษา</th>
                                 <th>ชื่อ-สกุล</th>
                                 <th>หมายเลขโทรศัพท์</th>
-                                <th>กลุ่มเรียน</th>
+                                <th>กลุ่มเรียน</th> -->
                                 <!-- <th></th> -->
                             </tr>
                         </tfoot>
@@ -209,7 +225,7 @@ function checkSamePhone($phone)
 </html>
 <script>
     $(document).ready(function() {
-        $("#listPhoneSame").DataTable()
+        // $("#listPhoneSame").DataTable()
         $("#listPhoneErr").DataTable()
         var table = $('#listPhone').DataTable({
             columnDefs: [{
@@ -242,15 +258,16 @@ function checkSamePhone($phone)
                         let month = '' + (d.getMonth() + 1)
                         let day = '' + d.getDate()
                         let year = d.getFullYear()
-
-                        phoneNumber += value[5] + ","
+                        if (phoneNumber.search(value[5]) < 0) {
+                            phoneNumber += value[5] + ","
+                        }
                         if (i % 200 == 0) {
                             exportFile(day + "/" + month + "/" + year + "_" + no, phoneNumber.slice(0, -1))
                             phoneNumber = ""
                             i = 0
                             no++
-                            numberFile = numberFile-1
-                        } else if (numberFile < 1 && i == dataArr.length-200*(Math.floor(dataArr.length / 200))) {
+                            numberFile = numberFile - 1
+                        } else if (numberFile < 1 && i == dataArr.length - 200 * (Math.floor(dataArr.length / 200))) {
                             exportFile(day + "/" + month + "/" + year + "_" + no, phoneNumber.slice(0, -1))
                         }
                         i++;

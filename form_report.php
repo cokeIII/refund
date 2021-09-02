@@ -44,16 +44,21 @@ if ($_SESSION["user_status"] != "finance") {
                                 <label>เลือกกลุ่มเรียน</label>
                                 <form action="form_report_sms.php" method="post">
                                     <select class="form-control" name="group_name" id="group_name">
-                                        <option value="">เลือกทุกกลุ่ม</option>
+                                        <option value="">เลือกทุกระดับ</option>
                                         <?php
 
-                                        $sqlSMS = "select student_group_short_name from enroll group by student_group_short_name";
-                                        $resSMS = mysqli_query($conn, $sqlSMS);
+                                        // $sqlSMS = "select student_group_short_name from enroll group by student_group_short_name";
+                                        // $resSMS = mysqli_query($conn, $sqlSMS);
 
-                                        while ($rowSMS = mysqli_fetch_array($resSMS)) {
+                                        // while ($rowSMS = mysqli_fetch_array($resSMS)) {
                                         ?>
-                                            <option value="<?php echo $rowSMS["student_group_short_name"] ?>"><?php echo $rowSMS["student_group_short_name"] ?></option>
-                                        <?php } ?>
+                                            <!-- <option value="<?php // echo $rowSMS["student_group_short_name"] ?>"><?php //echo $rowSMS["student_group_short_name"] ?></option> -->
+                                        <?php //} ?>
+                                        <option value="ปวช.1">ปวช.1</option>
+                                        <option value="ปวช.2">ปวช.2</option>
+                                        <option value="ปวช.3">ปวช.3</option>
+                                        <option value="ปวส.1">ปวส.1</option>
+                                        <option value="ปวส.2">ปวส.2</option>
                                     </select>
                                     <button type="submit" class="btn btn-info mt-2">รายงานส่ง SMS</button>
                                 </form>
