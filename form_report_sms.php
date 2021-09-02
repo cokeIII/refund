@@ -37,6 +37,7 @@ require_once "connect.php";
                         <tbody>
                             <?php
                             $i = 0;
+                            $group_name="";
                             if (!empty($_POST["group_name"])) {
                                 $group_name = $_POST["group_name"];
                                 $sql = "SELECT enroll.* FROM enroll 
@@ -277,7 +278,8 @@ function checkSamePhone($phone)
         })
 
         function exportFile(d, phoneNumber) {
-            download("phone_" + d + ".txt", phoneNumber)
+            let group_name = "<?php echo $group_name;?>";
+            download("phone_" + d + "_"+group_name+".txt", phoneNumber)
         }
 
         function download(filename, text) {
