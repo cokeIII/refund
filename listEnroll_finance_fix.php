@@ -40,8 +40,11 @@ if ($_SESSION["user_status"] != "finance") {
                         <div class="col-md-4">
                             <label><strong>ตัวเลือกพิมพ์รายงาน</strong></label>
                             <div>
-                                <input type="radio" name="printMode" id="report2" value="report2" checked> : เงินเยียวยา 2000
-                                <input type="radio" name="printMode" id="report4" value="report4" class="ml-2"> : เงิน บกศ
+                                <input type="radio" name="printMode" id="report2" value="report2" class="modeReport" checked> : เงินเยียวยา 2000
+                                <input type="radio" name="printMode" id="report4" value="report4" class="modeReport ml-2"> : เงิน บกศ
+                            </div>
+                            <div class="moneyFixBox">
+                                กำหนดจำนวนเงินที่พิมพ์: <input type="number"  id="moneyFix" class="form-control">
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -191,6 +194,14 @@ if ($_SESSION["user_status"] != "finance") {
 </div>
 <script>
     $(document).ready(function() {
+        $(".moneyFixBox").hide()
+        $(document).on('click','.modeReport',function(){
+            if ($('input[name=printMode]:checked').val() == "report2") {
+                $(".moneyFixBox").hide()
+            } else if ($('input[name=printMode]:checked').val() == "report4") {
+                $(".moneyFixBox").show()
+            }
+        })
         let enrollId
         let stdId
         $(document).on('click', '.btnPrint', function() {
@@ -201,6 +212,7 @@ if ($_SESSION["user_status"] != "finance") {
             } else if ($('input[name=printMode]:checked').val() == "report4") {
                 $.redirect("report_4.php", {
                     id: $(this).attr("enrollId"),
+                    money:  $("#moneyFixBox").val(),
                 }, "GET", "_blank");
             }
         })
