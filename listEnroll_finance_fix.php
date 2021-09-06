@@ -212,7 +212,7 @@ if ($_SESSION["user_status"] != "finance") {
             } else if ($('input[name=printMode]:checked').val() == "report4") {
                 $.redirect("report_4.php", {
                     id: $(this).attr("enrollId"),
-                    money:  $("#moneyFixBox").val(),
+                    money:  $("#moneyFix").val(),
                 }, "GET", "_blank");
             }
         })
