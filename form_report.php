@@ -18,7 +18,27 @@ if ($_SESSION["user_status"] != "finance") {
         <div class="container px-5">
             <div class="card">
                 <div class="card-body">
-
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-12">
+                                <h4>รายงานบัญชีรายชื่อนักเรียน/นักศึกษาที่อยู่ในระบบ ศธ.02 ณ วันที่ 6 ส.ค. 64 ที่สามารถจ่ายเงินได้</h4>
+                                <form action="report_5.php" method="POST">
+                                    <select id="group_id" name="group_id" class="form-control mb-3 col-md-5" required>
+                                        <option value="">-- เลือกกลุ่ม --</option>
+                                        <?php
+                                        $sqlG = "select * from std_group order by group_id";
+                                        $resG = mysqli_query($conn, $sqlG);
+                                        while ($rowG = mysqli_fetch_array($resG)) {
+                                        ?>
+                                            <option value="<?php echo $rowG["group_id"]; ?>"><?php echo $rowG["group_name"] . " (" . $rowG["group_id"] . ")"; ?></option>
+                                        <?php } ?>
+                                    </select>
+                                    <button class="btn btn-info mt-2">พิมพ์รายงาน</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
                     <div class="row">
                         <div class="col-md-12">
                             <div class="col-md-5">
@@ -52,8 +72,11 @@ if ($_SESSION["user_status"] != "finance") {
 
                                         // while ($rowSMS = mysqli_fetch_array($resSMS)) {
                                         ?>
-                                            <!-- <option value="<?php // echo $rowSMS["student_group_short_name"] ?>"><?php //echo $rowSMS["student_group_short_name"] ?></option> -->
-                                        <?php //} ?>
+                                        <!-- <option value="<?php // echo $rowSMS["student_group_short_name"] 
+                                                            ?>"><?php //echo $rowSMS["student_group_short_name"] 
+                                                                ?></option> -->
+                                        <?php //} 
+                                        ?>
                                         <option value="ปวช.1">ปวช.1</option>
                                         <option value="ปวช.2">ปวช.2</option>
                                         <option value="ปวช.3">ปวช.3</option>
@@ -70,11 +93,11 @@ if ($_SESSION["user_status"] != "finance") {
                         <div class="col-md-12">
                             <!-- <h4>ข้อมูลการโอนเงินคืนค่าลงทะเบียน</h4> -->
                             <!-- <form action="report_1.php" method="POST" target="_blank"> -->
-                                <?php
-                                // $sqlMajor = "select major_name from enroll group by major_name";
-                                // $resMajor = mysqli_query($conn, $sqlMajor);
-                                ?>
-                                <!-- <div class="row">
+                            <?php
+                            // $sqlMajor = "select major_name from enroll group by major_name";
+                            // $resMajor = mysqli_query($conn, $sqlMajor);
+                            ?>
+                            <!-- <div class="row">
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label>เลือกแผนก</label>
