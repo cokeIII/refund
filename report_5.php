@@ -6,12 +6,14 @@ header("Pragma: no-cache");
 header("Expires: 0");
 $group_id = $_REQUEST["group_id"];
 if (!empty($group_id)) {
-    $sql = "select * from enroll where group_id = '$group_id' and status = 'พิมพ์แล้ว'";
+    $sqlG = "select * from enroll where group_id = '$group_id' and status = 'พิมพ์แล้ว'";
 } else {
-    $sql = "";
+    $sqlG = "";
 }
-
-$res = mysqli_query($conn, $sql);
+$resRow = mysqli_query($conn, $sqlG);
+$rowcount = mysqli_num_rows($resRow);
+$resGetG = mysqli_query($conn, $sqlG);
+$rowGetG = mysqli_fetch_array($resGetG);
 ?>
 <style>
     .text-center {
@@ -21,7 +23,15 @@ $res = mysqli_query($conn, $sql);
     .m-t {
         margin-top: 30px;
     }
+    div.page { 
+        page-break-after: always; 
+    }
 </style>
+<?php
+$count = 0;
+for ($i = 0; $i < ceil($rowcount / 20); $i++) {
+    $page = $i * 20;
+?>
 <table>
     <tr>
         <th class="text-center" colspan="10">บัญชีรายชื่อนักเรียน-นักศึกษาที่อยู่ในระบบ ศธ.02 ณ วันที่ 6 ส.ค. 64 ที่สามารถจ่ายเงินได้</th>
@@ -32,12 +42,15 @@ $res = mysqli_query($conn, $sql);
     <tr>
         <th class="text-center" colspan="10">วิทยาลัยเทคนิคชลบุรี</th>
     </tr>
+    <tr>
+        <th>ระดับชั้น <?php echo  $rowGetG["student_group_short_name"];?></th>
+    </tr>
 </table>
 <table class="table" style="width:100%" border='1'>
     <thead>
         <tr>
             <th width="50px">ที่</th>
-            <th class="text-center" width="130px">เลขประจำตัวประชาชน<div>ของนักเรียน/นักศึกษา</div>
+            <th class="text-center" width="130px">เลขประจำตัวประชาชน<br>ของนักเรียน/นักศึกษา
             </th>
             <th>ชื่อ-สกุล นักเรียน/นักศึกษา</th>
             <th>ชื่อผู้ปกครองนักเรียน<div>ที่รับเงินช่วยเหลือ</div>
@@ -70,8 +83,28 @@ $res = mysqli_query($conn, $sql);
     </thead>
     <tbody>
         <?php
-        $count = 0;
+
+        $sqlLimit = "select e.*,p.people_name,p.people_surname 
+        from 
+        enroll e,
+        student_group g,
+        people p
+        where e.group_id = g.student_group_id
+        and p.people_id = g.teacher_id1
+        and e.group_id = '$group_id'
+        and e.status = 'พิมพ์แล้ว' limit $page,20";
+        // $sqlLimit = "select e.*,p.people_name,p.people_surname 
+        // from 
+        // enroll e,
+        // student_group g,
+        // people p
+        // where e.group_id = g.student_group_id
+        // and p.people_id = g.teacher_id1
+        // and e.group_id = '$group_id'
+        // ";
+        $res = mysqli_query($conn, $sqlLimit);
         while ($row = mysqli_fetch_array($res)) {
+            $teachName = $row["people_name"] . " " . $row["people_surname"];
         ?>
             <tr>
                 <td><?php echo ++$count; ?></td>
@@ -102,7 +135,7 @@ $res = mysqli_query($conn, $sql);
             <div><strong>ตรวจสอบแล้วถูกต้อง</strong></div>
             <br>
             <div>ลงชื่อ....................................................</div>
-            <div>(....................................................)</div>
+            <div>(<?php echo $teachName; ?>)</div>
             <div>อาจารย์ที่ปรึกษา</div>
             <div>วันที่..............เดือน..................................พ.ศ.2564</div>
         </td>
@@ -116,4 +149,5 @@ $res = mysqli_query($conn, $sql);
         </td>
     </tr>
 </table>
-<?php
+<div class="page"></div>
+<?php }
