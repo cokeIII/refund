@@ -43,7 +43,7 @@ for ($i = 0; $i < ceil($rowcount / 20); $i++) {
         <th class="text-center" colspan="10">วิทยาลัยเทคนิคชลบุรี</th>
     </tr>
     <tr>
-        <th>ระดับชั้น <?php echo  $rowGetG["student_group_short_name"];?></th>
+        <th colspan="2">ระดับชั้น <?php echo  $rowGetG["student_group_short_name"];?></th>
     </tr>
 </table>
 <table class="table" style="width:100%" border='1'>
