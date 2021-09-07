@@ -23,7 +23,7 @@ if ($_SESSION["user_status"] != "finance") {
                             <div class="col-md-12">
                                 <h4>รายงานบัญชีรายชื่อนักเรียน/นักศึกษาที่อยู่ในระบบ ศธ.02 ณ วันที่ 6 ส.ค. 64 ที่สามารถจ่ายเงินได้</h4>
                                 <form action="report_5.php" method="POST">
-                                    <select id="group_id" name="group_id" class="form-control mb-3 col-md-5" required>
+                                    <select id="group_id" name="group_id" class="form-control mb-3 col-md-4" required>
                                         <option value="">-- เลือกกลุ่ม --</option>
                                         <?php
                                         $sqlG = "select * from std_group order by group_id";
@@ -154,6 +154,7 @@ if ($_SESSION["user_status"] != "finance") {
 </html>
 <script>
     $(document).ready(function() {
+        $('#group_id').select2();
         $("#major_name").change(function() {
             let val = $(this).val()
             $.ajax({
