@@ -35,6 +35,7 @@
                 <th class="text-center">เลขบัญชี</th>
                 <th class="text-center" >ชื่อ บช.ผู้รับเงิน</th>
                 <th class="text-center">ชื่อธนาคาร</th>
+                <th class="text-center">เบอร์โทร</th>
             </tr>
         </thead>
         <tbody>
@@ -58,6 +59,7 @@
                 <td class="text-center"><?php echo $num_b ?></td>
                 <td><?php echo $row['recipient_name']?></td>
                 <td class="text-center"><?php echo $row['bank_name']?></td>
+                <td class="text-center"><?php echo $row['phone']?></td>
             </tr>
             <?php
             }
