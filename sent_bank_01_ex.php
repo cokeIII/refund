@@ -56,11 +56,16 @@
                 }else{
                     $num_b=$row['recipient_bank_number'];
                 }
+                if (substr($row['phone'],0,1)==0){
+                    $num_phone="A ".$row['phone'];
+                }else{
+                    $num_phone=$row['phone'];
+                }
                 ?>
                 <td class="text-center"><?php echo $num_b ?></td>
                 <td><?php echo $row['recipient_name']?></td>
                 <td class="text-center"><?php echo $row['bank_name']?></td>
-                <td class="text-center"><?php echo $row['phone']?></td>
+                <td class="text-center"><?php echo $num_phone;?></td>
             </tr>
             <?php
             }
