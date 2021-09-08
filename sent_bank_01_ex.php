@@ -10,7 +10,8 @@
                     concat(student.stu_fname,'  ',student.stu_lname) as std_name ,
                     bank.bank_id ,`recipient_bank_number`,
                     concat(`recipient_prefix`,`recipient_fname`,' ',`recipient_lname`) as recipient_name , 
-                    bank.bank_name
+                    bank.bank_name,
+                    enroll.phone
                     FROM `enroll` 
                     INNER JOIN student on student.student_id=enroll.student_id
                     INNER JOIN `bank` ON bank.bank_name = enroll.`recipient_bank`
