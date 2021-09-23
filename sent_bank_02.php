@@ -69,6 +69,9 @@ if (isset($_POST['level'])){
                                 <option value="623" <?php echo $a6?>>ปวส.2 ตกค้าง+ปวส.3  (รหัส 62) </option>
                                 <option value="613" <?php echo $a10?>>ปวส.2 ตกค้าง (รหัส 61) </option>
                                 <option value="603" <?php echo $a11?>>ปวส.2 ตกค้าง (รหัส 60) </option>
+                                <option value="632090103" <?php echo $a11?>>เทคโนโลยีสารสนเทศ ปวช.2/3 (บ.บ.)</option>
+                                <option value="632090104" <?php echo $a11?>>เทคโนโลยีสารสนเทศ ปวช.2/4 (บ.น.ว.)</option>
+                                <option value="62202" <?php echo $a11?>>คอมพิวเตอร์ธุรกิจ</option>
                             </select>
                         </div>
                         <div class="col-md-2">
