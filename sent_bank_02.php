@@ -101,9 +101,9 @@ if (isset($_POST['level'])){
                     INNER JOIN `pay` ON `pay`.grade_name=enroll.grade_name
                     WHERE enroll.status='พิมพ์แล้ว'
                     AND student.group_id LIKE '$group'
-                    and student.`group_id` !='632090103' 
-                    and student.`group_id` !='632090104'
-                    and student.`group_id` not LIKE '62202%'
+                    -- and student.`group_id` !='632090103' 
+                    -- and student.`group_id` !='632090104'
+                    -- and student.`group_id` not LIKE '62202%'
                     AND enroll.student_id not in (SELECT `student_id` FROM `student_status`)
                     ORDER BY  student.group_id , bank.bank_id";
                     // echo $sql;
