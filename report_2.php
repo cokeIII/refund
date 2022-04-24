@@ -51,7 +51,6 @@ $res = mysqli_query($conn, $sql);
 $row = mysqli_fetch_assoc($res);
 ?>
 
-
 <!DOCTYPE html>
 <html>
 
@@ -170,7 +169,7 @@ $row = mysqli_fetch_assoc($res);
             <td>ลงชื่อ  <img class="sig-size" src="uploads/signature/<?php echo $row["parent_signature"]; ?>">  ผู้รับเงิน</td>
         </tr>
         <tr>
-            <td class="text-size center">(<?php echo trim($row["recipient_prefix"]).$row["recipient_fname"] . " " . $row["recipient_lname"]; ?>)</td>
+            <td class="text-size center">(..............................................................................<?php //echo trim($row["recipient_prefix"]).$row["recipient_fname"] . " " . $row["recipient_lname"]; ?>)</td>
         </tr>
         <tr>
             <td class="text-size center">วันที่................................................</td>

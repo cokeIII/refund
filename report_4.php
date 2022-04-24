@@ -200,7 +200,7 @@ $row = mysqli_fetch_assoc($res);
         <tr class="txt-right text-size2 ">
             <td width="50%" class="center text-size2 m-l">
                 <div>ลงชื่อ <img class="sig-size" src="uploads/signature/<?php echo $row["parent_signature"]; ?>"> ผู้รับเงิน</div>
-                <div>(<?php echo trim($row["recipient_prefix"]) . $row["recipient_fname"] . " " . $row["recipient_lname"]; ?>)</div>
+                <div>(................................................<?php //echo trim($row["recipient_prefix"]) . $row["recipient_fname"] . " " . $row["recipient_lname"]; ?>)</div>
                 <div>วันที่................................................</div>
             </td>
             <td class="text-size center">
@@ -231,7 +231,7 @@ $row = mysqli_fetch_assoc($res);
     </table>
     <div class="center text-size2">
         <div>ลงชื่อ................................................</div>
-        <div>(นายอภิชาติ อนุกูลเวช)</div>
+        <div>(นายอำนวย เหิมขุนทด)</div>
         <div>รองผู้อำนวยการฝ่ายบริหารทรัพยากร</div>
     </div>
     <br>
